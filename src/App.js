@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SignupPage from "./admin/pages/SignupPage";
 import LoginPage from "./admin/pages/LoginPage";
 import HomePage from "./admin/pages/HomePage";
-import ForgotPw from "./admin/pages/ForgotPw";
+import ForgotPw from "./admin/pages/ForgotPwPage";
 
 function App() {
   return (
