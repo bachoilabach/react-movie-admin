@@ -42,7 +42,7 @@ export default function Login() {
         ))}
       </div>
 
-      <FormExtra />
+      <FormExtra linkName="Forgot your password?" linkUrl={"/ForgotPw"} />
       <FormAction handleSubmit={handleSubmit} text="Login" />
     </form>
   );

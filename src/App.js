@@ -1,23 +1,19 @@
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-} from "react-router-dom";
-import SignupPage from './admin/pages/SignupPage';
-import LoginPage from './admin/pages/LoginPage';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import SignupPage from "./admin/pages/SignupPage";
+import LoginPage from "./admin/pages/LoginPage";
+import HomePage from "./admin/pages/HomePage";
+import ForgotPw from "./admin/pages/ForgotPw";
 
 function App() {
   return (
-    <div className="min-h-full h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-blue-50">
-    <div className="max-w-md w-full space-y-8 p-4 bg-white rounded-2xl shadow-2xl">
-     <BrowserRouter>
-        <Routes>
-            <Route path="/" element={<LoginPage/>} />
-            <Route path="/signup" element={<SignupPage/>} />
-        </Routes>
-      </BrowserRouter>
-    </div>
-  </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/ForgotPw" element={<ForgotPw />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
