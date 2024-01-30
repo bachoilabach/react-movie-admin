@@ -30,7 +30,7 @@ const items = [
   ]),
   getItem("Files", "9", <FileOutlined />),
 ];
-const App = () => {
+const HomePage = () => {
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer, borderRadiusLG },
@@ -89,4 +89,4 @@ const App = () => {
     </Layout>
   );
 };
-export default App;
+export default HomePage;
