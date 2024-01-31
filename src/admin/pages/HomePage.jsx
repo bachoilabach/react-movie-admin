@@ -1,92 +1,77 @@
-import React, { useState } from "react";
-import {
-  DesktopOutlined,
-  FileOutlined,
-  PieChartOutlined,
-  TeamOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
-import { Breadcrumb, Layout, Menu, theme } from "antd";
-const { Header, Content, Sider } = Layout;
-function getItem(label, key, icon, children) {
-  return {
-    key,
-    icon,
-    children,
-    label,
-  };
-}
-const items = [
-  getItem("Option 1", "1", <PieChartOutlined />),
-  getItem("Option 2", "2", <DesktopOutlined />),
-  getItem("User", "sub1", <UserOutlined />, [
-    getItem("Tom", "3"),
-    getItem("Bill", "4"),
-    getItem("Alex", "5"),
-  ]),
-  getItem("Team", "sub2", <TeamOutlined />, [
-    getItem("Team 1", "6"),
-    getItem("Team 2", "8"),
-  ]),
-  getItem("Files", "9", <FileOutlined />),
-];
+import { useState } from "react";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import * as Icons from "@fortawesome/free-solid-svg-icons";
+
 const HomePage = () => {
-  const [collapsed, setCollapsed] = useState(false);
-  const {
-    token: { colorBgContainer, borderRadiusLG },
-  } = theme.useToken();
+  const [open, setOpen] = useState(true);
+  const Menus = [
+    { title: "Dashboard", icon: Icons.faGauge },
+    { title: "Inbox", icon: Icons.faComment },
+    { title: "Accounts", icon: Icons.faUser, gap: true },
+    { title: "Schedule ", icon: Icons.faCalendar },
+    { title: "Search", icon: Icons.faSearch },
+    { title: "Analytics", icon: Icons.faChartLine },
+    { title: "Files ", icon: Icons.faFile, gap: true },
+    { title: "Setting", icon: Icons.faGear },
+  ];
+
   return (
-    <Layout
-      style={{
-        minHeight: "100vh",
-      }}
-    >
-      <Sider
-        collapsible
-        collapsed={collapsed}
-        onCollapse={(value) => setCollapsed(value)}
+    <div className="flex">
+      <div
+        className={` ${
+          open ? "w-72" : "w-20 "
+        } bg-purple-200 h-screen p-5  pt-8 relative duration-300`}
       >
-        <div className="demo-logo-vertical" />
-        <Menu
-          theme="dark"
-          defaultSelectedKeys={["1"]}
-          mode="inline"
-          items={items}
+        <FontAwesomeIcon
+          icon={Icons.faChevronLeft}
+          className={`text-black absolute cursor-pointer -right-3 top-9 w-7 border-dark-purple  ${
+            !open && "rotate-180"
+          }`}
+          onClick={() => setOpen(!open)}
         />
-      </Sider>
-      <Layout>
-        <Header
-          style={{
-            padding: 0,
-            background: colorBgContainer,
-          }}
-        />
-        <Content
-          style={{
-            margin: "0 16px",
-          }}
-        >
-          <Breadcrumb
-            style={{
-              margin: "16px 0",
-            }}
+
+        <div className="flex gap-x-4 items-center">
+          <FontAwesomeIcon
+            icon={Icons.faHome}
+            className={`cursor-pointer duration-500 ${
+              open && "rotate-[360deg] fa-xl"
+            }`}
+          />
+
+          <h1
+            className={`origin-left font-medium text-xl duration-200 ${
+              !open && "scale-0"
+            }`}
           >
-            <Breadcrumb.Item>User</Breadcrumb.Item>
-            <Breadcrumb.Item>Bill</Breadcrumb.Item>
-          </Breadcrumb>
-          <div
-            style={{
-              padding: 24,
-              minHeight: 360,
-              background: colorBgContainer,
-              borderRadius: borderRadiusLG,
-            }}
-          >
-            Bill is a cat.
-          </div>
-        </Content>
-      </Layout>
-    </Layout>
+            Designer
+          </h1>
+        </div>
+        <ul className="pt-6">
+          {Menus.map((Menu, index) => (
+            <li
+              key={index}
+              className={`flex  rounded-md p-2 cursor-pointer hover:bg-light-white font-bold text-sm items-center gap-x-4 hover:bg-purple-300
+              ${Menu.gap ? "mt-9" : "mt-2"} ${
+                index === 0 && "bg-light-white"
+              } `}
+            >
+              <FontAwesomeIcon icon={Menu.icon} className="fa-xl" />
+              <span
+                className={`${
+                  !open && "hidden"
+                } origin-left duration-200 text-x`}
+              >
+                {Menu.title}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="h-screen flex-1 p-7">
+        <h1 className="text-2xl font-semibold ">Home Page</h1>
+      </div>
+    </div>
   );
 };
 export default HomePage;
