@@ -1,5 +1,5 @@
-import Header from "../components/Form/Header";
-import ForgotPw from "../components/Form/ForgotPw";
+import Header from "../components/Header";
+import ForgotPw from "../components/ForgotPw";
 
 export default function LoginPage() {
   return (
