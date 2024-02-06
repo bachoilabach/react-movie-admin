@@ -4,7 +4,12 @@ import SignupPage from "./admin/auth/pages/SignupPage";
 import LoginPage from "./admin/auth/pages/LoginPage";
 import ForgotPw from "./admin/auth/pages/ForgotPwPage";
 
-import HomePage from "./admin/pages/HomePage";
+import HomePage from "./admin/main/pages/HomePage";
+
+import AccountPage from "./admin/main/pages/AccountPage";
+import InboxPage from "./admin/main/pages/InboxPage";
+import SchedulePage from "./admin/main/pages/SchedulePage";
+
 
 function App() {
   return (
@@ -14,6 +19,10 @@ function App() {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/ForgotPw" element={<ForgotPw />} />
+
+        <Route path="/Accounts" element={<AccountPage />} />
+        <Route path="/Inbox" element={<InboxPage />} />
+        <Route path="/Shedule" element={<SchedulePage />} />
       </Routes>
     </BrowserRouter>
   );
