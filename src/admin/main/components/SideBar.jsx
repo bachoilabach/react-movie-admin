@@ -22,17 +22,17 @@ export default function SideBar() {
     <div
       className={` ${
         open ? "w-72" : "w-20 "
-      } bg-purple-200 h-screen p-5  pt-8 relative duration-300`}
+      } bg-[#F5F7F8] h-[calc(100vh-40px)] p-5  pt-8 relative duration-300 border-2 border-gray-500 m-5 rounded-lg`}
     >
       <FontAwesomeIcon
         icon={Icons.faChevronLeft}
-        className={`text-black absolute cursor-pointer -right-3 top-9 w-7 border-dark-purple  ${
+        className={`text-black absolute cursor-pointer -right-9 top-9 w-7 border-dark-purple  ${
           !open && "rotate-180"
         }`}
         onClick={() => setOpen(!open)}
       />
       <Link to={"/Home"}>
-        <div className="flex gap-x-4 items-center pl-2 hover:bg-purple-300 p-2 rounded-md">
+        <div className="flex gap-x-4 items-center pl-2 hover:bg-[#a4a4a4] p-2 rounded-md">
           <FontAwesomeIcon
             icon={Icons.faHome}
             className={`cursor-pointer duration-500 ${
@@ -53,7 +53,7 @@ export default function SideBar() {
           <Link to={Menu.link}>
             <li
               key={index}
-              className={`flex  rounded-md p-2 cursor-pointer hover:bg-light-white font-bold text-sm items-center gap-x-4 hover:bg-purple-300
+              className={`flex  rounded-md p-2 cursor-pointer hover:bg-light-white font-bold text-sm items-center gap-x-4 hover:bg-[#a4a4a4]
               ${Menu.gap ? "mt-9" : "mt-2"} ${
                 index === 0 && "bg-light-white"
               } `}

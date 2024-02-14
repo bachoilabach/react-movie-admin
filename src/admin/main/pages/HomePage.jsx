@@ -6,7 +6,12 @@ const HomePage = () => {
   return (
     <div className="flex">
       <SideBar />
+      <div>
       <NavBar />
+      <div>
+        <p>Hello World</p>
+      </div>
+      </div>
     </div>
   );
 };
