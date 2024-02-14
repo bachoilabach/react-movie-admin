@@ -9,7 +9,7 @@ const HomePage = () => {
       <div className="w-full">
       <NavBar />
       <div className="h-5/6 bg-white border-2 border-gray-800 rounded-lg m-5">
-        <p>Hello World HomePage</p>
+        <p>Home Page</p>
       </div>
       </div>
     </div>

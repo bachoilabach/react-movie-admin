@@ -8,14 +8,16 @@ import { Link } from "react-router-dom";
 export default function SideBar() {
   const [open, setOpen] = useState(true);
   const Menus = [
-    { title: "Dashboard", icon: Icons.faGauge, link: "/Dashboard" },
-    { title: "Inbox", icon: Icons.faComment, link: "/Inbox" },
+    { title: "Movies", icon: Icons.faFilm, link: "/Movies" },
+    { title: "Categories ", icon: Icons.faIcons, link: "/Categories" },
+    { title: "Actors", icon: Icons.faUserSecret, link: "/Actors" },
+    { title: "Directors", icon: Icons.faClapperboard, link: "/Directors" },
+    { title: "Comments", icon: Icons.faComments, link: "/Comments" },
+
     { title: "Accounts", icon: Icons.faUser, gap: true, link: "/Accounts" },
-    { title: "Schedule ", icon: Icons.faCalendar, link: "/Shedule" },
-    { title: "Search", icon: Icons.faSearch },
-    { title: "Analytics", icon: Icons.faChartLine },
-    { title: "Export ", icon: Icons.faFile, gap: true },
-    { title: "Log out", icon: Icons.faGear },
+    { title: "Statistics", icon: Icons.faChartLine, link: "/Statistics" },
+    { title: "Setting", icon: Icons.faGear, link: "/Setting" },
+    { title: "Log out", icon: Icons.faRightFromBracket, link: "/" },
   ];
 
   return (
@@ -32,7 +34,7 @@ export default function SideBar() {
         onClick={() => setOpen(!open)}
       />
       <Link to={"/Home"}>
-        <div className="flex gap-x-4 items-center pl-2 hover:bg-[#a4a4a4] p-2 rounded-md">
+        <div className="flex gap-x-4 items-center pl-2 hover:bg-blue-gray-100 p-2 rounded-md">
           <FontAwesomeIcon
             icon={Icons.faHome}
             className={`cursor-pointer duration-500 ${
@@ -53,7 +55,7 @@ export default function SideBar() {
           <Link to={Menu.link}>
             <li
               key={index}
-              className={`flex  rounded-md p-2 cursor-pointer hover:bg-light-white font-bold text-sm items-center gap-x-4 hover:bg-[#a4a4a4]
+              className={`flex  rounded-md p-2 cursor-pointer hover:bg-light-white font-bold text-sm items-center gap-x-4 hover:bg-blue-gray-100
               ${Menu.gap ? "mt-9" : "mt-2"} ${
                 index === 0 && "bg-light-white"
               } `}
