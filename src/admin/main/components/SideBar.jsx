@@ -22,7 +22,7 @@ export default function SideBar() {
     <div
       className={` ${
         open ? "w-72" : "w-20 "
-      } bg-[#F5F7F8] h-[calc(100vh-40px)] p-5  pt-8 relative duration-300 border-2 border-gray-500 m-5 rounded-lg`}
+      } bg-white h-[calc(100vh-40px)] p-5  pt-8 relative duration-300 border-2 border-gray-800 m-5 rounded-lg`}
     >
       <FontAwesomeIcon
         icon={Icons.faChevronLeft}

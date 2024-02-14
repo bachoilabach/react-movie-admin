@@ -4,12 +4,12 @@ import NavBar from "../components/NavBar";
 
 const HomePage = () => {
   return (
-    <div className="flex">
+    <div className="flex bg-[#cfcfcf]">
       <SideBar />
-      <div>
+      <div className="w-full">
       <NavBar />
-      <div>
-        <p>Hello World</p>
+      <div className="h-5/6 bg-white border-2 border-gray-800 rounded-lg m-5">
+        <p>Hello World HomePage</p>
       </div>
       </div>
     </div>

@@ -1,12 +1,16 @@
 import React from 'react'
-import SideBar from '../components/SideBar'
+import SideBar from "../components/SideBar";
+import NavBar from "../components/NavBar";
 
 export default function SchedulePage() {
   return (
-    <div className="flex">
+    <div className="flex bg-[#cfcfcf]">
       <SideBar />
-      <div className="h-screen flex-1 p-7">
-        <h1 className="text-2xl font-semibold ">Schedule Page</h1>
+      <div className="w-full">
+      <NavBar />
+      <div className="h-5/6 bg-white border-2 border-gray-800 rounded-lg m-5">
+        <p>Hello World AccountPage</p>
+      </div>
       </div>
     </div>
   )
