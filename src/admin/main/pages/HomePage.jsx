@@ -4,11 +4,11 @@ import NavBar from "../components/NavBar";
 
 const HomePage = () => {
   return (
-    <div className="flex bg-[#cfcfcf]">
+    <div className="flex bg-bgColorMain text-textMain">
       <SideBar />
       <div className="w-full">
       <NavBar />
-      <div className="h-5/6 bg-white border-2 border-gray-800 rounded-lg m-5">
+      <div className="h-5/6 bg-bgColorBlock rounded-lg m-5">
         <p>Home Page</p>
       </div>
       </div>

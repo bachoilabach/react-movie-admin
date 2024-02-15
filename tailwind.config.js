@@ -8,6 +8,12 @@ module.exports = withMT({
   ],
   theme: {
     extend: {},
+    colors: {
+      'bgColorMain': '#182B54',
+      'bgColorBlock': '#2C4267',
+      'textMain': '#ffffff',
+      'hoverNavBar': '#465882'
+    }
   },
   plugins: [],
 });

@@ -16,7 +16,6 @@ export default function SideBar() {
 
     { title: "Accounts", icon: Icons.faUser, gap: true, link: "/Accounts" },
     { title: "Statistics", icon: Icons.faChartLine, link: "/Statistics" },
-    { title: "Setting", icon: Icons.faGear, link: "/Setting" },
     { title: "Log out", icon: Icons.faRightFromBracket, link: "/" },
   ];
 
@@ -24,25 +23,25 @@ export default function SideBar() {
     <div
       className={` ${
         open ? "w-72" : "w-20 "
-      } bg-white h-[calc(100vh-40px)] p-5  pt-8 relative duration-300 border-2 border-gray-800 m-5 rounded-lg`}
+      } bg-bgColorBlock text-textMain h-[calc(100vh-40px)] p-5  pt-8 relative duration-300 m-5 rounded-lg`}
     >
       <FontAwesomeIcon
         icon={Icons.faChevronLeft}
-        className={`text-black absolute cursor-pointer -right-9 top-9 w-7 border-dark-purple  ${
+        className={`text-textMain absolute cursor-pointer -right-9 top-9 w-7  ${
           !open && "rotate-180"
         }`}
         onClick={() => setOpen(!open)}
       />
       <Link to={"/Home"}>
-        <div className="flex gap-x-4 items-center pl-2 hover:bg-blue-gray-100 p-2 rounded-md">
+        <div className="flex gap-x-4 items-center pl-2 hover:bg-hoverNavBar p-2 rounded-md">
           <FontAwesomeIcon
             icon={Icons.faHome}
             className={`cursor-pointer duration-500 ${
-              open && "rotate-[360deg] fa-xl"
+              open && "rotate-[360deg] fa-xl text-textMain"
             }`}
           />
           <h1
-            className={`origin-left font-medium text-xl duration-200 ${
+            className={`origin-left font-bold text-xl duration-200 text-textMain ${
               !open && "scale-0"
             }`}
           >
@@ -55,10 +54,8 @@ export default function SideBar() {
           <Link to={Menu.link}>
             <li
               key={index}
-              className={`flex  rounded-md p-2 cursor-pointer hover:bg-light-white font-bold text-sm items-center gap-x-4 hover:bg-blue-gray-100
-              ${Menu.gap ? "mt-9" : "mt-2"} ${
-                index === 0 && "bg-light-white"
-              } `}
+              className={`flex text-textMain rounded-md p-2 cursor-pointer font-medium text-sm items-center gap-x-4 hover:bg-hoverNavBar
+              ${Menu.gap ? "mt-9" : "mt-2"} ${index === 0} `}
             >
               <FontAwesomeIcon icon={Menu.icon} className="fa-xl" />
               <span
