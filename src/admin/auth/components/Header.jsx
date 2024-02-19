@@ -8,14 +8,14 @@ export default function Header({
 }) {
   return (
     <div className="mb-10">
-      <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+      <h2 className=" text-center text-2xl font-extrabold text-white">
         {heading}
       </h2>
-      <p className=" text-center text-sm text-gray-600 mt-4">
+      <p className=" text-center text-sm text-gray-400 mt-4">
         {paragraph}{" "}
         <Link
           to={linkUrl}
-          className="font-medium text-purple-600 hover:text-purple-500"
+          className="font-medium text-red-600 hover:text-red-500"
         >
           {linkName}
         </Link>

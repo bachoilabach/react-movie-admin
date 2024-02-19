@@ -38,6 +38,8 @@ export default function Signup() {
             type={field.type}
             isRequired={field.isRequired}
             placeholder={field.placeholder}
+            customClass={field.customClass}
+
           />
         ))}
         <FormAction handleSubmit={handleSubmit} text="Signup" />

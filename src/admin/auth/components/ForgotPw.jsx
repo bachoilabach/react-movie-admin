@@ -36,6 +36,8 @@ export default function ForgotPw() {
             type={field.type}
             isRequired={field.isRequired}
             placeholder={field.placeholder}
+            customClass={field.customClass}
+
           />
         ))}
       </div>
