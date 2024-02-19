@@ -4,14 +4,14 @@ import NavBar from "../components/NavBar";
 
 export default function MoviePage() {
   return (
-    <div className="flex bg-bgColorMain text-textMain">
-      <SideBar />
-      <div className="w-full">
-        <NavBar />
-        <div className="h-5/6 bg-bgColorBlock rounded-lg m-5">
-          <p>Movie Page</p>
-        </div>
-      </div>
-    </div>
+    <div className="flex bg-bgColorMain text-textMain p-[20px] gap-[3%]">
+			<SideBar />
+			<div className="w-full h-full flex flex-col gap-y-4">
+				<NavBar />
+				<div className=" bg-bgColorBlock rounded-lg h-[calc(100vh-136px)]">
+					<p>Movie Page</p>					
+				</div>
+			</div>
+		</div>
   );
 }
