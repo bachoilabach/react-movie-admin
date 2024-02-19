@@ -8,6 +8,7 @@ const loginFields = [
     autoComplete: "email",
     isRequired: true,
     placeholder: "Email address",
+    customClass:"bg-[#333333] text-white"
   },
   {
     labelText: "Password",
@@ -18,6 +19,7 @@ const loginFields = [
     autoComplete: "current-password",
     isRequired: true,
     placeholder: "Password",
+    customClass:"bg-[#333333] text-white"
   },
 ];
 
@@ -31,6 +33,8 @@ const signupFields = [
     autoComplete: "username",
     isRequired: true,
     placeholder: "Username",
+    customClass:"bg-[#333333] text-white"
+
   },
   {
     labelText: "Email address",
@@ -41,6 +45,8 @@ const signupFields = [
     autoComplete: "email",
     isRequired: true,
     placeholder: "Email address",
+    customClass:"bg-[#333333] text-white"
+
   },
   {
     labelText: "Password",
@@ -51,6 +57,8 @@ const signupFields = [
     autoComplete: "current-password",
     isRequired: true,
     placeholder: "Password",
+    customClass:"bg-[#333333] text-white"
+
   },
   {
     labelText: "Confirm Password",
@@ -61,6 +69,8 @@ const signupFields = [
     autoComplete: "confirm-password",
     isRequired: true,
     placeholder: "Confirm Password",
+    customClass:"bg-[#333333] text-white"
+
   },
 ];
 
@@ -74,6 +84,8 @@ const ForgotPwFields = [
     autoComplete: "email",
     isRequired: true,
     placeholder: "Email address",
+    customClass:"bg-[#333333] text-white"
+
   },
 ];
 
