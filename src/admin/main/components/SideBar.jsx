@@ -23,7 +23,7 @@ export default function SideBar() {
     <div
       className={` ${
         open ? "w-72" : "w-20 "
-      } bg-bgColorBlock text-textMain h-[calc(100vh-40px)] p-5  pt-8 relative duration-300 m-5 rounded-lg`}
+      } bg-bgColorBlock text-textMain h-[calc(100vh-40px)] p-5  pt-8 relative duration-300 rounded-lg`}
     >
       <FontAwesomeIcon
         icon={Icons.faChevronLeft}
@@ -33,15 +33,15 @@ export default function SideBar() {
         onClick={() => setOpen(!open)}
       />
       <Link to={"/Home"}>
-        <div className="flex gap-x-4 items-center pl-2 hover:bg-hoverNavBar p-2 rounded-md">
+        <div className="flex gap-x-4 items-center pl-2 hover:bg-hoverNavBar p-2 rounded-md group">
           <FontAwesomeIcon
             icon={Icons.faHome}
-            className={`cursor-pointer duration-500 ${
+            className={`cursor-pointer duration-500 group-hover:text-active ${
               open && "rotate-[360deg] fa-xl text-textMain"
             }`}
           />
           <h1
-            className={`origin-left font-bold text-xl duration-200 text-textMain ${
+            className={`origin-left font-bold text-xl duration-200 text-textMain group-hover:text-active  ${
               !open && "scale-0"
             }`}
           >
@@ -49,19 +49,20 @@ export default function SideBar() {
           </h1>
         </div>
       </Link>
+      
       <ul className="pt-6">
         {Menus.map((Menu, index) => (
           <Link to={Menu.link}>
             <li
               key={index}
-              className={`flex text-textMain rounded-md p-2 cursor-pointer font-medium text-sm items-center gap-x-4 hover:bg-hoverNavBar
+              className={`flex text-textMain rounded-md p-2 cursor-pointer font-medium text-sm items-center gap-x-4 hover:bg-hoverNavBar group
               ${Menu.gap ? "mt-9" : "mt-2"} ${index === 0} `}
             >
-              <FontAwesomeIcon icon={Menu.icon} className="fa-xl" />
+              <FontAwesomeIcon icon={Menu.icon} className="fa-xl group-hover:text-active" />
               <span
                 className={`${
                   !open && "hidden"
-                } origin-left duration-200 text-x`}
+                } origin-left duration-200 text-x group-hover:text-active`}
               >
                 {Menu.title}
               </span>
