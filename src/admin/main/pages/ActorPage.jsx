@@ -278,7 +278,7 @@ export default function ActorPage() {
               shadow={false}
               className="rounded-none flex flex-row justify-between items-center"
             >
-              <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
+              <div className="flex flex-col items-center justify-between gap-4 md:flex-row py-20">
                 <Tabs value="all" className="w-full md:w-max">
                   <TabsHeader>
                     {TABS.map(({ label, value }) => (
@@ -314,7 +314,7 @@ export default function ActorPage() {
                     {TABLE_HEAD.map((head) => (
                       <th
                         key={head}
-                        className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4"
+                        className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-3"
                       >
                         <Typography
                           variant="small"
