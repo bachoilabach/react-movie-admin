@@ -13,6 +13,7 @@ import CommentPage from "./admin/main/pages/CommentPage";
 import AccountPage from "./admin/main/pages/AccountPage";
 import StatisticPage from "./admin/main/pages/StatisticPage";
 import LoginPage from "./admin/auth/pages/LoginPage";
+import Main from "./admin/main/pages/Main";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
 
         <Route path="/Accounts" element={<AccountPage />} />
         <Route path="/Statistics" element={<StatisticPage />} />
+        <Route path="/Main" element={<Main/>}/>
         <Route path="/" element={<LoginPage />} />
       </Routes>
     </BrowserRouter>
