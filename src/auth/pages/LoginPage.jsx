@@ -1,6 +1,6 @@
 import Header from "../components/Header";
 import Login from "../components/Login";
-import background from "../../../img/background.jpg";
+import background from "../../img/background.jpg";
 
 export default function LoginPage() {
 	return (

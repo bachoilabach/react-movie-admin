@@ -1,18 +1,18 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import SignupPage from "./admin/auth/pages/SignupPage";
-import ForgotPw from "./admin/auth/pages/ForgotPwPage";
+import SignupPage from "./auth/pages/SignupPage";
+import ForgotPw from "./auth/pages/ForgotPwPage";
 
-import HomePage from "./admin/main/pages/HomePage";
-import MoviePage from "./admin/main/pages/MoviePage";
-import CategoryPage from "./admin/main/pages/CategoryPage";
-import ActorsPage from "./admin/main/pages/ActorPage";
-import DirectorPage from "./admin/main/pages/DirectorPage";
-import CommentPage from "./admin/main/pages/CommentPage";
+import HomePage from "./main/pages/HomePage";
+import MoviePage from "./main/pages/MoviePage";
+import CategoryPage from "./main/pages/CategoryPage";
+import ActorsPage from "./main/pages/ActorPage";
+import DirectorPage from "./main/pages/DirectorPage";
+import CommentPage from "./main/pages/CommentPage";
 
-import AccountPage from "./admin/main/pages/AccountPage";
-import StatisticPage from "./admin/main/pages/StatisticPage";
-import LoginPage from "./admin/auth/pages/LoginPage";
+import AccountPage from "./main/pages/AccountPage";
+import StatisticPage from "./main/pages/StatisticPage";
+import LoginPage from "./auth/pages/LoginPage";
 
 function App() {
   return (

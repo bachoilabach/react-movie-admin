@@ -10,133 +10,93 @@ import {
 } from "@material-tailwind/react";
 import { PencilIcon } from "@heroicons/react/24/solid";
 
-const TABLE_HEAD = ["Name", "Job", "Employed", ""];
+const TABLE_HEAD = ["User ID", "Name", "Role ID", ""];
 
 const TABLE_ROWS = [
   {
-    name: "John Michael",
-    job: "Manager",
-    date: "23/04/18",
+    userid: "a123",
+    fullname: "John Michael",
+    roleid: "123",
   },
   {
-    name: "Alexa Liras",
-    job: "Developer",
-    date: "23/04/18",
+    userid: "a123",
+    fullname: "John Michael",
+    roleid: "123",
   },
   {
-    name: "Laurent Perrier",
-    job: "Executive",
-    date: "19/09/17",
+    userid: "a123",
+    fullname: "John Michael",
+    roleid: "123",
   },
   {
-    name: "Michael Levi",
-    job: "Developer",
-    date: "24/12/08",
+    userid: "a123",
+    fullname: "John Michael",
+    roleid: "123",
   },
   {
-    name: "Richard Gran",
-    job: "Manager",
-    date: "04/10/21",
+    userid: "a123",
+    fullname: "John Michael",
+    roleid: "123",
   },
   {
-    name: "John Michael",
-    job: "Manager",
-    date: "23/04/18",
+    userid: "a123",
+    fullname: "John Michael",
+    roleid: "123",
   },
   {
-    name: "Alexa Liras",
-    job: "Developer",
-    date: "23/04/18",
+    userid: "a123",
+    fullname: "John Michael",
+    roleid: "123",
   },
   {
-    name: "Laurent Perrier",
-    job: "Executive",
-    date: "19/09/17",
+    userid: "a123",
+    fullname: "John Michael",
+    roleid: "123",
   },
   {
-    name: "Michael Levi",
-    job: "Developer",
-    date: "24/12/08",
+    userid: "a123",
+    fullname: "John Michael",
+    roleid: "123",
   },
   {
-    name: "Richard Gran",
-    job: "Manager",
-    date: "04/10/21",
+    userid: "a123",
+    fullname: "John Michael",
+    roleid: "123",
   },
   {
-    name: "John Michael",
-    job: "Manager",
-    date: "23/04/18",
+    userid: "a123",
+    fullname: "John Michael",
+    roleid: "123",
   },
   {
-    name: "Alexa Liras",
-    job: "Developer",
-    date: "23/04/18",
+    userid: "a123",
+    fullname: "John Michael",
+    roleid: "123",
   },
   {
-    name: "Laurent Perrier",
-    job: "Executive",
-    date: "19/09/17",
+    userid: "a123",
+    fullname: "John Michael",
+    roleid: "123",
   },
   {
-    name: "Michael Levi",
-    job: "Developer",
-    date: "24/12/08",
+    userid: "a123",
+    fullname: "John Michael",
+    roleid: "123",
   },
   {
-    name: "Richard Gran",
-    job: "Manager",
-    date: "04/10/21",
+    userid: "a123",
+    fullname: "John Michael",
+    roleid: "123",
   },
   {
-    name: "John Michael",
-    job: "Manager",
-    date: "23/04/18",
+    userid: "a123",
+    fullname: "John Michael",
+    roleid: "123",
   },
   {
-    name: "Alexa Liras",
-    job: "Developer",
-    date: "23/04/18",
-  },
-  {
-    name: "Laurent Perrier",
-    job: "Executive",
-    date: "19/09/17",
-  },
-  {
-    name: "Michael Levi",
-    job: "Developer",
-    date: "24/12/08",
-  },
-  {
-    name: "Richard Gran",
-    job: "Manager",
-    date: "04/10/21",
-  },
-  {
-    name: "John Michael",
-    job: "Manager",
-    date: "23/04/18",
-  },
-  {
-    name: "Alexa Liras",
-    job: "Developer",
-    date: "23/04/18",
-  },
-  {
-    name: "Laurent Perrier",
-    job: "Executive",
-    date: "19/09/17",
-  },
-  {
-    name: "Michael Levi",
-    job: "Developer",
-    date: "24/12/08",
-  },
-  {
-    name: "Richard Gran",
-    job: "Manager",
-    date: "04/10/21",
+    userid: "a123",
+    fullname: "John Michael",
+    roleid: "123",
   },
 ];
 
@@ -168,21 +128,21 @@ export default function AccountPage() {
                 </tr>
               </thead>
               <tbody>
-                {TABLE_ROWS.map(({ name, job, date }, index) => {
+                {TABLE_ROWS.map(({ userid, fullname, roleid }, index) => {
                   const isLast = index === TABLE_ROWS.length - 1;
                   const classes = isLast
                     ? "p-4"
                     : "p-4 border-b border-blue-gray-50";
 
                   return (
-                    <tr key={name}>
+                    <tr key={userid}>
                       <td className={classes}>
                         <Typography
                           variant="small"
                           color="blue-gray"
                           className="font-normal"
                         >
-                          {name}
+                          {userid}
                         </Typography>
                       </td>
                       <td className={classes}>
@@ -191,7 +151,7 @@ export default function AccountPage() {
                           color="blue-gray"
                           className="font-normal"
                         >
-                          {job}
+                          {fullname}
                         </Typography>
                       </td>
                       <td className={classes}>
@@ -200,7 +160,7 @@ export default function AccountPage() {
                           color="blue-gray"
                           className="font-normal"
                         >
-                          {date}
+                          {roleid}
                         </Typography>
                       </td>
                       <td className={classes}>

@@ -22,16 +22,16 @@ import {
 
 const TABS = [
   {
-    label: "All",
-    value: "all",
+    label: "Movies",
+    value: "movies",
   },
   {
-    label: "Monitored",
-    value: "monitored",
+    label: "TV Shows",
+    value: "TV Shows",
   },
   {
-    label: "Unmonitored",
-    value: "unmonitored",
+    label: "TV Episodes",
+    value: "TV Episodes",
   },
 ];
 
@@ -280,7 +280,7 @@ export default function ActorPage() {
             >
               <div className="flex flex-col items-center justify-between gap-4 md:flex-row py-20">
                 <Tabs value="all" className="w-full md:w-max">
-                  <TabsHeader>
+                <TabsHeader className="w-[500px]">
                     {TABS.map(({ label, value }) => (
                       <Tab key={value} value={value}>
                         &nbsp;&nbsp;{label}&nbsp;&nbsp;
