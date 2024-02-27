@@ -34,7 +34,7 @@ export default function Login() {
             } else {
                 // Lưu thông tin người dùng vào Local Storage
                 localStorage.setItem('userData', JSON.stringify(data.user));
-				if(data.user.RoleID === 'R2'){
+				if(data.user.roleID === '2'){
 					navigate('/Main')
 				}else{
 					navigate("/home");
