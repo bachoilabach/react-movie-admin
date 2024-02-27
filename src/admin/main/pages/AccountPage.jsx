@@ -142,12 +142,12 @@ const TABLE_ROWS = [
 
 export default function AccountPage() {
   return (
-    <div className="flex bg-bgColorMain text-textMain">
+    <div className="flex bg-bgColorMain text-textMain p-[20px] gap-[3%]">
       <SideBar />
-      <div className="w-full">
+      <div className="w-full h-full flex flex-col gap-y-4">
         <NavBar />
         <div className="h-5/6 m-5">
-          <Card className="h-[600px] overflow-scroll">
+          <Card className="h-[570px] overflow-scroll">
             <table className=" min-w-max table-auto text-center">
               <thead>
                 <tr>
