@@ -18,21 +18,27 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/signup" element={<SignupPage />} />
-        <Route path="/ForgotPw" element={<ForgotPw />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/ForgotPw" element={<ForgotPw />} />
 
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/Movies" element={<MoviePage />} />
-        <Route path="/Categories" element={<CategoryPage />} />
-        <Route path="/Actors" element={<ActorsPage />} />
-        <Route path="/Directors" element={<DirectorPage />} />
-        <Route path="/Comments" element={<CommentPage />} />
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/Movies" element={<MoviePage />} />
+          <Route path="/Categories" element={<CategoryPage />} />
+          <Route path="/Actors" element={<ActorsPage />} />
+          <Route path="/Directors" element={<DirectorPage />} />
+          <Route path="/Comments" element={<CommentPage />} />
 
-        <Route path="/Accounts" element={<AccountPage />} />
-        <Route path="/Statistics" element={<StatisticPage />} />
-        <Route path="/" element={<LoginPage />} />
+          <Route path="/Accounts" element={<AccountPage />} />
+          <Route path="/Statistics" element={<StatisticPage />} />
+          <Route path="/" element={<LoginPage />} />
       </Routes>
     </BrowserRouter>
+    // <BrowserRouter>
+    //   <Routes>
+    //     <Route path="/" element={<LoginPage />} />
+    //     <Route path="/dashboard" element={<Dashboard />} />
+    //   </Routes>
+    // </BrowserRouter>
   );
 }
 

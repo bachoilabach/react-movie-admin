@@ -23,7 +23,7 @@ export default function SideBar() {
     <div
       className={` ${
         open ? "w-72" : "w-20 "
-      } bg-bgColorBlock text-textMain h-[calc(100vh-40px)] p-5  pt-8 relative duration-300 rounded-lg`}
+      } bg-bgColorBlock text-textMain h-[calc(100vh-40px)] p-5  pt-8 relative duration-300 rounded-lg `}
     >
       <FontAwesomeIcon
         icon={Icons.faChevronLeft}

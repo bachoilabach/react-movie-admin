@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import SideBar from "../components/SideBar";
 import NavBar from "../components/NavBar";
 
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import { PencilIcon, UserPlusIcon } from "@heroicons/react/24/solid";
+import { PencilIcon } from "@heroicons/react/24/solid";
 import {
   Card,
   CardHeader,
@@ -12,30 +12,12 @@ import {
   Button,
   CardBody,
   CardFooter,
-  Tabs,
-  TabsHeader,
-  Tab,
   Avatar,
   IconButton,
   Tooltip,
 } from "@material-tailwind/react";
 
-const TABS = [
-  {
-    label: "Movies",
-    value: "movies",
-  },
-  {
-    label: "TV Shows",
-    value: "TV Shows",
-  },
-  {
-    label: "TV Episodes",
-    value: "TV Episodes",
-  },
-];
-
-const TABLE_HEAD = ["Member", "Function", "Employed", "Edit"];
+const TABLE_HEAD = ["Name", "National", "Birth Date", "Edit"];
 
 const TABLE_ROWS = [
   {
@@ -266,6 +248,16 @@ const TABLE_ROWS = [
 ];
 
 export default function ActorPage() {
+  const [modal, setModal] = useState(false);
+
+  const toggleModal = () => {
+    setModal(!modal);
+    if (!modal) {
+      document.body.style.overflowY = "hidden";
+    } else {
+      document.body.style.overflowY = "auto";
+    }
+  };
   return (
     <div className="flex bg-bgColorMain text-textMain p-[20px] gap-[3%]">
       <SideBar />
@@ -278,18 +270,7 @@ export default function ActorPage() {
               shadow={false}
               className="rounded-none flex flex-row justify-between items-center"
             >
-              <div className="flex flex-col items-center justify-between gap-4 md:flex-row py-20">
-                <Tabs value="all" className="w-full md:w-max">
-                <TabsHeader className="w-[500px]">
-                    {TABS.map(({ label, value }) => (
-                      <Tab key={value} value={value}>
-                        &nbsp;&nbsp;{label}&nbsp;&nbsp;
-                      </Tab>
-                    ))}
-                  </TabsHeader>
-                </Tabs>
-              </div>
-              <div className=" flex items-center justify-between gap-2 mt-1">
+              <div className=" mt-1 flex flex-col items-center justify-between gap-4 md:flex-row py-20">
                 <div className="w-full md:w-72 ">
                   <Input
                     label="Search"
@@ -298,11 +279,7 @@ export default function ActorPage() {
                 </div>
                 <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
                   <Button variant="outlined" size="sm">
-                    view all
-                  </Button>
-                  <Button className="flex items-center gap-3" size="sm">
-                    <UserPlusIcon strokeWidth={2} className="h-4 w-4" /> Add
-                    member
+                    Search
                   </Button>
                 </div>
               </div>
@@ -387,7 +364,7 @@ export default function ActorPage() {
                           </td>
                           <td className={classes}>
                             <Tooltip content="Edit User">
-                              <IconButton variant="text">
+                              <IconButton onClick={toggleModal} variant="text">
                                 <PencilIcon className="h-4 w-4" />
                               </IconButton>
                             </Tooltip>
@@ -399,6 +376,23 @@ export default function ActorPage() {
                 </tbody>
               </table>
             </CardBody>
+            {modal && (
+              <div className="w-full h-[100vh] fixed inset-0 z-10">
+                <div
+                  onClick={toggleModal}
+                  className="w-full h-full bg-black opacity-50"
+                ></div>
+                <div className="absolute w-11/12 h-5/6 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-300 p-8 rounded">
+                  <h2>Hello Modal</h2>
+                  <button
+                    className="absolute bottom-2 right-4 px-3 py-2 border-[1px] border-black text-black hover:bg-blue-gray-600 rounded-lg"
+                    onClick={toggleModal}
+                  >
+                    CLOSE
+                  </button>
+                </div>
+              </div>
+            )}
             <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
               <Typography
                 variant="small"
