@@ -83,6 +83,17 @@ const TABLE_ROWS = [
     duration: 123,
     date: "04/10/21",
   },
+  {
+    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-5.jpg",
+    name: "Richard Gran",
+    email: "richard@creative-tim.com",
+    job: "Manager",
+    org: "Executive",
+    duration: 123,
+    date: "04/10/21",
+  },
+  
+  
 ];
 
 export default function MoviePage() {
@@ -98,17 +109,17 @@ export default function MoviePage() {
   };
 
   return (
-    <div className="flex bg-bgColorMain text-textMain p-[20px] gap-[3%]">
+    <div className="flex text-textMain p-[20px] gap-[3%]">
       <SideBar />
       <div className="w-full h-full flex flex-col gap-y-4">
         <NavBar />
-        <div className=" bg-bgColorBlock rounded-lg h-[calc(100vh-136px)]">
+        <div className="h-[calc(100vh-136px)]">
           <Card className="h-full w-full justify-between">
             <div>
               <CardHeader
                 floated={false}
                 shadow={false}
-                className="rounded-none flex flex-row justify-between items-center max-h-14"
+                className="rounded-none flex flex-row justify-between items-center max-h-14 mt-1"
               >
                 <div className="flex flex-col items-center justify-between gap-4 md:flex-row py-20">
                   <Tabs value="all" className="w-full md:w-max">
@@ -135,7 +146,7 @@ export default function MoviePage() {
                   </div>
                 </div>
               </CardHeader>
-              <CardBody className=" px-0">
+              <CardBody className="p-1 px-0">
                 <table className=" w-full min-w-max table-auto text-left">
                   <thead>
                     <tr>
@@ -262,7 +273,7 @@ export default function MoviePage() {
                 </div>
               </div>
             )}
-            <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
+            <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-2">
               <Typography
                 variant="small"
                 color="blue-gray"

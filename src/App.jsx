@@ -14,6 +14,8 @@ import AccountPage from "./main/pages/AccountPage";
 import StatisticPage from "./main/pages/StatisticPage";
 import LoginPage from "./auth/pages/LoginPage";
 
+import NotFound from "./main/pages/NotFound";
+
 function App() {
   return (
     <BrowserRouter>
@@ -31,6 +33,8 @@ function App() {
           <Route path="/Accounts" element={<AccountPage />} />
           <Route path="/Statistics" element={<StatisticPage />} />
           <Route path="/" element={<LoginPage />} />
+
+          <Route path="/*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
     // <BrowserRouter>

@@ -8,17 +8,35 @@ import {
   Card,
   CardHeader,
   Input,
-  Chip,
   Typography,
   Button,
   CardBody,
   CardFooter,
+  Tabs,
+  TabsHeader,
+  Tab,
   Avatar,
   IconButton,
   Tooltip,
 } from "@material-tailwind/react";
 
-const TABLE_HEAD = ["User name", "Vip member", "Birth Date", "Edit"];
+import Modal from "../components/Modal";
+
+const TABS = [
+  {
+    label: "Admin",
+    value: "admin",
+  },
+  {
+    label: "Member",
+    value: "member",
+  },
+  {
+    label: "Vip member",
+    value: "vipmember",
+  },
+];
+const TABLE_HEAD = ["Name", "Role", "Email", "Phone number", "Edit"];
 
 const TABLE_ROWS = [
   {
@@ -27,7 +45,7 @@ const TABLE_ROWS = [
     email: "john@creative-tim.com",
     job: "Manager",
     org: "Organization",
-    online: true,
+    duration: 123,
     date: "23/04/18",
   },
   {
@@ -36,7 +54,7 @@ const TABLE_ROWS = [
     email: "alexa@creative-tim.com",
     job: "Programator",
     org: "Developer",
-    online: false,
+    duration: 123,
     date: "23/04/18",
   },
   {
@@ -45,7 +63,7 @@ const TABLE_ROWS = [
     email: "laurent@creative-tim.com",
     job: "Executive",
     org: "Projects",
-    online: false,
+    duration: 123,
     date: "19/09/17",
   },
   {
@@ -54,7 +72,7 @@ const TABLE_ROWS = [
     email: "michael@creative-tim.com",
     job: "Programator",
     org: "Developer",
-    online: true,
+    duration: 123,
     date: "24/12/08",
   },
   {
@@ -63,193 +81,22 @@ const TABLE_ROWS = [
     email: "richard@creative-tim.com",
     job: "Manager",
     org: "Executive",
-    online: false,
+    duration: 123,
     date: "04/10/21",
   },
   {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg",
-    name: "John Michael",
-    email: "john@creative-tim.com",
-    job: "Manager",
-    org: "Organization",
-    online: true,
-    date: "23/04/18",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-2.jpg",
-    name: "Alexa Liras",
-    email: "alexa@creative-tim.com",
-    job: "Programator",
-    org: "Developer",
-    online: false,
-    date: "23/04/18",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-1.jpg",
-    name: "Laurent Perrier",
-    email: "laurent@creative-tim.com",
-    job: "Executive",
-    org: "Projects",
-    online: false,
-    date: "19/09/17",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-4.jpg",
-    name: "Michael Levi",
-    email: "michael@creative-tim.com",
-    job: "Programator",
-    org: "Developer",
-    online: true,
-    date: "24/12/08",
-  },
-  {
     img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-5.jpg",
     name: "Richard Gran",
     email: "richard@creative-tim.com",
     job: "Manager",
     org: "Executive",
-    online: false,
-    date: "04/10/21",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg",
-    name: "John Michael",
-    email: "john@creative-tim.com",
-    job: "Manager",
-    org: "Organization",
-    online: true,
-    date: "23/04/18",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-2.jpg",
-    name: "Alexa Liras",
-    email: "alexa@creative-tim.com",
-    job: "Programator",
-    org: "Developer",
-    online: false,
-    date: "23/04/18",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-1.jpg",
-    name: "Laurent Perrier",
-    email: "laurent@creative-tim.com",
-    job: "Executive",
-    org: "Projects",
-    online: false,
-    date: "19/09/17",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-4.jpg",
-    name: "Michael Levi",
-    email: "michael@creative-tim.com",
-    job: "Programator",
-    org: "Developer",
-    online: true,
-    date: "24/12/08",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-5.jpg",
-    name: "Richard Gran",
-    email: "richard@creative-tim.com",
-    job: "Manager",
-    org: "Executive",
-    online: false,
-    date: "04/10/21",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg",
-    name: "John Michael",
-    email: "john@creative-tim.com",
-    job: "Manager",
-    org: "Organization",
-    online: true,
-    date: "23/04/18",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-2.jpg",
-    name: "Alexa Liras",
-    email: "alexa@creative-tim.com",
-    job: "Programator",
-    org: "Developer",
-    online: false,
-    date: "23/04/18",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-1.jpg",
-    name: "Laurent Perrier",
-    email: "laurent@creative-tim.com",
-    job: "Executive",
-    org: "Projects",
-    online: false,
-    date: "19/09/17",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-4.jpg",
-    name: "Michael Levi",
-    email: "michael@creative-tim.com",
-    job: "Programator",
-    org: "Developer",
-    online: true,
-    date: "24/12/08",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-5.jpg",
-    name: "Richard Gran",
-    email: "richard@creative-tim.com",
-    job: "Manager",
-    org: "Executive",
-    online: false,
-    date: "04/10/21",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg",
-    name: "John Michael",
-    email: "john@creative-tim.com",
-    job: "Manager",
-    org: "Organization",
-    online: true,
-    date: "23/04/18",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-2.jpg",
-    name: "Alexa Liras",
-    email: "alexa@creative-tim.com",
-    job: "Programator",
-    org: "Developer",
-    online: false,
-    date: "23/04/18",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-1.jpg",
-    name: "Laurent Perrier",
-    email: "laurent@creative-tim.com",
-    job: "Executive",
-    org: "Projects",
-    online: false,
-    date: "19/09/17",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-4.jpg",
-    name: "Michael Levi",
-    email: "michael@creative-tim.com",
-    job: "Programator",
-    org: "Developer",
-    online: true,
-    date: "24/12/08",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-5.jpg",
-    name: "Richard Gran",
-    email: "richard@creative-tim.com",
-    job: "Manager",
-    org: "Executive",
-    online: false,
+    duration: 123,
     date: "04/10/21",
   },
 ];
 
 export default function AccountPage() {
-  const [modal, setModal] = useState(false);
+  const [modal, setModal] = useState(Modal);
 
   const toggleModal = () => {
     setModal(!modal);
@@ -259,134 +106,157 @@ export default function AccountPage() {
       document.body.style.overflowY = "auto";
     }
   };
+
   return (
-    <div className="flex bg-bgColorMain text-textMain p-[20px] gap-[3%]">
+    <div className="flex text-textMain p-[20px] gap-[3%]">
       <SideBar />
       <div className="w-full h-full flex flex-col gap-y-4">
         <NavBar />
-        <div className=" bg-bgColorBlock rounded-lg h-[calc(100vh-136px)]">
-          <Card className="h-full w-full">
-            <CardHeader
-              floated={false}
-              shadow={false}
-              className="rounded-none flex flex-row justify-between items-center"
-            >
-              <div className=" mt-1 flex flex-col items-center justify-between gap-4 md:flex-row py-20">
-                <div className="w-full md:w-72 ">
-                  <Input
-                    label="Search"
-                    icon={<MagnifyingGlassIcon className="h-5 w-5" />}
-                  />
+        <div className="h-[calc(100vh-136px)]">
+          <Card className="h-full w-full justify-between">
+            <div>
+              <CardHeader
+                floated={false}
+                shadow={false}
+                className="rounded-none flex flex-row justify-between items-center max-h-14 mt-1"
+              >
+                <div className="flex flex-col items-center justify-between gap-4 md:flex-row py-20">
+                  <Tabs value="all" className="w-full md:w-max">
+                    <TabsHeader className="w-[500px] z-0">
+                      {TABS.map(({ label, value }) => (
+                        <Tab key={value} value={value}>
+                          &nbsp;&nbsp;{label}&nbsp;&nbsp;
+                        </Tab>
+                      ))}
+                    </TabsHeader>
+                  </Tabs>
                 </div>
-                <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
-                  <Button variant="outlined" size="sm">
-                    Search
-                  </Button>
+                <div className=" flex items-center justify-between gap-2 mt-1">
+                  <div className="w-full md:w-72 ">
+                    <Input
+                      label="Search"
+                      icon={<MagnifyingGlassIcon className="h-5 w-5" />}
+                    />
+                  </div>
+                  <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
+                    <Button variant="outlined" size="sm">
+                      Search
+                    </Button>
+                  </div>
                 </div>
-              </div>
-            </CardHeader>
-            <CardBody className="overflow-scroll px-0">
-              <table className=" w-full min-w-max table-auto text-left">
-                <thead>
-                  <tr>
-                    {TABLE_HEAD.map((head) => (
-                      <th
-                        key={head}
-                        className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-3"
-                      >
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal leading-none opacity-70"
+              </CardHeader>
+              <CardBody className="p-1 px-0">
+                <table className=" w-full min-w-max table-auto text-left">
+                  <thead>
+                    <tr>
+                      {TABLE_HEAD.map((head) => (
+                        <th
+                          key={head}
+                          className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-3"
                         >
-                          {head}
-                        </Typography>
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {TABLE_ROWS.map(
-                    ({ img, name, email, job, org, online, date }, index) => {
-                      const isLast = index === TABLE_ROWS.length - 1;
-                      const classes = isLast
-                        ? "p-4"
-                        : "p-4 border-b border-blue-gray-50";
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-normal leading-none opacity-70"
+                          >
+                            {head}
+                          </Typography>
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {TABLE_ROWS.map(
+                      (
+                        { img, name, email, job, org, duration, date },
+                        index
+                      ) => {
+                        const isLast = index === TABLE_ROWS.length - 1;
+                        const classes = isLast
+                          ? "p-4"
+                          : "p-4 border-b border-blue-gray-50";
 
-                      return (
-                        <tr key={name}>
-                          <td className={classes}>
-                            <div className="flex items-center gap-3">
-                              <Avatar src={img} alt={name} size="sm" />
+                        return (
+                          <tr key={name}>
+                            <td className={classes}>
+                              <div className="flex items-center gap-3">
+                                <Avatar src={img} alt={name} size="sm" />
+                                <div className="flex flex-col">
+                                  <Typography
+                                    variant="small"
+                                    color="blue-gray"
+                                    className="font-normal"
+                                  >
+                                    {name}
+                                  </Typography>
+                                  <Typography
+                                    variant="small"
+                                    color="blue-gray"
+                                    className="font-normal opacity-70"
+                                  >
+                                    {email}
+                                  </Typography>
+                                </div>
+                              </div>
+                            </td>
+                            <td className={classes}>
                               <div className="flex flex-col">
                                 <Typography
                                   variant="small"
                                   color="blue-gray"
                                   className="font-normal"
                                 >
-                                  {name}
+                                  {job}
                                 </Typography>
                                 <Typography
                                   variant="small"
                                   color="blue-gray"
                                   className="font-normal opacity-70"
                                 >
-                                  {email}
+                                  {org}
                                 </Typography>
                               </div>
-                            </div>
-                          </td>
-                          <td className={classes}>
-                          <div className="w-max">
-                        <Chip
-                          variant="ghost"
-                          size="sm"
-                          value={online ? "Yes" : "No"}
-                          color={online ? "green" : "blue-gray"}
-                        />
-                      </div>
-                          </td>
-                          <td className={classes}>
-                            <Typography
-                              variant="small"
-                              color="blue-gray"
-                              className="font-normal"
-                            >
-                              {date}
-                            </Typography>
-                          </td>
-                          <td className={classes}>
-                            <Tooltip content="Edit User">
-                              <IconButton onClick={toggleModal} variant="text">
-                                <PencilIcon className="h-4 w-4" />
-                              </IconButton>
-                            </Tooltip>
-                          </td>
-                        </tr>
-                      );
-                    }
-                  )}
-                </tbody>
-              </table>
-            </CardBody>
-            {modal && (
-              <div className="w-full h-[100vh] fixed inset-0 z-10">
-                <div
-                  onClick={toggleModal}
-                  className="w-full h-full bg-black opacity-50"
-                ></div>
-                <div className="absolute w-11/12 h-5/6 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-300 p-8 rounded">
-                  <h2>Hello Modal</h2>
-                  <button
-                    className="absolute bottom-2 right-4 px-3 py-2 border-[1px] border-black text-black hover:bg-blue-gray-600 rounded-lg"
-                    onClick={toggleModal}
-                  >
-                    CLOSE
-                  </button>
-                </div>
-              </div>
-            )}
-            <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
+                            </td>
+                            <td className={classes}>
+                              <div className="w-max">
+                                <Typography
+                                  variant="small"
+                                  color="blue-gray"
+                                  className="font-normal"
+                                >
+                                  {duration}
+                                </Typography>
+                              </div>
+                            </td>
+                            <td className={classes}>
+                              <Typography
+                                variant="small"
+                                color="blue-gray"
+                                className="font-normal"
+                              >
+                                {date}
+                              </Typography>
+                            </td>
+                            <td className={classes}>
+                              <Tooltip content="Edit User">
+                                <IconButton
+                                  variant="text"
+                                  onClick={toggleModal}
+                                >
+                                  <PencilIcon className="h-4 w-4" />
+                                </IconButton>
+                              </Tooltip>
+                            </td>
+                          </tr>
+                        );
+                      }
+                    )}
+                  </tbody>
+                </table>
+              </CardBody>
+            </div>
+            <Modal modal={modal} toggleModal = {toggleModal}/>
+            <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-2">
               <Typography
                 variant="small"
                 color="blue-gray"
