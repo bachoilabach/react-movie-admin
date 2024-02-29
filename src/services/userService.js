@@ -1,4 +1,4 @@
-import axios from "../../axious"
+import axios from "../axious"
 const handleLoginApi = (userEmail, userPassword) => {
     return axios.post('/api/login',{
         email: userEmail,
