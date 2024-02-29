@@ -96,7 +96,7 @@ const TABLE_ROWS = [
 ];
 
 export default function AccountPage() {
-  const [modal, setModal] = useState(Modal);
+  const [modal, setModal] = useState(false);
 
   const toggleModal = () => {
     setModal(!modal);
@@ -255,7 +255,7 @@ export default function AccountPage() {
                 </table>
               </CardBody>
             </div>
-            <Modal modal={modal} toggleModal = {toggleModal}/>
+            {modal && <Modal toggleModal={toggleModal} />}
             <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-2">
               <Typography
                 variant="small"
