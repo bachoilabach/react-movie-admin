@@ -243,6 +243,8 @@ export default function MoviePage() {
                                 <IconButton
                                   variant="text"
                                   onClick={toggleModal}
+                                  data-ripple-light="true"
+                                  data-dialog-target="dialog"
                                 >
                                   <PencilIcon className="h-4 w-4" />
                                 </IconButton>
