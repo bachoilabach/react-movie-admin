@@ -3,7 +3,7 @@ import { loginFields } from "../constants/FormFields";
 import FormAction from "./FormAction";
 import FormExtra from "./FormExtra";
 import Input from "./Input";
-import handleLoginApi from "../../services/userService";
+import {handleLoginApi} from "../../services/userService";
 import { useNavigate } from "react-router-dom";
 
 const fields = loginFields;
