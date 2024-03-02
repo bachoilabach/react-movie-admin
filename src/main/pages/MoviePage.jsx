@@ -20,6 +20,8 @@ import {
   Tooltip,
 } from "@material-tailwind/react";
 
+import Modal from "../components/Modal";
+
 const TABS = [
   {
     label: "Movies",
@@ -83,6 +85,15 @@ const TABLE_ROWS = [
     duration: 123,
     date: "04/10/21",
   },
+  {
+    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-5.jpg",
+    name: "Richard Gran",
+    email: "richard@creative-tim.com",
+    job: "Manager",
+    org: "Executive",
+    duration: 123,
+    date: "04/10/21",
+  },
 ];
 
 export default function MoviePage() {
@@ -98,17 +109,17 @@ export default function MoviePage() {
   };
 
   return (
-    <div className="flex bg-bgColorMain text-textMain p-[20px] gap-[3%]">
+    <div className="flex text-textMain p-[20px] gap-[3%]">
       <SideBar />
       <div className="w-full h-full flex flex-col gap-y-4">
         <NavBar />
-        <div className=" bg-bgColorBlock rounded-lg h-[calc(100vh-136px)]">
+        <div className="h-[calc(100vh-136px)]">
           <Card className="h-full w-full justify-between">
             <div>
               <CardHeader
                 floated={false}
                 shadow={false}
-                className="rounded-none flex flex-row justify-between items-center max-h-14"
+                className="rounded-none flex flex-row justify-between items-center max-h-14 mt-1"
               >
                 <div className="flex flex-col items-center justify-between gap-4 md:flex-row py-20">
                   <Tabs value="all" className="w-full md:w-max">
@@ -135,7 +146,7 @@ export default function MoviePage() {
                   </div>
                 </div>
               </CardHeader>
-              <CardBody className=" px-0">
+              <CardBody className="p-1 px-0">
                 <table className=" w-full min-w-max table-auto text-left">
                   <thead>
                     <tr>
@@ -232,6 +243,8 @@ export default function MoviePage() {
                                 <IconButton
                                   variant="text"
                                   onClick={toggleModal}
+                                  data-ripple-light="true"
+                                  data-dialog-target="dialog"
                                 >
                                   <PencilIcon className="h-4 w-4" />
                                 </IconButton>
@@ -245,24 +258,9 @@ export default function MoviePage() {
                 </table>
               </CardBody>
             </div>
-            {modal && (
-              <div className="w-full h-[100vh] fixed inset-0 z-10">
-                <div
-                  onClick={toggleModal}
-                  className="w-full h-full bg-black opacity-50"
-                ></div>
-                <div className="absolute w-11/12 h-5/6 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-300 p-8 rounded">
-                  <h2>Hello Modal</h2>
-                  <button
-                    className="absolute bottom-2 right-4 px-3 py-2 border-[1px] border-black text-black hover:bg-blue-gray-600 rounded-lg"
-                    onClick={toggleModal}
-                  >
-                    CLOSE
-                  </button>
-                </div>
-              </div>
-            )}
-            <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
+            {modal && <Modal toggleModal={toggleModal} />}
+
+            <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-2">
               <Typography
                 variant="small"
                 color="blue-gray"

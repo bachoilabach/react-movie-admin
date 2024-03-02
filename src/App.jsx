@@ -10,16 +10,11 @@ import ActorsPage from "./main/pages/ActorPage";
 import DirectorPage from "./main/pages/DirectorPage";
 import CommentPage from "./main/pages/CommentPage";
 
-<<<<<<< HEAD
-import AccountPage from "./admin/main/pages/AccountPage";
-import StatisticPage from "./admin/main/pages/StatisticPage";
-import LoginPage from "./admin/auth/pages/LoginPage";
-import Main from "./admin/main/pages/Main";
-=======
 import AccountPage from "./main/pages/AccountPage";
 import StatisticPage from "./main/pages/StatisticPage";
 import LoginPage from "./auth/pages/LoginPage";
->>>>>>> Truong
+
+import NotFound from "./main/pages/NotFound";
 
 function App() {
   return (
@@ -35,16 +30,11 @@ function App() {
           <Route path="/Directors" element={<DirectorPage />} />
           <Route path="/Comments" element={<CommentPage />} />
 
-<<<<<<< HEAD
-        <Route path="/Accounts" element={<AccountPage />} />
-        <Route path="/Statistics" element={<StatisticPage />} />
-        <Route path="/Main" element={<Main/>}/>
-        <Route path="/" element={<LoginPage />} />
-=======
           <Route path="/Accounts" element={<AccountPage />} />
           <Route path="/Statistics" element={<StatisticPage />} />
           <Route path="/" element={<LoginPage />} />
->>>>>>> Truong
+
+          <Route path="/*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
     // <BrowserRouter>
