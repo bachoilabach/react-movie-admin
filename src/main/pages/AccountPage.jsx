@@ -40,7 +40,7 @@ const TABS = [
 const TABLE_HEAD = ["Name", "Role", "Gender", "Phone number", "Action"];
 
 export default function AccountPage() {
-  const [modal, setModal] = useState(Modal);
+  const [modal, setModal] = useState(false);
   const [tableRows, setTableRows] = useState([]);
 
   const toggleModal = () => {
@@ -55,7 +55,6 @@ export default function AccountPage() {
   const getAccount = async () => {
     try {
       let response = await getAllUsers('ALL');
-      console.log(tableRows)
       setTableRows(response.users)
     } catch (error) {
       console.error("Lỗi khi gọi API:", error)
@@ -127,7 +126,7 @@ export default function AccountPage() {
                   <tbody>
                     {tableRows.map(
                       (
-                        {email,fullName,roleID,gender,phoneNumber},
+                        {img,email,fullName,roleID,gender,phoneNumber},
                         index
                       ) => {
                         const isLast = index === tableRows.length - 1;
@@ -136,11 +135,12 @@ export default function AccountPage() {
                           : "p-4 border-b border-blue-gray-50";
                           const role = roleID === 1 ? 'admin' : 'user'
                           const genderName = gender === 1 ? 'Male' : 'Female'
+                          const avatar = img === '' ? '' : 'https://cdn.sforum.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg'
                         return (
                           <tr key={fullName}>
                             <td className={classes}>
                               <div className="flex items-center gap-3">
-                                <Avatar alt={fullName} size="sm" />
+                                <Avatar src={avatar} alt={fullName} size="sm" />
                                 <div className="flex flex-col">
                                   <Typography
                                     variant="small"
@@ -201,7 +201,7 @@ export default function AccountPage() {
                               <Tooltip content="Edit User">
                                 <IconButton
                                   variant="text"
-                                  // onClick={toggleModal}
+                                  onClick={toggleModal}
                                 >
                                   <PencilIcon className="h-4 w-4" />
                                 </IconButton>
@@ -215,7 +215,7 @@ export default function AccountPage() {
                 </table>
               </CardBody>
             </div>
-            <Modal modal={modal} toggleModal={toggleModal} />
+            {modal && <Modal toggleModal={toggleModal} />}
             <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-2">
               <Typography
                 variant="small"
