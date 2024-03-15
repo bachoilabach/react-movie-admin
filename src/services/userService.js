@@ -12,4 +12,12 @@ const getAllUsers = (inputID)=>{
     })
 };
 
-export {handleLoginApi,getAllUsers}
+const handleSignUpApi = (userEmail, userPassword,roleID)=>{
+    return axios.post('/api/create-new-user',{
+        email: userEmail,
+        password: userPassword,
+        roleID: roleID
+    })
+}
+
+export {handleLoginApi,getAllUsers,handleSignUpApi}
