@@ -24,18 +24,17 @@ const loginFields = [
 ];
 
 const signupFields = [
-  {
-    labelText: "Username",
-    labelFor: "username",
-    id: "username",
-    name: "username",
-    type: "text",
-    autoComplete: "username",
-    isRequired: true,
-    placeholder: "Username",
-    customClass:"bg-[#333333] text-white"
-
-  },
+  // {
+  //   labelText: "Username",
+  //   labelFor: "username",
+  //   id: "username",
+  //   name: "username",
+  //   type: "text",
+  //   autoComplete: "username",
+  //   isRequired: true,
+  //   placeholder: "Username",
+  //   customClass:"bg-[#333333] text-white"
+  // },
   {
     labelText: "Email address",
     labelFor: "email-address",
@@ -63,10 +62,10 @@ const signupFields = [
   {
     labelText: "Confirm Password",
     labelFor: "confirm-password",
-    id: "confirm-password",
-    name: "confirm-password",
+    id: "confirm_password",
+    name: "confirm_password",
     type: "password",
-    autoComplete: "confirm-password",
+    autoComplete: "confirm_password",
     isRequired: true,
     placeholder: "Confirm Password",
     customClass:"bg-[#333333] text-white"

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SideBar from "../components/SideBar";
 import NavBar from "../components/NavBar";
 
@@ -21,6 +21,7 @@ import {
 } from "@material-tailwind/react";
 
 import Modal from "../components/Modal";
+import { getAllUsers } from "../../services/userService";
 
 const TABS = [
   {
@@ -34,69 +35,13 @@ const TABS = [
   {
     label: "Vip member",
     value: "vipmember",
-  },
-];
-const TABLE_HEAD = ["Name", "Role", "Email", "Phone number", "Edit"];
-
-const TABLE_ROWS = [
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg",
-    name: "John Michael",
-    email: "john@creative-tim.com",
-    job: "Manager",
-    org: "Organization",
-    duration: 123,
-    date: "23/04/18",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-2.jpg",
-    name: "Alexa Liras",
-    email: "alexa@creative-tim.com",
-    job: "Programator",
-    org: "Developer",
-    duration: 123,
-    date: "23/04/18",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-1.jpg",
-    name: "Laurent Perrier",
-    email: "laurent@creative-tim.com",
-    job: "Executive",
-    org: "Projects",
-    duration: 123,
-    date: "19/09/17",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-4.jpg",
-    name: "Michael Levi",
-    email: "michael@creative-tim.com",
-    job: "Programator",
-    org: "Developer",
-    duration: 123,
-    date: "24/12/08",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-5.jpg",
-    name: "Richard Gran",
-    email: "richard@creative-tim.com",
-    job: "Manager",
-    org: "Executive",
-    duration: 123,
-    date: "04/10/21",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-5.jpg",
-    name: "Richard Gran",
-    email: "richard@creative-tim.com",
-    job: "Manager",
-    org: "Executive",
-    duration: 123,
-    date: "04/10/21",
-  },
-];
+  }
+]
+const TABLE_HEAD = ["Name", "Role", "Gender", "Phone number", "Action"];
 
 export default function AccountPage() {
   const [modal, setModal] = useState(false);
+  const [tableRows, setTableRows] = useState([]);
 
   const toggleModal = () => {
     setModal(!modal);
@@ -106,6 +51,19 @@ export default function AccountPage() {
       document.body.style.overflowY = "auto";
     }
   };
+
+  const getAccount = async () => {
+    try {
+      let response = await getAllUsers('ALL');
+      setTableRows(response.users)
+    } catch (error) {
+      console.error("Lỗi khi gọi API:", error)
+    }
+  };
+
+  useEffect(()=>{
+    getAccount()
+  },[])
 
   return (
     <div className="flex text-textMain p-[20px] gap-[3%]">
@@ -166,28 +124,30 @@ export default function AccountPage() {
                     </tr>
                   </thead>
                   <tbody>
-                    {TABLE_ROWS.map(
+                    {tableRows.map(
                       (
-                        { img, name, email, job, org, duration, date },
+                        {img,email,fullName,roleID,gender,phoneNumber},
                         index
                       ) => {
-                        const isLast = index === TABLE_ROWS.length - 1;
+                        const isLast = index === tableRows.length - 1;
                         const classes = isLast
                           ? "p-4"
                           : "p-4 border-b border-blue-gray-50";
-
+                          const role = roleID === 1 ? 'admin' : 'user'
+                          const genderName = gender === 1 ? 'Male' : 'Female'
+                          const avatar = img === '' ? '' : 'https://cdn.sforum.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg'
                         return (
-                          <tr key={name}>
+                          <tr key={fullName}>
                             <td className={classes}>
                               <div className="flex items-center gap-3">
-                                <Avatar src={img} alt={name} size="sm" />
+                                <Avatar src={avatar} alt={fullName} size="sm" />
                                 <div className="flex flex-col">
                                   <Typography
                                     variant="small"
                                     color="blue-gray"
                                     className="font-normal"
                                   >
-                                    {name}
+                                    {fullName}
                                   </Typography>
                                   <Typography
                                     variant="small"
@@ -206,14 +166,14 @@ export default function AccountPage() {
                                   color="blue-gray"
                                   className="font-normal"
                                 >
-                                  {job}
+                                  {roleID}
                                 </Typography>
                                 <Typography
                                   variant="small"
                                   color="blue-gray"
                                   className="font-normal opacity-70"
                                 >
-                                  {org}
+                                  {role}
                                 </Typography>
                               </div>
                             </td>
@@ -224,7 +184,7 @@ export default function AccountPage() {
                                   color="blue-gray"
                                   className="font-normal"
                                 >
-                                  {duration}
+                                  {genderName}
                                 </Typography>
                               </div>
                             </td>
@@ -234,7 +194,7 @@ export default function AccountPage() {
                                 color="blue-gray"
                                 className="font-normal"
                               >
-                                {date}
+                                {phoneNumber}
                               </Typography>
                             </td>
                             <td className={classes}>
