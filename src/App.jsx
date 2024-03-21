@@ -23,15 +23,15 @@ function App() {
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/ForgotPw" element={<ForgotPw />} />
 
-          <Route path="/home" element={<HomePage />} />
-          <Route path="/Movies" element={<MoviePage />} />
-          <Route path="/Categories" element={<CategoryPage />} />
-          <Route path="/Actors" element={<ActorsPage />} />
-          <Route path="/Directors" element={<DirectorPage />} />
-          <Route path="/Comments" element={<CommentPage />} />
+          <Route path="/dashboard" element={<HomePage />} />
+          <Route path="/dashboard/Movies" element={<MoviePage />} />
+          <Route path="/dashboard/Categories" element={<CategoryPage />} />
+          <Route path="/dashboard/Actors" element={<ActorsPage />} />
+          <Route path="/dashboard/Directors" element={<DirectorPage />} />
+          <Route path="/dashboard/Comments" element={<CommentPage />} />
 
-          <Route path="/Accounts" element={<AccountPage />} />
-          <Route path="/Statistics" element={<StatisticPage />} />
+          <Route path="/dashboard/Accounts" element={<AccountPage />} />
+          <Route path="/dashboard/Statistics" element={<StatisticPage />} />
           <Route path="/" element={<LoginPage />} />
 
           <Route path="/*" element={<NotFound />} />

@@ -8,14 +8,14 @@ import { Link } from "react-router-dom";
 export default function SideBar() {
   const [open, setOpen] = useState(true);
   const Menus = [
-    { title: "Movies", icon: Icons.faFilm, link: "/Movies" },
-    { title: "Categories ", icon: Icons.faIcons, link: "/Categories" },
-    { title: "Actors", icon: Icons.faUserSecret, link: "/Actors" },
-    { title: "Directors", icon: Icons.faClapperboard, link: "/Directors" },
-    { title: "Comments", icon: Icons.faComments, link: "/Comments" },
+    { title: "Movies", icon: Icons.faFilm, link: "/dashboard/Movies" },
+    { title: "Categories ", icon: Icons.faIcons, link: "/dashboard/Categories" },
+    { title: "Actors", icon: Icons.faUserSecret, link: "/dashboard/Actors" },
+    { title: "Directors", icon: Icons.faClapperboard, link: "/dashboard/Directors" },
+    { title: "Comments", icon: Icons.faComments, link: "/dashboard/Comments" },
 
-    { title: "Accounts", icon: Icons.faUser, gap: true, link: "/Accounts" },
-    { title: "Statistics", icon: Icons.faChartLine, link: "/Statistics" },
+    { title: "Accounts", icon: Icons.faUser, gap: true, link: "/dashboard/Accounts" },
+    { title: "Statistics", icon: Icons.faChartLine, link: "/dashboard/Statistics" },
     { title: "Log out", icon: Icons.faRightFromBracket, link: "/" },
   ];
 
@@ -32,7 +32,7 @@ export default function SideBar() {
         }`}
         onClick={() => setOpen(!open)}
       />
-      <Link to={"/Home"}>
+      <Link to={"/dashboard"}>
         <div className="flex gap-x-4 items-center pl-2 hover:bg-hoverNavBar p-2 rounded-md group">
           <FontAwesomeIcon
             icon={Icons.faHome}

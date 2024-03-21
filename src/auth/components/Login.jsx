@@ -17,6 +17,7 @@ export default function Login() {
 
     const handleChange = (e) => {
         setLoginState({ ...loginState, [e.target.id]: e.target.value });
+        
     };
 
     const handleSubmit = (e) => {
@@ -35,9 +36,9 @@ export default function Login() {
                 // Lưu thông tin người dùng vào Local Storage
                 localStorage.setItem('userData', JSON.stringify(data.user));
 				if(data.user.roleID === '2'){
-					navigate('/Main')
+					navigate('/dashboard/Main')
 				}else{
-					navigate("/home");
+					navigate("/dashboard");
 				}
             }
         } catch (error) {
