@@ -48,7 +48,6 @@ export default function AccountPage() {
 	const toggleModal = ({userID,email,fullName,phoneNumber,gender,roleID,address}) => {
 		const userData = {userID,email,fullName,phoneNumber,gender,roleID,address}
 		setSelectedUser(userData);
-		console.log(userData)
 		setModal(!modal);
 		if (!modal) {
 			document.body.style.overflowY = 'hidden';

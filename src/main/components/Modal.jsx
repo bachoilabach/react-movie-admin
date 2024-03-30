@@ -8,21 +8,19 @@ import { handleUpdateUserDataApi } from '../../services/userService';
 export default function Modal({ toggleModal, selectedUser }) {
 	const [accountState, setAccountState] = useState({});
 
-	const [roleValue, setRoleValue] = useState(accountState.roleID);
-	const [genderValue, setGenderValue] = useState(accountState.gender);
+	const [roleValue, setRoleValue] = useState();
+	const [genderValue, setGenderValue] = useState();
 	const getAccount = async () => {
 		try {
 			let response = await getAllUsers(selectedUser.userID);
-			setAccountState(response.users)
-			console.log(response.users)
+			setAccountState(response.users);
+			setGenderValue(response.users.gender);
+			setRoleValue(response.users.roleID);
 		} catch (error) {
 			console.error('Lỗi khi gọi API:', error);
 		}
 	};
 	useEffect(() => {
-		// Cập nhật giá trị mặc định cho Select dựa trên roleID của selectedUser
-		setRoleValue(selectedUser.roleID);
-		setGenderValue(selectedUser.gender);
 		getAccount();
 	}, []);
 
@@ -33,31 +31,40 @@ export default function Modal({ toggleModal, selectedUser }) {
 			[id]: value,
 		}));
 	};
-	
-
-	const handleChangeRole = () => {
-		setRoleValue(roleValue);
-	};
-
-	const handleChangeGeder = () => {
-		setGenderValue(genderValue);
-	};
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		handleChangeUserData();
 	};
 
+	const handleChangeGender = (value) => {
+		setGenderValue(genderValue);
+		console.log(genderValue)
+		setAccountState((prevState) => ({
+			...prevState,
+			gender: value,
+		}));
+	};
+
+	const handleChangeRole = (value) => {
+		setGenderValue(value);
+		setAccountState((prevState) => ({
+			...prevState,
+			roleID: value,
+		}));
+	};
+
 	const handleChangeUserData = async () => {
 		try {
-			let message = await handleUpdateUserDataApi(accountState)
-			if(message.errCode === 0){
-				// toggleModal
+			let message = await handleUpdateUserDataApi(accountState);
+			console.log(accountState);
+			if (message.errCode === 0) {
+				toggleModal();
 			}
 		} catch (error) {
-			console.log(error)
+			console.log(error);
 		}
-	}; 
+	};
 
 	return (
 		<div className="fixed inset-0 z-10">
@@ -89,7 +96,7 @@ export default function Modal({ toggleModal, selectedUser }) {
 								/>
 							))}
 						</div>
-						<div className="flex gap-8">
+						<div className="flex gap-7">
 							{UserFields.slice(2, 4).map((ele) => (
 								<Input
 									key={ele.id}
@@ -114,9 +121,11 @@ export default function Modal({ toggleModal, selectedUser }) {
 								color="blue"
 								className="shadow-sm"
 								value={roleValue}
-								onChange={handleChangeRole}>
-								<Option value={1}>Admin</Option>
-								<Option value={2}>User</Option>
+								onChange={(value) => handleChangeRole(value)}
+								id="role"
+							>
+								<Option value={1} index={1}>Admin</Option>
+								<Option value={2} index={2}>User</Option>
 							</Select>
 							<Select
 								label="Gender"
@@ -124,12 +133,17 @@ export default function Modal({ toggleModal, selectedUser }) {
 								color="blue"
 								className="shadow-sm"
 								value={genderValue}
-								onChange={handleChangeGeder}>
-								<Option value={1}>Male</Option>
-								<Option value={2}>Female</Option>
+								onChange={(value) => handleChangeGender(value)}
+								id="gender">
+								<Option value={1} index={1}>Male</Option>
+								<Option value={2} index={2}>Female</Option>
 							</Select>
 						</div>
-						<Button variant="solid" color="blue" className="w-24" onClick={handleChangeUserData}>
+						<Button
+							variant="solid"
+							color="blue"
+							className="w-24"
+							onClick={handleChangeUserData}>
 							Save
 						</Button>
 						<Button

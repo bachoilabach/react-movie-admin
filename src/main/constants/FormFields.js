@@ -28,8 +28,7 @@ const UserFields = [
 		type: 'number',
 		autoComplete: 'email',
 		isRequired: false,
-		classExpand: 'w-[113%] ',
-
+		classExpand: 'w-[100%]',
 	},
     {
 		label: 'Address',
@@ -39,7 +38,7 @@ const UserFields = [
 		type: 'text',
 		autoComplete: 'address',
 		isRequired: false,
-		classExpand: 'w-[188%]',
+		classExpand: 'w-[189%]',
 	},
 ];
 
