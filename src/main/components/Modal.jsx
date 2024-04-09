@@ -123,6 +123,7 @@ export default function Modal({ toggleModal, selectedUser }) {
 								value={roleValue}
 								onChange={(value) => handleChangeRole(value)}
 								id="role"
+								
 							>
 								<Option value={1} index={1}>Admin</Option>
 								<Option value={2} index={2}>User</Option>
