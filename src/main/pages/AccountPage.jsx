@@ -22,6 +22,7 @@ import {
 
 import Modal from '../components/Modal';
 import { getAllUsers, handleDeleteUserApi } from '../../services/userService';
+import { unstable_HistoryRouter } from 'react-router-dom';
 
 const TABS = [
 	{
@@ -65,8 +66,8 @@ export default function AccountPage() {
 		}
 	};
 
-	const handleDeleteUser = async ({userID,email,fullName,phoneNumber,gender,roleID})=>{
-		const user = {userID,email,fullName,phoneNumber,gender,roleID}
+	const handleDeleteUser = async ({userID})=>{
+		const user = {userID}
 		console.log(user)
 		try {
 			await handleDeleteUserApi(user.userID)
@@ -211,7 +212,7 @@ export default function AccountPage() {
 															<Tooltip content='Delete User'>
 																<IconButton
 																	variant='text'
-																	onClick={() => handleDeleteUser({userID,email,fullName,phoneNumber,gender,roleID})}
+																	onClick={() => handleDeleteUser({userID})}
 																>
 																	<TrashIcon className='h-4 w-4 text-red-500' />
 																</IconButton>
