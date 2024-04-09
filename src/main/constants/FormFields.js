@@ -42,4 +42,27 @@ const UserFields = [
 	},
 ];
 
-export { UserFields };
+const actorFields = [
+	{
+		label: 'Name',
+		id: 'name',
+		name: 'name',
+		placeholder: 'Enter actor name',
+		type: 'text',
+		autoComplete: 'name',
+		isRequired: false,
+		classExpand: 'w-[189%]',
+	},
+	{
+		label: 'Nationality',
+		id: 'nationality',
+		name: 'nationality',
+		placeholder: 'Enter actor nationality',
+		type: 'text',
+		autoComplete: 'nationality',
+		isRequired: false,
+		classExpand: 'w-[189%]',
+	},
+]
+
+export { UserFields, actorFields };
