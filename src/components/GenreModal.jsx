@@ -1,6 +1,6 @@
 import { Button, Typography } from '@material-tailwind/react';
 import React, { useEffect, useState } from 'react';
-import { getAllGenres, handleCreateNewGenre, handleUpdateGenreDataApi, } from '../../services/genreService';
+import { getAllGenres, handleCreateNewGenre, handleUpdateGenreDataApi, } from '../services/genreService';
 import Input from './Input';
 
 export default function GenreModal({ toggleGenreModal, title, genreID }) {

@@ -7,9 +7,9 @@ import {
 	createNewActorApi,
 	editActorApi,
 	getAllActors,
-} from '../../services/actorService';
+} from '../services/actorService';
 import dayjs from 'dayjs';
-import commonUtils from '../../utils/commonUtils';
+import commonUtils from '../utils/commonUtils';
 
 export default function ActorModal({ toggleActorModal, actorID, title }) {
 	const [actorState, setActorState] = useState({});

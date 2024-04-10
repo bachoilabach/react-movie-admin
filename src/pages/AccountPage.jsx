@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import SideBar from '../components/SideBar';
-import NavBar from '../components/NavBar';
 
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { PencilIcon, TrashIcon } from '@heroicons/react/24/solid';
@@ -21,7 +19,7 @@ import {
 } from '@material-tailwind/react';
 
 import Modal from '../components/Modal';
-import { getAllUsers, handleDeleteUserApi } from '../../services/userService';
+import { getAllUsers, handleDeleteUserApi } from '../services/userService';
 import { unstable_HistoryRouter } from 'react-router-dom';
 
 const TABS = [
@@ -83,9 +81,7 @@ export default function AccountPage() {
 
 	return (
 		<div className='flex text-textMain p-[20px] gap-[3%]'>
-			<SideBar />
 			<div className='w-full h-full flex flex-col gap-y-4'>
-				<NavBar />
 				<div className='h-[calc(100vh-136px)]'>
 					<Card className='h-full w-full justify-between'>
 						<div>

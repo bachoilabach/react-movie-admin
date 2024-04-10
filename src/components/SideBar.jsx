@@ -3,21 +3,11 @@ import { useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as Icons from "@fortawesome/free-solid-svg-icons";
+import Routes from "../routes/routes";
 import { Link } from "react-router-dom";
 
 export default function SideBar() {
   const [open, setOpen] = useState(true);
-  const Menus = [
-    { title: "Movies", icon: Icons.faFilm, link: "/dashboard/Movies" },
-    { title: "Categories ", icon: Icons.faIcons, link: "/dashboard/Categories" },
-    { title: "Actors", icon: Icons.faUserSecret, link: "/dashboard/Actors" },
-    { title: "Directors", icon: Icons.faClapperboard, link: "/dashboard/Directors" },
-    { title: "Comments", icon: Icons.faComments, link: "/dashboard/Comments" },
-
-    { title: "Accounts", icon: Icons.faUser, gap: true, link: "/dashboard/Accounts" },
-    { title: "Statistics", icon: Icons.faChartLine, link: "/dashboard/Statistics" },
-    { title: "Log out", icon: Icons.faRightFromBracket, link: "/" },
-  ];
 
   return (
     <div
@@ -32,7 +22,7 @@ export default function SideBar() {
         }`}
         onClick={() => setOpen(!open)}
       />
-      <Link to={"/dashboard"}>
+      <Link to={"/dashboard/Home"}>
         <div className="flex gap-x-4 items-center pl-2 hover:bg-hoverNavBar p-2 rounded-md group">
           <FontAwesomeIcon
             icon={Icons.faHome}
@@ -49,16 +39,19 @@ export default function SideBar() {
           </h1>
         </div>
       </Link>
-      
+
       <ul className="pt-6">
-        {Menus.map((Menu, index) => (
+        {Routes.map((Menu, index) => (
           <Link to={Menu.link}>
             <li
               key={index}
               className={`flex text-textMain rounded-md p-2 cursor-pointer font-medium text-sm items-center gap-x-4 hover:bg-hoverNavBar group
               ${Menu.gap ? "mt-9" : "mt-2"} ${index === 0} `}
             >
-              <FontAwesomeIcon icon={Menu.icon} className="fa-xl group-hover:text-active" />
+              <FontAwesomeIcon
+                icon={Menu.icon}
+                className="fa-xl group-hover:text-active"
+              />
               <span
                 className={`${
                   !open && "hidden"

@@ -1,6 +1,4 @@
 import React from "react";
-import SideBar from "../components/SideBar";
-import NavBar from "../components/NavBar";
 
 import {
   Card,
@@ -195,9 +193,7 @@ export default function StatisticPage() {
   const [type, setType] = React.useState("chart1");
   return (
     <div className="flex bg-bgColorMain text-textMain p-[20px] gap-[3%]">
-      <SideBar />
       <div className="w-full h-full flex flex-col gap-y-4">
-        <NavBar />
         <Card className="w-full h-[calc(100vh-136px)] ">
           <CardBody>
             <Tabs value={type} className="overflow-visible">

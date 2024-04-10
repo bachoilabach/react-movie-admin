@@ -1,48 +1,24 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React from "react";
+import Dashboard from "./layouts/dashboard";
+import { BrowserRouter } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
-import SignupPage from "./auth/pages/SignupPage";
-import ForgotPw from "./auth/pages/ForgotPwPage";
-
-import HomePage from "./main/pages/HomePage";
-import MoviePage from "./main/pages/MoviePage";
-import CategoryPage from "./main/pages/CategoryPage";
-import ActorsPage from "./main/pages/ActorPage";
-import DirectorPage from "./main/pages/DirectorPage";
-import CommentPage from "./main/pages/CommentPage";
-
-import AccountPage from "./main/pages/AccountPage";
-import StatisticPage from "./main/pages/StatisticPage";
-import LoginPage from "./auth/pages/LoginPage";
-
-import NotFound from "./main/pages/NotFound";
+import NotFound from "../src/pages/NotFound";
+import LoginPage from "../src/pages/LoginPage";
+import SignupPage from "../src/pages/SignupPage";
+import ForgotPwPage from "../src/pages/ForgotPwPage";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-          <Route path="/signup" element={<SignupPage />} />
-          <Route path="/ForgotPw" element={<ForgotPw />} />
-
-          <Route path="/dashboard" element={<HomePage />} />
-          <Route path="/dashboard/Movies" element={<MoviePage />} />
-          <Route path="/dashboard/Categories" element={<CategoryPage />} />
-          <Route path="/dashboard/Actors" element={<ActorsPage />} />
-          <Route path="/dashboard/Directors" element={<DirectorPage />} />
-          <Route path="/dashboard/Comments" element={<CommentPage />} />
-
-          <Route path="/dashboard/Accounts" element={<AccountPage />} />
-          <Route path="/dashboard/Statistics" element={<StatisticPage />} />
+      <BrowserRouter>
+        <Routes>
           <Route path="/" element={<LoginPage />} />
-
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/forgotpw" element={<ForgotPwPage />} />
+          <Route path="/dashboard/*" element={<Dashboard />} />
           <Route path="/*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
-    // <BrowserRouter>
-    //   <Routes>
-    //     <Route path="/" element={<LoginPage />} />
-    //     <Route path="/dashboard" element={<Dashboard />} />
-    //   </Routes>
-    // </BrowserRouter>
+        </Routes>
+      </BrowserRouter>
   );
 }
 

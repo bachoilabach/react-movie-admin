@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { loginFields } from "../constants/FormFields";
+import { loginFields } from "../constants/FormFieldsAuth";
 import FormAction from "./FormAction";
 import FormExtra from "./FormExtra";
 import Input from "./Input";
-import {handleLoginApi} from "../../services/userService";
+import {handleLoginApi} from "../services/userService";
 import { useNavigate } from "react-router-dom";
 
 const fields = loginFields;

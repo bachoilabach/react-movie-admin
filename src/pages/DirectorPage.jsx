@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import SideBar from "../components/SideBar";
-import NavBar from "../components/NavBar";
 
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { PencilIcon } from "@heroicons/react/24/solid";
@@ -12,9 +10,6 @@ import {
   Button,
   CardBody,
   CardFooter,
-  Tabs,
-  TabsHeader,
-  Tab,
   Avatar,
   IconButton,
   Tooltip,
@@ -22,40 +17,14 @@ import {
 
 import Modal from "../components/Modal";
 
-const TABS = [
-  {
-    label: "Movies",
-    value: "movies",
-  },
-  {
-    label: "TV Shows",
-    value: "TV Shows",
-  },
-  {
-    label: "TV Episodes",
-    value: "TV Episodes",
-  },
-];
-
-const TABLE_HEAD = ["Title", "Genre", "Duration(s)", "Release", "Edit"];
+const TABLE_HEAD = ["Name", "National", "Birth Date", "Edit"];
 
 const TABLE_ROWS = [
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg",
-    name: "John Michael",
-    email: "john@creative-tim.com",
-    job: "Manager",
-    org: "Organization",
-    duration: 123,
-    date: "23/04/18",
-  },
   {
     img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-2.jpg",
     name: "Alexa Liras",
     email: "alexa@creative-tim.com",
     job: "Programator",
-    org: "Developer",
-    duration: 123,
     date: "23/04/18",
   },
   {
@@ -63,8 +32,6 @@ const TABLE_ROWS = [
     name: "Laurent Perrier",
     email: "laurent@creative-tim.com",
     job: "Executive",
-    org: "Projects",
-    duration: 123,
     date: "19/09/17",
   },
   {
@@ -72,8 +39,6 @@ const TABLE_ROWS = [
     name: "Michael Levi",
     email: "michael@creative-tim.com",
     job: "Programator",
-    org: "Developer",
-    duration: 123,
     date: "24/12/08",
   },
   {
@@ -81,8 +46,6 @@ const TABLE_ROWS = [
     name: "Richard Gran",
     email: "richard@creative-tim.com",
     job: "Manager",
-    org: "Executive",
-    duration: 123,
     date: "04/10/21",
   },
   {
@@ -90,13 +53,18 @@ const TABLE_ROWS = [
     name: "Richard Gran",
     email: "richard@creative-tim.com",
     job: "Manager",
-    org: "Executive",
-    duration: 123,
+    date: "04/10/21",
+  },
+  {
+    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-5.jpg",
+    name: "Richard Gran",
+    email: "richard@creative-tim.com",
+    job: "Manager",
     date: "04/10/21",
   },
 ];
 
-export default function MoviePage() {
+export default function DirectorPage() {
   const [modal, setModal] = useState(false);
 
   const toggleModal = () => {
@@ -107,32 +75,18 @@ export default function MoviePage() {
       document.body.style.overflowY = "auto";
     }
   };
-
   return (
     <div className="flex text-textMain p-[20px] gap-[3%]">
-      <SideBar />
       <div className="w-full h-full flex flex-col gap-y-4">
-        <NavBar />
         <div className="h-[calc(100vh-136px)]">
-          <Card className="h-full w-full justify-between">
+          <Card className="h-full w-full flex flex-col justify-between ">
             <div>
               <CardHeader
                 floated={false}
                 shadow={false}
-                className="rounded-none flex flex-row justify-between items-center max-h-14 mt-1"
+                className="rounded-none flex flex-row justify-between items-center mt-2 my-2 mx-2"
               >
-                <div className="flex flex-col items-center justify-between gap-4 md:flex-row py-20">
-                  <Tabs value="all" className="w-full md:w-max">
-                    <TabsHeader className="w-[500px] z-0">
-                      {TABS.map(({ label, value }) => (
-                        <Tab key={value} value={value}>
-                          &nbsp;&nbsp;{label}&nbsp;&nbsp;
-                        </Tab>
-                      ))}
-                    </TabsHeader>
-                  </Tabs>
-                </div>
-                <div className=" flex items-center justify-between gap-2 mt-1">
+                <div className=" mt-1 flex flex-col items-center justify-between gap-4 md:flex-row">
                   <div className="w-full md:w-72 ">
                     <Input
                       label="Search"
@@ -168,10 +122,7 @@ export default function MoviePage() {
                   </thead>
                   <tbody>
                     {TABLE_ROWS.map(
-                      (
-                        { img, name, email, job, org, duration, date },
-                        index
-                      ) => {
+                      ({ img, name, email, job, date }, index) => {
                         const isLast = index === TABLE_ROWS.length - 1;
                         const classes = isLast
                           ? "p-4"
@@ -209,24 +160,6 @@ export default function MoviePage() {
                                 >
                                   {job}
                                 </Typography>
-                                <Typography
-                                  variant="small"
-                                  color="blue-gray"
-                                  className="font-normal opacity-70"
-                                >
-                                  {org}
-                                </Typography>
-                              </div>
-                            </td>
-                            <td className={classes}>
-                              <div className="w-max">
-                                <Typography
-                                  variant="small"
-                                  color="blue-gray"
-                                  className="font-normal"
-                                >
-                                  {duration}
-                                </Typography>
                               </div>
                             </td>
                             <td className={classes}>
@@ -241,10 +174,8 @@ export default function MoviePage() {
                             <td className={classes}>
                               <Tooltip content="Edit User">
                                 <IconButton
-                                  variant="text"
                                   onClick={toggleModal}
-                                  data-ripple-light="true"
-                                  data-dialog-target="dialog"
+                                  variant="text"
                                 >
                                   <PencilIcon className="h-4 w-4" />
                                 </IconButton>
@@ -257,9 +188,8 @@ export default function MoviePage() {
                   </tbody>
                 </table>
               </CardBody>
+              {modal && <Modal toggleModal={toggleModal} />}
             </div>
-            {modal && <Modal toggleModal={toggleModal} />}
-
             <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-2">
               <Typography
                 variant="small"

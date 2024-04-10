@@ -1,6 +1,6 @@
 import Header from "../components/Header";
 import Signup from "../components/SignUp";
-import background from "../../img/background.jpg";
+import background from "../img/background.jpg";
 
 export default function SignupPage() {
 	return (

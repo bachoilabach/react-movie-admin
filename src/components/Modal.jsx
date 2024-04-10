@@ -2,8 +2,8 @@ import { Button, Option, Select, Typography } from '@material-tailwind/react';
 import React, { useEffect, useState } from 'react';
 import Input from './Input';
 import { UserFields } from '../constants/FormFields';
-import { getAllUsers } from '../../services/userService';
-import { handleUpdateUserDataApi } from '../../services/userService';
+import { getAllUsers } from '../services/userService';
+import { handleUpdateUserDataApi } from '../services/userService';
 
 export default function Modal({ toggleModal, selectedUser }) {
 	const [accountState, setAccountState] = useState({});
