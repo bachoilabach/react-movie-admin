@@ -6,6 +6,12 @@ const getAllActors = (id)=>{
     })
 }
 
+const createNewActorApi = (actorData)=>{
+    return axios.post('/api/create-new-actor',{
+        actor: actorData
+    })
+}
+
 const editActorApi = (actorData)=>{
     return axios.put('/api/edit-actor',{
         actor: actorData
@@ -23,6 +29,7 @@ const deleteActor = (actorID)=>{
 
 export {
     getAllActors,
+    createNewActorApi,
     editActorApi,
     deleteActor
 }

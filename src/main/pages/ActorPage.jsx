@@ -35,6 +35,7 @@ export default function ActorPage() {
 	const toggleActorModal = ({ actorID }) => {
 		setActorModal(!actorModal);
 		setActor(actorID);
+		console.log(actor);
 		if (!actorModal) {
 			document.body.style.overflowY = 'hidden';
 		} else {
@@ -64,7 +65,7 @@ export default function ActorPage() {
 
 	useEffect(() => {
 		getActor();
-	}, [check||actorModal]);
+	}, [check || actorModal]);
 
 	const totalPages = Math.ceil(tableRows.length / ITEMS_PER_PAGE);
 
@@ -159,12 +160,17 @@ export default function ActorPage() {
 												const classes = isLast
 													? 'p-4'
 													: 'p-4 border-b border-blue-gray-50';
-
+												
 												return (
 													<tr key={name}>
 														<td className={classes}>
 															<div className="flex items-center gap-3">
-																<Avatar src={image} alt={name} size="sm" />
+																<Avatar
+																	src={`data:image/jpeg;base64,${image}`}
+																	alt={name}
+																	size="sm"
+																/>
+
 																<div className="flex flex-col">
 																	<Typography
 																		variant="small"

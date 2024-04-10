@@ -3,7 +3,11 @@ import React, { useEffect, useState } from 'react';
 import Input from './Input';
 import { actorFields } from '../constants/FormFields';
 import { DatePicker, Image } from 'antd';
-import { editActorApi, getAllActors } from '../../services/actorService';
+import {
+	createNewActorApi,
+	editActorApi,
+	getAllActors,
+} from '../../services/actorService';
 import dayjs from 'dayjs';
 import commonUtils from '../../utils/commonUtils';
 
@@ -11,15 +15,16 @@ export default function ActorModal({ toggleActorModal, actorID, title }) {
 	const [actorState, setActorState] = useState({});
 	const [birthdate, setBirthDate] = useState(null);
 	const [previewImgURL, setPreviewImageURL] = useState(null);
+	const [check, setCheck] = useState(false);
 
 	const getActor = async () => {
 		try {
-			let response = await getAllActors(actorID);
-			setActorState(response.actors);
-			if (response.actors.image) {
-                setPreviewImageURL(response.actors.image);
-            }
-			console.log(response.actors.image)
+			if (actorID) {
+				let response = await getAllActors(actorID);
+				setActorState(response.actors);
+				setBirthDate(dayjs(response.actors.birthdate, 'YYYY-MM-DD'));
+				fetchImageAsBase64(response.actors.image)
+			}
 		} catch (error) {
 			console.error('Lỗi khi gọi API:', error);
 		}
@@ -33,14 +38,19 @@ export default function ActorModal({ toggleActorModal, actorID, title }) {
 		}
 	};
 
-	const addActor = () => {};
+	const addActor = async () => {
+		try {
+			await createNewActorApi(actorState);
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	useEffect(() => {
-		getActor();
-		if (actorState.birthdate) {
-			setBirthDate(dayjs(actorState.birthdate, 'YYYY-MM-DD'));
+		if (actorID) {
+			getActor();
 		}
-	}, [actorState.birthdate]);
+	}, [actorID]);
 
 	const handleChange = (e) => {
 		const { id, value } = e.target;
@@ -50,20 +60,58 @@ export default function ActorModal({ toggleActorModal, actorID, title }) {
 		}));
 	};
 
+	const handleChangeBirthDate = (value) => {
+		const formattedBirthdate = value.format('YYYY-MM-DD');
+		console.log(formattedBirthdate);
+		setBirthDate(dayjs(value, 'YYYY-MM-DD'));
+		console.log(dayjs(value, 'YYYY-MM-DD'));
+		setActorState((prevState) => ({
+			...prevState,
+			birthdate: formattedBirthdate,
+		}));
+	};
+
 	const handleChangeImage = async (e) => {
 		let data = e.target.files;
 		let file = data[0];
 		if (file) {
 			const base64 = await commonUtils.getBase64(file);
 			const objectURL = URL.createObjectURL(file);
-			setPreviewImageURL(objectURL);
+			setPreviewImageURL(base64);
 			setActorState((prevState) => ({
 				...prevState,
 				image: base64,
 			}));
+			console.log(base64);
 		}
-		console.log(actorState);
 	};
+
+	const fetchImageAsBase64 = async (imageUrl) => {
+		try {
+			console.log(imageUrl)
+			const response = await fetch(imageUrl);
+			const blob = await response.blob();
+	
+			// Đọc blob dưới dạng ArrayBuffer
+			const arrayBuffer = await new Response(blob).arrayBuffer();
+	
+			// Chuyển đổi ArrayBuffer thành base64
+			const base64 = arrayBufferToBase64(arrayBuffer);
+	
+			setPreviewImageURL(`data:image/jpg;base64,${base64}`);
+			console.log(`data:image/jpeg;base64,${base64}`);
+			return base64;
+		} catch (error) {
+			console.error('Error fetching image:', error);
+			return null;
+		}
+	};
+	
+	const arrayBufferToBase64 = (arrayBuffer) => {
+		const binary = Array.from(new Uint8Array(arrayBuffer)).map(byte => String.fromCharCode(byte)).join('');
+		return btoa(binary);
+	};
+	
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -126,8 +174,9 @@ export default function ActorModal({ toggleActorModal, actorID, title }) {
 								<Typography className="text-[14px]">Date of birth</Typography>
 								<DatePicker
 									className="h-[37px] mt-1"
+									id="birthdate"
 									value={birthdate}
-									onChange={(date) => setBirthDate(date)}
+									onChange={(value) => handleChangeBirthDate(value)}
 								/>
 							</div>
 						</div>
@@ -137,6 +186,7 @@ export default function ActorModal({ toggleActorModal, actorID, title }) {
 								className="min-h-28 max-h-28 placeholder:text-slate-400 block bg-white w-full border border-gray-400 rounded-md py-2 pl-3 pr-3 mt-1 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
 								value={actorState.biography}
 								id="biography"
+								maxLength={5000}
 								onChange={handleChange}></textarea>
 						</div>
 						<div className="mb-4">

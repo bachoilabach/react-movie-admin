@@ -34,6 +34,7 @@ export default function CategoryPage() {
 	const toggleGenreModal = ({ genreID }) => {
 		setGenreModal(!genreModal);
 		setGenre(genreID);
+		console.log(genre)
 		if (!genreModal) {
 			document.body.style.overflowY = 'hidden';
 		} else {
