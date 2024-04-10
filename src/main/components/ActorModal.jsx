@@ -24,6 +24,7 @@ export default function ActorModal({ toggleActorModal, actorID, title }) {
 				setActorState(response.actors);
 				setBirthDate(dayjs(response.actors.birthdate, 'YYYY-MM-DD'));
 				fetchImageAsBase64(response.actors.image)
+				console.log(response.actors.image)
 			}
 		} catch (error) {
 			console.error('Lỗi khi gọi API:', error);
@@ -88,18 +89,16 @@ export default function ActorModal({ toggleActorModal, actorID, title }) {
 
 	const fetchImageAsBase64 = async (imageUrl) => {
 		try {
-			console.log(imageUrl)
+			
 			const response = await fetch(imageUrl);
 			const blob = await response.blob();
 	
-			// Đọc blob dưới dạng ArrayBuffer
 			const arrayBuffer = await new Response(blob).arrayBuffer();
-	
-			// Chuyển đổi ArrayBuffer thành base64
+			
+			
 			const base64 = arrayBufferToBase64(arrayBuffer);
 	
 			setPreviewImageURL(`data:image/jpg;base64,${base64}`);
-			console.log(`data:image/jpeg;base64,${base64}`);
 			return base64;
 		} catch (error) {
 			console.error('Error fetching image:', error);
@@ -205,6 +204,7 @@ export default function ActorModal({ toggleActorModal, actorID, title }) {
 									type="file"
 									id="previewImg"
 									hidden
+									accept=".jpg, .jpeg, .png"
 									onChange={(e) => handleChangeImage(e)}
 								/>
 								<label htmlFor="previewImg" className="cursor-pointer">
