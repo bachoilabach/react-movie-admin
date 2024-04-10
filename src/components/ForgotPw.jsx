@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ForgotPwFields } from "../constants/FormFieldsAuth";
 import FormAction from "./FormAction";
-import Input from "./Input";
+import Input from "./InputAuth";
 
 const fields = ForgotPwFields;
 let fieldsState = {};
@@ -37,7 +37,6 @@ export default function ForgotPw() {
             isRequired={field.isRequired}
             placeholder={field.placeholder}
             customClass={field.customClass}
-
           />
         ))}
       </div>

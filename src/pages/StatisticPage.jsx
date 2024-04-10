@@ -192,51 +192,49 @@ const chartConfig2 = {
 export default function StatisticPage() {
   const [type, setType] = React.useState("chart1");
   return (
-    <div className="flex bg-bgColorMain text-textMain p-[20px] gap-[3%]">
-      <div className="w-full h-full flex flex-col gap-y-4">
-        <Card className="w-full h-[calc(100vh-136px)] ">
-          <CardBody>
-            <Tabs value={type} className="overflow-visible">
-              <TabsHeader className="relative z-0 ">
-                <Tab value="chart1" onClick={() => setType("chart1")}>
-                  Chart 1
-                </Tab>
-                <Tab value="chart2" onClick={() => setType("chart2")}>
-                  Chart 2
-                </Tab>
-              </TabsHeader>
-              <TabsBody
-                animate={{
-                  initial: {
-                    x: type === "chart1" ? 400 : -400,
-                  },
-                  mount: {
-                    x: 0,
-                  },
-                  unmount: {
-                    x: type === "chart1" ? 400 : -400,
-                  },
-                }}
-              >
-                <TabPanel value="chart1" className="p-0">
-                  <div>
-                    <CardBody className="px-2 pb-0">
-                      <Chart {...chartConfig} />
-                    </CardBody>
-                  </div>
-                </TabPanel>
-                <TabPanel value="chart2" className="p-0">
-                  <div>
-                    <CardBody className="px-2 pb-0">
-                      <Chart {...chartConfig2} />
-                    </CardBody>
-                  </div>
-                </TabPanel>
-              </TabsBody>
-            </Tabs>
-          </CardBody>
-        </Card>
-      </div>
+    <div className="w-full h-full flex flex-col gap-y-4">
+      <Card className="w-full h-[calc(100vh-136px)] ">
+        <CardBody>
+          <Tabs value={type} className="overflow-visible">
+            <TabsHeader className="relative z-0 ">
+              <Tab value="chart1" onClick={() => setType("chart1")}>
+                Chart 1
+              </Tab>
+              <Tab value="chart2" onClick={() => setType("chart2")}>
+                Chart 2
+              </Tab>
+            </TabsHeader>
+            <TabsBody
+              animate={{
+                initial: {
+                  x: type === "chart1" ? 400 : -400,
+                },
+                mount: {
+                  x: 0,
+                },
+                unmount: {
+                  x: type === "chart1" ? 400 : -400,
+                },
+              }}
+            >
+              <TabPanel value="chart1" className="p-0">
+                <div>
+                  <CardBody className="px-2 pb-0">
+                    <Chart {...chartConfig} />
+                  </CardBody>
+                </div>
+              </TabPanel>
+              <TabPanel value="chart2" className="p-0">
+                <div>
+                  <CardBody className="px-2 pb-0">
+                    <Chart {...chartConfig2} />
+                  </CardBody>
+                </div>
+              </TabPanel>
+            </TabsBody>
+          </Tabs>
+        </CardBody>
+      </Card>
     </div>
   );
 }
