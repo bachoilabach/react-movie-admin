@@ -33,8 +33,10 @@ export default function ActorModal({ toggleActorModal, actorID, title }) {
 
 	const addActor = async () => {
 		try {
-			
-			await createNewActorApi(actorState);
+			let message = await createNewActorApi(actorState);
+			if(message.errCode === 0){
+				toggleActorModal(false)
+			}
 		} catch (error) {
 			console.log(error);
 		}
@@ -42,8 +44,10 @@ export default function ActorModal({ toggleActorModal, actorID, title }) {
 
 	const editActor = async () => {
 		try {
-			console.log(actorState.image);
-			await editActorApi(actorState);
+			let message = await editActorApi(actorState);
+			if(message.errCode === 0){
+				toggleActorModal(false)
+			}
 		} catch (error) {
 			console.log(error);
 		}

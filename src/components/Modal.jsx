@@ -57,9 +57,10 @@ export default function Modal({ toggleModal, selectedUser }) {
   const handleChangeUserData = async () => {
     try {
       let message = await handleUpdateUserDataApi(accountState);
-      console.log(accountState);
+      console.log(message.errCode);
+
       if (message.errCode === 0) {
-        toggleModal();
+        toggleModal(false);
       }
     } catch (error) {
       console.log(error);
@@ -153,7 +154,7 @@ export default function Modal({ toggleModal, selectedUser }) {
               variant="solid"
               color="blue"
               className="w-24"
-              onClick={handleChangeUserData}
+              onClick={()=>handleChangeUserData()}
             >
               Save
             </Button>

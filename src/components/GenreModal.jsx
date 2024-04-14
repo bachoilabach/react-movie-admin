@@ -43,7 +43,10 @@ export default function GenreModal({ toggleGenreModal, title, genreID }) {
 
   const handleAddGenre = async () => {
     try {
-      await handleCreateNewGenre(value);
+      let message = await handleCreateNewGenre(value);
+      if(message.errCode === 0){
+				toggleGenreModal(false)
+			}
     } catch (error) {
       console.log(error);
     }
@@ -51,8 +54,10 @@ export default function GenreModal({ toggleGenreModal, title, genreID }) {
 
   const handleChangeGenreData = async () => {
     try {
-      await handleUpdateGenreDataApi(genreID, value);
-      console.log(genreState);
+      let message = await handleUpdateGenreDataApi(genreID, value);
+      if(message.errCode === 0){
+				toggleGenreModal(false)
+			}
     } catch (error) {
       console.log(error);
     }
