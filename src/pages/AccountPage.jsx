@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
 
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { PencilIcon, TrashIcon } from "@heroicons/react/24/solid";
 import {
   Card,
   CardHeader,
-  Input,
   Typography,
-  Button,
   CardBody,
-  CardFooter,
   Tabs,
   TabsHeader,
   Tab,
@@ -20,7 +16,8 @@ import {
 
 import Modal from "../components/Modal";
 import { getAllUsers, handleDeleteUserApi } from "../services/userService";
-
+import PaginationFooter from "../components/Pagination";
+import Search from "../components/Search";
 
 const TABS = [
   {
@@ -38,11 +35,14 @@ const TABS = [
 ];
 const TABLE_HEAD = ["Name", "Role", "Gender", "Phone number", "Action"];
 
+const ITEMS_PER_PAGE = 6;
+
 export default function AccountPage() {
   const [modal, setModal] = useState(false);
   const [check, setCheck] = useState(false);
   const [tableRows, setTableRows] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const toggleModal = ({
     userID,
@@ -95,6 +95,25 @@ export default function AccountPage() {
     getAccount();
   }, [check || modal]);
 
+  const totalPages = Math.ceil(tableRows.length / ITEMS_PER_PAGE);
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const visibleItems = tableRows.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
+
   return (
     <div className="w-full h-full flex flex-col gap-y-4">
       <div className="h-[calc(100vh-136px)]">
@@ -116,19 +135,7 @@ export default function AccountPage() {
                   </TabsHeader>
                 </Tabs>
               </div>
-              <div className=" flex items-center justify-between gap-2 mt-1">
-                <div className="w-full md:w-72 ">
-                  <Input
-                    label="Search"
-                    icon={<MagnifyingGlassIcon className="h-5 w-5" />}
-                  />
-                </div>
-                <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
-                  <Button variant="outlined" size="sm">
-                    Search
-                  </Button>
-                </div>
-              </div>
+              <Search />
             </CardHeader>
             <CardBody className="p-1 px-0">
               <table className=" w-full min-w-max table-auto text-left">
@@ -151,7 +158,8 @@ export default function AccountPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {tableRows.map(
+                  {/* visibleItems or tablerows ? */}
+                  {visibleItems.map(
                     (
                       {
                         userID,
@@ -268,23 +276,12 @@ export default function AccountPage() {
           {modal && (
             <Modal toggleModal={toggleModal} selectedUser={selectedUser} />
           )}
-          <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-2">
-            <Typography
-              variant="small"
-              color="blue-gray"
-              className="font-normal"
-            >
-              Page 1 of 10
-            </Typography>
-            <div className="flex gap-2">
-              <Button variant="outlined" size="sm">
-                Previous
-              </Button>
-              <Button variant="outlined" size="sm">
-                Next
-              </Button>
-            </div>
-          </CardFooter>
+          <PaginationFooter
+            currentPage={currentPage}
+            totalPages={totalPages}
+            handlePrevPage={handlePrevPage}
+            handleNextPage={handleNextPage}
+          />
         </Card>
       </div>
     </div>
