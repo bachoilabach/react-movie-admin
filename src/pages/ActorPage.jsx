@@ -102,20 +102,20 @@ export default function ActorPage() {
 								</div>
 								<div className="flex shrink-0 flex-col gap-2 sm:flex-row">
 									<Button variant="outlined" size="sm">
-										Tìm kiếm
+										Search
 									</Button>
 								</div>
-								<div>
-									<Button
-										color="blue"
-										className="py-2.5"
-										onClick={() => {
-											toggleActorModal({ actor });
-											setClickAdd(true);
-										}}>
-										Add actor
-									</Button>
-								</div>
+							</div>
+							<div>
+								<Button
+									color="blue"
+									className="py-2.5"
+									onClick={() => {
+										toggleActorModal({ actor });
+										setClickAdd(true);
+									}}>
+									Add actor
+								</Button>
 							</div>
 						</CardHeader>
 						<CardBody className="p-1 px-0">

@@ -20,7 +20,7 @@ import {
 
 import Modal from "../components/Modal";
 import { getAllUsers, handleDeleteUserApi } from "../services/userService";
-import { unstable_HistoryRouter } from "react-router-dom";
+
 
 const TABS = [
   {
