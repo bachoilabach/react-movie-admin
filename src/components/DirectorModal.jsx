@@ -219,7 +219,7 @@ export default function DirectorModal({ toggleDirectorModal, directorID, title }
 							color="red"
 							className="ml-4"
 							onClick={toggleDirectorModal}>
-							Cancle
+							Cancel
 						</Button>
 					</form>
 				</div>

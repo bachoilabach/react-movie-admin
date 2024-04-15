@@ -107,7 +107,7 @@ export default function GenreModal({ toggleGenreModal, title, genreID }) {
                 className="ml-4"
                 onClick={toggleGenreModal}
               >
-                Cancle
+                Cancel
               </Button>
             </div>
           </form>

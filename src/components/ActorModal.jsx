@@ -231,7 +231,7 @@ export default function ActorModal({ toggleActorModal, actorID, title }) {
 							color="red"
 							className="ml-4"
 							onClick={toggleActorModal}>
-							Cancle
+							Cancel
 						</Button>
 					</form>
 				</div>
