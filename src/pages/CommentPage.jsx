@@ -1,19 +1,18 @@
 import React from "react";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { PencilIcon, TrashIcon } from "@heroicons/react/24/solid";
 import {
   Card,
   CardHeader,
   Typography,
-  Button,
   CardBody,
   IconButton,
   Tooltip,
 } from "@material-tailwind/react";
 
-import CommentModal from "../components/CommentModal";
+// import CommentModal from "../components/CommentModal";
 // import { getAllcomments, deletecommentApi } from "../services/commentService";
 import PaginationFooter from "../components/Pagination";
 import Search from "../components/Search";
