@@ -38,9 +38,9 @@ export default function Login() {
         // Lưu thông tin người dùng vào Local Storage
         localStorage.setItem("userData", JSON.stringify(data.user));
         if (data.user.roleID === "2") {
-          navigate("/dashboard/Main");
+          navigate("/*");
         } else {
-          navigate("/dashboard");
+          navigate("/dashboard/Home");
         }
       }
     } catch (error) {

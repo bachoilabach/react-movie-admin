@@ -2,7 +2,6 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as Icons from "@fortawesome/free-solid-svg-icons";
-import { Input } from "@material-tailwind/react";
 
 import {
   Popover,
@@ -26,12 +25,6 @@ export default function NavBar() {
     <div className="flex justify-between items-center bg-bgColorBlock text-textMain h-[80px] px-6 rounded-lg">
       <h1 className="text-2xl font-semibold ">{namepage}</h1>
       <div className="flex items-center gap-4">
-        <form>
-          <div className="mr-auto md:mr-4 md:w-56">
-            <Input label="Search" color="black" />
-          </div>
-        </form>
-
         <Menu>
           <MenuHandler>
             <Badge content="10" className="pointer-events-none">

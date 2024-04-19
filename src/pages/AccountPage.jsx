@@ -25,12 +25,12 @@ const TABS = [
     value: "admin",
   },
   {
-    label: "Member",
-    value: "member",
+    label: "User",
+    value: "user",
   },
   {
-    label: "Vip member",
-    value: "vipmember",
+    label: "Vip user",
+    value: "vipuser",
   },
 ];
 const TABLE_HEAD = ["Name", "Role", "Gender", "Phone number", "Action"];
