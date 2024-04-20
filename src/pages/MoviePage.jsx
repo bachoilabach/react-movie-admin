@@ -1,154 +1,124 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import { PencilIcon } from "@heroicons/react/24/solid";
+import { PencilIcon, TrashIcon } from "@heroicons/react/24/solid";
 import {
   Card,
   CardHeader,
-  Input,
   Typography,
   Button,
   CardBody,
-  CardFooter,
-  Tabs,
-  TabsHeader,
-  Tab,
   Avatar,
   IconButton,
   Tooltip,
 } from "@material-tailwind/react";
 
-import Modal from "../components/Modal";
+import ActorModal from "../components/ActorModal";
+import PaginationFooter from "../components/Pagination";
+import Search from "../components/Search";
+import { deleteMovie, getAllMovies } from "../services/movieService";
+import { get } from "lodash";
+import MovieModal from "../components/MovieModal";
 
-const TABS = [
-  {
-    label: "Movies",
-    value: "movies",
-  },
-  {
-    label: "TV Shows",
-    value: "TV Shows",
-  },
-  {
-    label: "TV Episodes",
-    value: "TV Episodes",
-  },
-];
+const TABLE_HEAD = ["Title", "Country", "Release", "Description", "Edit"];
 
-const TABLE_HEAD = ["Title", "Genre", "Duration(s)", "Release", "Edit"];
-
-const TABLE_ROWS = [
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg",
-    name: "John Michael",
-    email: "john@creative-tim.com",
-    job: "Manager",
-    org: "Organization",
-    duration: 123,
-    date: "23/04/18",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-2.jpg",
-    name: "Alexa Liras",
-    email: "alexa@creative-tim.com",
-    job: "Programator",
-    org: "Developer",
-    duration: 123,
-    date: "23/04/18",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-1.jpg",
-    name: "Laurent Perrier",
-    email: "laurent@creative-tim.com",
-    job: "Executive",
-    org: "Projects",
-    duration: 123,
-    date: "19/09/17",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-4.jpg",
-    name: "Michael Levi",
-    email: "michael@creative-tim.com",
-    job: "Programator",
-    org: "Developer",
-    duration: 123,
-    date: "24/12/08",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-5.jpg",
-    name: "Richard Gran",
-    email: "richard@creative-tim.com",
-    job: "Manager",
-    org: "Executive",
-    duration: 123,
-    date: "04/10/21",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-5.jpg",
-    name: "Richard Gran",
-    email: "richard@creative-tim.com",
-    job: "Manager",
-    org: "Executive",
-    duration: 123,
-    date: "04/10/21",
-  },
-];
+const ITEMS_PER_PAGE = 6;
 
 export default function MoviePage() {
-  const [modal, setModal] = useState(false);
+  const [movieModal, setMovieModal] = useState(false);
+  const [check, setCheck] = useState(false);
+  const [movie, setMovie] = useState(null);
+  const [clickAdd, setClickAdd] = useState(false);
+  const [tableRows, setTableRows] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const toggleModal = () => {
-    setModal(!modal);
-    if (!modal) {
+  const toggleMovieModal = ({ movieID }) => {
+    setMovieModal(!movieModal);
+    setMovie(movieID);
+    console.log(movie);
+    if (!movieModal) {
       document.body.style.overflowY = "hidden";
     } else {
       document.body.style.overflowY = "auto";
     }
   };
 
+  const getMovie = async () => {
+    try {
+      let response = await getAllMovies("ALL");
+      // console.log(response.actors);
+      setTableRows(response.movies);
+    } catch (error) {
+      console.error("Lỗi khi gọi API:", error);
+    }
+  };
+
+  const delteMovie = async ({ movieID }) => {
+    console.log(movieID);
+    try {
+      await deleteMovie(movieID);
+      setCheck(!check);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getAllMovies();
+  }, [check || movieModal]);
+
+  const totalPages = Math.ceil(tableRows.length / ITEMS_PER_PAGE);
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const visibleItems = tableRows.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
+
   return (
     <div className="w-full h-full flex flex-col gap-y-4">
       <div className="h-[calc(100vh-136px)]">
-        <Card className="h-full w-full justify-between">
+        <Card className="h-full w-full flex flex-col justify-between ">
           <div>
             <CardHeader
               floated={false}
               shadow={false}
-              className="rounded-none flex flex-row justify-between items-center max-h-14 mt-1"
+              className="rounded-none flex flex-row justify-between items-center mt-2 my-2 mx-2"
             >
-              <div className="flex flex-col items-center justify-between gap-4 md:flex-row py-20">
-                <Tabs value="all" className="w-full md:w-max">
-                  <TabsHeader className="w-[500px] z-0">
-                    {TABS.map(({ label, value }) => (
-                      <Tab key={value} value={value}>
-                        &nbsp;&nbsp;{label}&nbsp;&nbsp;
-                      </Tab>
-                    ))}
-                  </TabsHeader>
-                </Tabs>
-              </div>
-              <div className=" flex items-center justify-between gap-2 mt-1">
-                <div className="w-full md:w-72 ">
-                  <Input
-                    label="Search"
-                    icon={<MagnifyingGlassIcon className="h-5 w-5" />}
-                  />
-                </div>
-                <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
-                  <Button variant="outlined" size="sm">
-                    Search
-                  </Button>
-                </div>
+              <Search/>
+              <div>
+                <Button
+                  color="blue"
+                  className="py-2.5"
+                  onClick={() => {
+                    toggleMovieModal({ movie });
+                    setClickAdd(true);
+                  }}
+                >
+                  Add movie
+                </Button>
               </div>
             </CardHeader>
             <CardBody className="p-1 px-0">
               <table className=" w-full min-w-max table-auto text-left">
                 <thead>
                   <tr>
-                    {TABLE_HEAD.map((head) => (
+                    {TABLE_HEAD.map((head, index) => (
                       <th
                         key={head}
-                        className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-3"
+                        className={`border-y border-blue-gray-100 bg-blue-gray-50/50 p-3 ${
+                          index === TABLE_HEAD.length - 1 ? "pl-6" : ""
+                        }`}
                       >
                         <Typography
                           variant="small"
@@ -162,32 +132,35 @@ export default function MoviePage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {TABLE_ROWS.map(
-                    ({ img, name, email, job, org, duration, date }, index) => {
-                      const isLast = index === TABLE_ROWS.length - 1;
+                  {visibleItems.map(
+                    (
+                      {
+                        movieID,
+                        title,
+                        country,
+                        release,
+                        description
+                      },
+                      index
+                    ) => {
+                      const isLast = index === tableRows.length - 1;
                       const classes = isLast
                         ? "p-4"
                         : "p-4 border-b border-blue-gray-50";
 
                       return (
-                        <tr key={name}>
+                        <tr key={title}>
                           <td className={classes}>
                             <div className="flex items-center gap-3">
-                              <Avatar src={img} alt={name} size="sm" />
+                              {/* <Avatar src={image} alt={name} size="sm" /> */}
+
                               <div className="flex flex-col">
                                 <Typography
                                   variant="small"
                                   color="blue-gray"
                                   className="font-normal"
                                 >
-                                  {name}
-                                </Typography>
-                                <Typography
-                                  variant="small"
-                                  color="blue-gray"
-                                  className="font-normal opacity-70"
-                                >
-                                  {email}
+                                  {title}
                                 </Typography>
                               </div>
                             </div>
@@ -199,25 +172,7 @@ export default function MoviePage() {
                                 color="blue-gray"
                                 className="font-normal"
                               >
-                                {job}
-                              </Typography>
-                              <Typography
-                                variant="small"
-                                color="blue-gray"
-                                className="font-normal opacity-70"
-                              >
-                                {org}
-                              </Typography>
-                            </div>
-                          </td>
-                          <td className={classes}>
-                            <div className="w-max">
-                              <Typography
-                                variant="small"
-                                color="blue-gray"
-                                className="font-normal"
-                              >
-                                {duration}
+                                {country}
                               </Typography>
                             </div>
                           </td>
@@ -227,18 +182,42 @@ export default function MoviePage() {
                               color="blue-gray"
                               className="font-normal"
                             >
-                              {date}
+                              {release}
+                            </Typography>
+                          </td>
+                          <td
+                            className={classes}
+                            style={{
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                            }}
+                          >
+                            <Typography
+                              variant="small"
+                              color="blue-gray"
+                              className="font-normal whitespace-nowrap max-w-28"
+                            >
+                              {description}
                             </Typography>
                           </td>
                           <td className={classes}>
-                            <Tooltip content="Edit User">
+                            <Tooltip content="Edit Movie">
                               <IconButton
                                 variant="text"
-                                onClick={toggleModal}
-                                data-ripple-light="true"
-                                data-dialog-target="dialog"
+                                onClick={() => {
+                                  setClickAdd(false);
+                                  toggleMovieModal({ movieID });
+                                }}
                               >
-                                <PencilIcon className="h-4 w-4" />
+                                <PencilIcon className="h-4 w-4 text-yellow-800" />
+                              </IconButton>
+                            </Tooltip>
+                            <Tooltip content="Delete Actor">
+                              <IconButton
+                                variant="text"
+                                onClick={() => delteMovie({ movieID })}
+                              >
+                                <TrashIcon className="h-4 w-4 text-red-500" />
                               </IconButton>
                             </Tooltip>
                           </td>
@@ -249,26 +228,20 @@ export default function MoviePage() {
                 </tbody>
               </table>
             </CardBody>
+            {movieModal && (
+              <MovieModal
+                toggleMovieModal={toggleMovieModal}
+                title={clickAdd ? "Add" : "Edit"}
+                movieID={movie}
+              />
+            )}
           </div>
-          {modal && <Modal toggleModal={toggleModal} />}
-
-          <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-2">
-            <Typography
-              variant="small"
-              color="blue-gray"
-              className="font-normal"
-            >
-              Page 1 of 10
-            </Typography>
-            <div className="flex gap-2">
-              <Button variant="outlined" size="sm">
-                Previous
-              </Button>
-              <Button variant="outlined" size="sm">
-                Next
-              </Button>
-            </div>
-          </CardFooter>
+          <PaginationFooter
+            currentPage={currentPage}
+            totalPages={totalPages}
+            handlePrevPage={handlePrevPage}
+            handleNextPage={handleNextPage}
+          />
         </Card>
       </div>
     </div>

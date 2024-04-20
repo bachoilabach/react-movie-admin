@@ -18,7 +18,7 @@ import Search from "../components/Search";
 
 const TABLE_HEAD = ["Ordinal", "Name", "Edit"];
 
-const ITEMS_PER_PAGE = 6;
+
 
 export default function CategoryPage() {
   const [genreModal, setGenreModal] = useState(false);
@@ -61,6 +61,8 @@ export default function CategoryPage() {
     getGenres();
   }, [check || genreModal]);
 
+  const ITEMS_PER_PAGE = 6;
+  
   const totalPages = Math.ceil(tableRows.length / ITEMS_PER_PAGE);
 
   const handleNextPage = () => {

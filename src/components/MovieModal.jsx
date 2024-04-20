@@ -1,48 +1,48 @@
 import { Button, Typography } from '@material-tailwind/react';
 import React, { useEffect, useState } from 'react';
 import Input from './Input';
-import { actorFields } from '../constants/FormFields';
 import { DatePicker, Image } from 'antd';
+
 import dayjs from 'dayjs';
 import commonUtils from '../utils/commonUtils';
-import { createNewDirectorApi, editDirectorApi, getAllDirectors } from '../services/directorService';
+import { createNewMovieApi, editMovieApi, getAllMovies } from '../services/movieService';
 
 
-export default function DirectorModal({ toggleDirectorModal, directorID, title }) {
-	const [directorState, setDirectorState] = useState({});
-	const [birthdate, setBirthDate] = useState(null);
+export default function MovieModal({ toggleMovieModal, movieID, title }) {
+	const [movieState, setMovieState] = useState({});
+	// const [birthdate, setBirthDate] = useState(null);
 	const [previewImgURL, setPreviewImageURL] = useState(null);
 
-	const getDirector = async () => {
+	const getMovie = async () => {
 		try {
-			if (directorID) {
-				let response = await getAllDirectors(directorID);
-				setDirectorState(response.directors);
-				setBirthDate(dayjs(response.directors.birthdate, 'YYYY-MM-DD'));
-				fetchImageAsBase64(response.directors.image);
+			if (movieID) {
+				let response = await getAllMovies(movieID);
+				setMovieState(response.movies);
+				// setBirthDate(dayjs(response.actors.birthdate, 'YYYY-MM-DD'));
+				fetchImageAsBase64(response.movies.image);
+				console.log(response.movies.image);
 			}
 		} catch (error) {
 			console.error('Lỗi khi gọi API:', error);
 		}
 	};
 
-	const addDirector = async () => {
+	const addMovie = async () => {
 		try {
-			let message = await createNewDirectorApi(directorState);
+			let message = await createNewMovieApi(movieState);
 			if(message.errCode === 0){
-				toggleDirectorModal(false)
+				toggleMovieModal(false)
 			}
-
 		} catch (error) {
 			console.log(error);
 		}
 	};
 
-	const editDirector = async () => {
+	const editMovie = async () => {
 		try {
-			let message =await editDirectorApi(directorState);
+			let message = await editMovieApi(movieState);
 			if(message.errCode === 0){
-				toggleDirectorModal(false)
+				toggleMovieModal(false)
 			}
 		} catch (error) {
 			console.log(error);
@@ -50,14 +50,14 @@ export default function DirectorModal({ toggleDirectorModal, directorID, title }
 	};
 
 	useEffect(() => {
-		if (directorID) {
-			getDirector();
+		if (movieID) {
+			getMovie();
 		}
-	}, [directorID]);
+	}, [movieID]);
 
 	const handleChange = (e) => {
 		const { id, value } = e.target;
-		setDirectorState((prevState) => ({
+		setMovieState((prevState) => ({
 			...prevState,
 			[id]: value,
 		}));
@@ -66,8 +66,9 @@ export default function DirectorModal({ toggleDirectorModal, directorID, title }
 	const handleChangeBirthDate = (value) => {
 		const formattedBirthdate = value.format('YYYY-MM-DD');
 		console.log(formattedBirthdate);
-		setBirthDate(dayjs(value, 'YYYY-MM-DD'));
-		setDirectorState((prevState) => ({
+		// setBirthDate(dayjs(value, 'YYYY-MM-DD'));
+		console.log(dayjs(value, 'YYYY-MM-DD'));
+		setMovieState((prevState) => ({
 			...prevState,
 			birthdate: formattedBirthdate,
 		}));
@@ -80,10 +81,11 @@ export default function DirectorModal({ toggleDirectorModal, directorID, title }
 			const base64 = await commonUtils.getBase64(file);
 			const objectURL = URL.createObjectURL(file);
 			setPreviewImageURL(base64);
-			setDirectorState((prevState) => ({
+			setMovieState((prevState) => ({
 				...prevState,
 				image: base64,
 			}));
+			console.log(base64);
 		}
 	};
 
@@ -98,67 +100,39 @@ export default function DirectorModal({ toggleDirectorModal, directorID, title }
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		handleSubmitDirector();
+		handleSubmitMovie();
 	};
 
-	const handleSubmitDirector = () => {
-		title === 'Add' ? addDirector() : editDirector();
+	const handleSubmitMovie = () => {
+		title === 'Add' ? addMovie() : editMovie();
 	};
 
 	return (
 		<div className="fixed inset-0 z-10">
 			<div
-				onClick={toggleDirectorModal}
+				onClick={toggleMovieModal}
 				className="w-full h-full bg-black opacity-50"></div>
 			<div className="absolute w-7/12 h-5/6 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded">
 				<div className="p-4 flex justify-center flex-col items-center mt-[3%]">
 					<div className="w-2/3 mb-3">
 						<Typography variant="h4" color="blue-gray" className="text-xl">
-							{title} director
+							{title} movie
 						</Typography>
 					</div>
 					<form className="w-2/3" onSubmit={handleSubmit}>
 						<div className="">
-							{actorFields.slice(0, 1).map((ele) => (
-								<Input
-									key={ele.id}
-									id={ele.id}
-									name={ele.name}
-									label={ele.label}
-									placeholder={ele.placeholder}
-									handleChange={handleChange}
-									type={ele.type}
-									autoComplete={ele.autoComplete}
-									required={ele.isRequired}
-									disable={ele.disable}
-									value={directorState[ele.id]}
-								/>
-							))}
+							
 						</div>
 						<div className="flex gap-8">
 							<div className="min-w-[400px]">
-								{actorFields.slice(1, 2).map((ele) => (
-									<Input
-										key={ele.id}
-										id={ele.id}
-										name={ele.name}
-										label={ele.label}
-										placeholder={ele.placeholder}
-										handleChange={handleChange}
-										type={ele.type}
-										autoComplete={ele.autoComplete}
-										required={ele.isRequired}
-										disable={ele.disable}
-										value={directorState[ele.id]}
-									/>
-								))}
+								
 							</div>
 							<div>
 								<Typography className="text-[14px]">Date of birth</Typography>
 								<DatePicker
 									className="h-[37px] mt-1"
 									id="birthdate"
-									value={birthdate}
+									// value={birthdate}
 									onChange={(value) => handleChangeBirthDate(value)}
 								/>
 							</div>
@@ -167,7 +141,7 @@ export default function DirectorModal({ toggleDirectorModal, directorID, title }
 							<Typography className="text-[14px]">Bio</Typography>
 							<textarea
 								className="min-h-28 max-h-28 placeholder:text-slate-400 block bg-white w-full border border-gray-400 rounded-md py-2 pl-3 pr-3 mt-1 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
-								value={directorState.biography}
+								value={movieState.description}
 								id="biography"
 								maxLength={5000}
 								onChange={handleChange}></textarea>
@@ -217,15 +191,15 @@ export default function DirectorModal({ toggleDirectorModal, directorID, title }
 							variant="solid"
 							color="blue"
 							className="w-24"
-							onClick={handleSubmitDirector}>
+							onClick={handleSubmitMovie}>
 							Save
 						</Button>
 						<Button
 							variant="outlined"
 							color="red"
 							className="ml-4"
-							onClick={toggleDirectorModal}>
-							Cancle
+							onClick={toggleMovieModal}>
+							Cancel
 						</Button>
 					</form>
 				</div>
