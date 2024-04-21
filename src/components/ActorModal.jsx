@@ -11,7 +11,6 @@ import {
 import dayjs from 'dayjs';
 import commonUtils from '../utils/commonUtils';
 
-
 export default function ActorModal({ toggleActorModal, actorID, title }) {
 	const [actorState, setActorState] = useState({});
 	const [birthdate, setBirthDate] = useState(null);
@@ -34,8 +33,8 @@ export default function ActorModal({ toggleActorModal, actorID, title }) {
 	const addActor = async () => {
 		try {
 			let message = await createNewActorApi(actorState);
-			if(message.errCode === 0){
-				toggleActorModal(false)
+			if (message.errCode === 0) {
+				toggleActorModal(false);
 			}
 		} catch (error) {
 			console.log(error);
@@ -45,8 +44,8 @@ export default function ActorModal({ toggleActorModal, actorID, title }) {
 	const editActor = async () => {
 		try {
 			let message = await editActorApi(actorState);
-			if(message.errCode === 0){
-				toggleActorModal(false)
+			if (message.errCode === 0) {
+				toggleActorModal(false);
 			}
 		} catch (error) {
 			console.log(error);
@@ -95,7 +94,7 @@ export default function ActorModal({ toggleActorModal, actorID, title }) {
 
 	const fetchImageAsBase64 = async (imageUrl) => {
 		try {
-			await setPreviewImageURL(imageUrl)
+			await setPreviewImageURL(imageUrl);
 		} catch (error) {
 			console.error('Error fetching image:', error);
 			return null;
@@ -138,6 +137,7 @@ export default function ActorModal({ toggleActorModal, actorID, title }) {
 									required={ele.isRequired}
 									disable={ele.disable}
 									value={actorState[ele.id]}
+									classExpand={ele.classExpand}
 								/>
 							))}
 						</div>
@@ -156,6 +156,7 @@ export default function ActorModal({ toggleActorModal, actorID, title }) {
 										required={ele.isRequired}
 										disable={ele.disable}
 										value={actorState[ele.id]}
+										classExpand={ele.classExpand}
 									/>
 								))}
 							</div>
