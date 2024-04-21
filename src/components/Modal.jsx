@@ -95,6 +95,7 @@ export default function Modal({ toggleModal, selectedUser }) {
                   required={ele.isRequired}
                   disable={ele.disable}
                   value={accountState[ele.id]}
+                  classExpand={ele.classExpand}
                 />
               ))}
             </div>
