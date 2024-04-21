@@ -24,17 +24,6 @@ const loginFields = [
 ];
 
 const signupFields = [
-	// {
-	//   labelText: "Username",
-	//   labelFor: "username",
-	//   id: "username",
-	//   name: "username",
-	//   type: "text",
-	//   autoComplete: "username",
-	//   isRequired: true,
-	//   placeholder: "Username",
-	//   customClass:"bg-[#333333] text-white"
-	// },
 	{
 		labelText: 'Email address',
 		labelFor: 'email-address',
