@@ -21,7 +21,6 @@ const handleUpdateGenreDataApi = (genreID,genreData) => {
 };
 
 const deleteGenreApi = (genreID)=>{
-    console.log(genreID);
 	return axios.delete('/api/delete-genre', {
 		data: {
 			genreID: genreID,
@@ -29,9 +28,16 @@ const deleteGenreApi = (genreID)=>{
 	});
 }
 
+const searchGenreApi = (keyword)=>{
+    return axios.get(`/api/get-search-genre?keyword=${keyword}`,{
+        keyword: keyword
+    })
+}
+
 export {
     getAllGenres,
     handleCreateNewGenre,
     handleUpdateGenreDataApi,
-    deleteGenreApi
+    deleteGenreApi,
+    searchGenreApi
 }

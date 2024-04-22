@@ -12,7 +12,7 @@ import {
 } from "@material-tailwind/react";
 
 import GenreModal from "../components/GenreModal";
-import { getAllGenres, deleteGenreApi } from "../services/genreService";
+import { getAllGenres, deleteGenreApi, searchGenreApi } from "../services/genreService";
 import PaginationFooter from "../components/Pagination";
 import Search from "../components/Search";
 
@@ -27,6 +27,16 @@ export default function CategoryPage() {
   const [clickAdd, setClickAdd] = useState(false);
   const [tableRows, setTableRows] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+
+
+  // * State for searching
+  const [valueSearch, setValueSearch] = useState()
+  const [dataLoaded, setDataLoaded] = useState(false);
+
+  const handleChangeInputSearch = (value)=>{
+    setValueSearch(value)
+    handleSearch(value)
+  }
 
   const toggleGenreModal = ({ genreID }) => {
     setGenreModal(!genreModal);
@@ -57,13 +67,22 @@ export default function CategoryPage() {
     }
   };
 
+  const handleSearch = async (keyword) => {
+    try {
+      let response = await searchGenreApi(keyword)
+      setTableRows(response.genres.genresSearch)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   useEffect(() => {
-    getGenres();
+    getGenres().then(() => setDataLoaded(true));
   }, [check || genreModal]);
 
   const ITEMS_PER_PAGE = 6;
   
-  const totalPages = Math.ceil(tableRows.length / ITEMS_PER_PAGE);
+  const totalPages = dataLoaded ? Math.ceil(tableRows.length / ITEMS_PER_PAGE) : 0;
 
   const handleNextPage = () => {
     if (currentPage < totalPages) {
@@ -92,7 +111,7 @@ export default function CategoryPage() {
               shadow={false}
               className="rounded-none flex flex-row justify-between items-center mt-2 my-2 mx-2"
             >
-              <Search />
+              <Search value={valueSearch} handleChange={handleChangeInputSearch}/>
               <div>
                 <Button
                   color="blue"
