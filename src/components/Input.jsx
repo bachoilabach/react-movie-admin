@@ -1,7 +1,7 @@
 import { Typography } from "@material-tailwind/react";
 
 const fixedClass =
-  "placeholder:text-slate-400 block bg-white w-full border border-gray-400 rounded-md py-2 pl-3 pr-3 mt-1 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm";
+  "placeholder:text-slate-400 block bg-white border border-gray-400 rounded-md py-2 pl-3 pr-3 mt-1 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm";
 
 export default function Input({
   label,

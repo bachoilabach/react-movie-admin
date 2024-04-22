@@ -28,8 +28,11 @@ export default function DirectorModal({ toggleDirectorModal, directorID, title }
 
 	const addDirector = async () => {
 		try {
-			
-			await createNewDirectorApi(directorState);
+			let message = await createNewDirectorApi(directorState);
+			if(message.errCode === 0){
+				toggleDirectorModal(false)
+			}
+
 		} catch (error) {
 			console.log(error);
 		}
@@ -37,7 +40,10 @@ export default function DirectorModal({ toggleDirectorModal, directorID, title }
 
 	const editDirector = async () => {
 		try {
-			await editDirectorApi(directorState);
+			let message =await editDirectorApi(directorState);
+			if(message.errCode === 0){
+				toggleDirectorModal(false)
+			}
 		} catch (error) {
 			console.log(error);
 		}

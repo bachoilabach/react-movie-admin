@@ -32,7 +32,6 @@ export default function ActorPage() {
   const toggleActorModal = ({ actorID }) => {
     setActorModal(!actorModal);
     setActor(actorID);
-    console.log(actor);
     if (!actorModal) {
       document.body.style.overflowY = "hidden";
     } else {
@@ -43,7 +42,7 @@ export default function ActorPage() {
   const getActor = async () => {
     try {
       let response = await getAllActors("ALL");
-      // console.log(response.actors);
+      console.log(response.actors);
       setTableRows(response.actors);
     } catch (error) {
       console.error("Lỗi khi gọi API:", error);
