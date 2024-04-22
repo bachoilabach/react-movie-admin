@@ -62,9 +62,8 @@ export default function MovieModal({ toggleMovieModal, movieID, title }) {
 			let movieGenresFromDatabase = await getAllGenresMovie(movieID);
 			const selectedGenresApi = movieGenresFromDatabase.moviegenres.map(
 				(genre) => genre.genreID
-			) 
+			);
 			setSelectedGenres(selectedGenresApi);
-
 		} catch (error) {
 			console.error('Lỗi khi gọi API:', error);
 		}
@@ -77,7 +76,7 @@ export default function MovieModal({ toggleMovieModal, movieID, title }) {
 			let movieActorsFromDatabase = await getAllActorsMovie(movieID);
 			const selectedActorsApi = movieActorsFromDatabase.movieactors.map(
 				(actor) => actor.actorID
-			) 
+			);
 			setSelectedActors(selectedActorsApi);
 		} catch (error) {
 			console.error('Lỗi khi gọi API:', error);
@@ -89,9 +88,10 @@ export default function MovieModal({ toggleMovieModal, movieID, title }) {
 			let response = await getAllDirectors('ALL');
 			setDirector(response.directors);
 			let movieDirectorsFromDatabase = await getAllDirectorsMovie(movieID);
-			const selectedDirectorsApi = movieDirectorsFromDatabase.moviedirectors.map(
-				(director) => director.directorID
-			) 
+			const selectedDirectorsApi =
+				movieDirectorsFromDatabase.moviedirectors.map(
+					(director) => director.directorID
+				);
 			setSelectedDirectors(selectedDirectorsApi);
 		} catch (error) {
 			console.error('Lỗi khi gọi API:', error);
@@ -115,7 +115,9 @@ export default function MovieModal({ toggleMovieModal, movieID, title }) {
 		try {
 			let message = await createNewMovieApi(movieState);
 			if (message.errCode === 0) {
-				toggleMovieModal(false);
+				setTimeout(() => {
+					toggleMovieModal(false);
+				}, 3000);
 			}
 			console.log(movieState);
 		} catch (error) {
@@ -126,9 +128,11 @@ export default function MovieModal({ toggleMovieModal, movieID, title }) {
 	const editMovie = async () => {
 		try {
 			let message = await editMovieApi(movieState);
-			console.log(movieState)
+			console.log(movieState);
 			if (message.errCode === 0) {
-				toggleMovieModal(false);
+				setTimeout(() => {
+					toggleMovieModal(false);
+				}, 3000);
 			}
 		} catch (error) {
 			console.log(error);
