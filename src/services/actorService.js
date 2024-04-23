@@ -27,9 +27,16 @@ const deleteActor = (actorID)=>{
 	});
 }
 
+const searchActorApi = (keywords) => {
+    return axios.get(`/api/get-search-actor?keywords=${keywords}`,{
+        keywords: keywords
+    });
+}
+
 export {
     getAllActors,
     createNewActorApi,
     editActorApi,
-    deleteActor
+    deleteActor,
+    searchActorApi
 }

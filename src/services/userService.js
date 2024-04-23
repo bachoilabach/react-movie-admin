@@ -36,10 +36,17 @@ const handleDeleteUserApi = (userID) => {
 	});
 };
 
+const searchUserApi = (keyword)=>{
+    return axios.get(`/api/get-search-user?keyword=${keyword}`,{
+        keyword: keyword
+    })
+}
+
 export {
 	handleLoginApi,
 	getAllUsers,
 	handleSignUpApi,
 	handleUpdateUserDataApi,
 	handleDeleteUserApi,
+	searchUserApi
 };

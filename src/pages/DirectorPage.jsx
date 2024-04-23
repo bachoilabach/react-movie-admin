@@ -15,6 +15,7 @@ import {
 import {
   deleteDirectorApi,
   getAllDirectors,
+  searchDirectorApi,
 } from "../services/directorService";
 import DirectorModal from "../components/DirectorModal";
 import PaginationFooter from "../components/Pagination";
@@ -31,6 +32,15 @@ export default function DirectorPage() {
   const [clickAdd, setClickAdd] = useState(false);
   const [tableRows, setTableRows] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+
+  // * State for searching
+  const [valueSearch, setValueSearch] = useState();
+  const [dataLoaded, setDataLoaded] = useState(false);
+
+  const handleChangeInputSearch = (value) => {
+    setValueSearch(value);
+    handleSearch(value);
+  };
 
   const toggleDirectorModal = ({ directorID }) => {
     setDirectorModal(!directorModal);
@@ -62,11 +72,22 @@ export default function DirectorPage() {
     }
   };
 
+  const handleSearch = async (keyword) => {
+    try {
+      let response = await searchDirectorApi(keyword);
+      setTableRows(response.director.directorSearch);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    getDirector();
+    getDirector().then(() => setDataLoaded(true));
   }, [check || directorModal]);
 
-  const totalPages = Math.ceil(tableRows.length / ITEMS_PER_PAGE);
+  const totalPages = dataLoaded
+    ? Math.ceil(tableRows.length / ITEMS_PER_PAGE)
+    : 0;
 
   const handleNextPage = () => {
     if (currentPage < totalPages) {
@@ -95,7 +116,10 @@ export default function DirectorPage() {
               shadow={false}
               className="rounded-none flex flex-row justify-between items-center mt-2 my-2 mx-2"
             >
-              <Search/>
+              <Search
+                value={valueSearch}
+                handleChange={handleChangeInputSearch}
+              />
               <div>
                 <Button
                   color="blue"

@@ -50,6 +50,12 @@ const getAllDirectorsMovie = (id) => {
 	});
 };
 
+const searchMovieApi = (keyword)=>{
+    return axios.get(`/api/get-search-movie?keyword=${keyword}`,{
+        keyword: keyword
+    })
+}
+
 export {
 	getAllMovies,
 	createNewMovieApi,
@@ -59,4 +65,5 @@ export {
 	getAllGenresMovie,
 	getAllActorsMovie,
 	getAllDirectorsMovie,
+	searchMovieApi
 };

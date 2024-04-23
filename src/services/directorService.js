@@ -27,9 +27,16 @@ const deleteDirectorApi = (directorID)=>{
 	});
 }
 
+const searchDirectorApi = (keyword)=>{
+    return axios.get(`/api/get-search-director?keyword=${keyword}`,{
+        keyword: keyword
+    })
+}
+
 export {
     getAllDirectors,
     createNewDirectorApi,
     editDirectorApi,
-    deleteDirectorApi
+    deleteDirectorApi,
+    searchDirectorApi
 }

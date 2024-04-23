@@ -40,7 +40,7 @@ export default function Signup() {
         if (data && data.errCode !== 0) {
           setErrMessage(data.message);
         } else {
-          navigate("/Login");
+          navigate("/");
         }
       }
     } catch (error) {

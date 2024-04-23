@@ -13,7 +13,11 @@ import {
 } from "@material-tailwind/react";
 
 import ActorModal from "../components/ActorModal";
-import { deleteActor, getAllActors } from "../services/actorService";
+import {
+  deleteActor,
+  getAllActors,
+  searchActorApi,
+} from "../services/actorService";
 import PaginationFooter from "../components/Pagination";
 import Search from "../components/Search";
 
@@ -28,6 +32,15 @@ export default function ActorPage() {
   const [clickAdd, setClickAdd] = useState(false);
   const [tableRows, setTableRows] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+
+  // * State for searching
+  const [valueSearch, setValueSearch] = useState();
+  const [dataLoaded, setDataLoaded] = useState(false);
+
+  const handleChangeInputSearch = (value) => {
+    setValueSearch(value);
+    handleSearch(value);
+  };
 
   const toggleActorModal = ({ actorID }) => {
     setActorModal(!actorModal);
@@ -59,11 +72,22 @@ export default function ActorPage() {
     }
   };
 
+  const handleSearch = async (keyword) => {
+    try {
+      let response = await searchActorApi(keyword);
+      setTableRows(response.actor.actorSearch);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    getActor();
+    getActor().then(() => setDataLoaded(true));
   }, [check || actorModal]);
 
-  const totalPages = Math.ceil(tableRows.length / ITEMS_PER_PAGE);
+  const totalPages = dataLoaded
+    ? Math.ceil(tableRows.length / ITEMS_PER_PAGE)
+    : 0;
 
   const handleNextPage = () => {
     if (currentPage < totalPages) {
@@ -92,7 +116,10 @@ export default function ActorPage() {
               shadow={false}
               className="rounded-none flex flex-row justify-between items-center mt-2 my-2 mx-2"
             >
-              <Search/>
+              <Search
+                value={valueSearch}
+                handleChange={handleChangeInputSearch}
+              />
               <div>
                 <Button
                   color="blue"

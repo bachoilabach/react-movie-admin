@@ -15,7 +15,11 @@ import {
 } from "@material-tailwind/react";
 
 import Modal from "../components/Modal";
-import { getAllUsers, handleDeleteUserApi } from "../services/userService";
+import {
+  getAllUsers,
+  handleDeleteUserApi,
+  searchUserApi,
+} from "../services/userService";
 import PaginationFooter from "../components/Pagination";
 import Search from "../components/Search";
 
@@ -43,6 +47,15 @@ export default function AccountPage() {
   const [tableRows, setTableRows] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+
+  // * State for searching
+  const [valueSearch, setValueSearch] = useState();
+  const [dataLoaded, setDataLoaded] = useState(false);
+
+  const handleChangeInputSearch = (value) => {
+    setValueSearch(value);
+    handleSearch(value);
+  };
 
   const toggleModal = ({
     userID,
@@ -91,11 +104,22 @@ export default function AccountPage() {
     }
   };
 
+  const handleSearch = async (keyword) => {
+    try {
+      let response = await searchUserApi(keyword);
+      setTableRows(response.user.userSearch);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    getAccount();
+    getAccount().then(() => setDataLoaded(true));
   }, [check || modal]);
 
-  const totalPages = Math.ceil(tableRows.length / ITEMS_PER_PAGE);
+  const totalPages = dataLoaded
+    ? Math.ceil(tableRows.length / ITEMS_PER_PAGE)
+    : 0;
 
   const handleNextPage = () => {
     if (currentPage < totalPages) {
@@ -135,7 +159,10 @@ export default function AccountPage() {
                   </TabsHeader>
                 </Tabs>
               </div>
-              <Search />
+              <Search
+                value={valueSearch}
+                handleChange={handleChangeInputSearch}
+              />
             </CardHeader>
             <CardBody className="p-1 px-0">
               <table className=" w-full min-w-max table-auto text-left">
