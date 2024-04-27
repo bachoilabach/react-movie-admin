@@ -83,6 +83,7 @@ export default function ActorModal({ toggleActorModal, actorID, title }) {
 		if (file) {
 			const base64 = await commonUtils.getBase64(file);
 			const objectURL = URL.createObjectURL(file);
+			console.log(objectURL)
 			setPreviewImageURL(base64);
 			setActorState((prevState) => ({
 				...prevState,
