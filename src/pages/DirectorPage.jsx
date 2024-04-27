@@ -20,6 +20,7 @@ import {
 import DirectorModal from "../components/DirectorModal";
 import PaginationFooter from "../components/Pagination";
 import Search from "../components/Search";
+import { debounce } from "lodash";
 
 const TABLE_HEAD = ["Name", "National", "Birth Date", "Bio", "Edit"];
 
@@ -39,7 +40,7 @@ export default function DirectorPage() {
 
   const handleChangeInputSearch = (value) => {
     setValueSearch(value);
-    handleSearch(value);
+    debouncedHandleSearch(value)
   };
 
   const toggleDirectorModal = ({ directorID }) => {
@@ -80,6 +81,9 @@ export default function DirectorPage() {
       console.log(error);
     }
   };
+
+  const debouncedHandleSearch = debounce(handleSearch, 300);
+
 
   useEffect(() => {
     getDirector().then(() => setDataLoaded(true));

@@ -20,6 +20,7 @@ import {
   searchMovieApi,
 } from "../services/movieService";
 import MovieModal from "../components/MovieModal";
+import { debounce } from "lodash";
 
 const TABLE_HEAD = ["Title", "Country", "Release", "Description", "Edit"];
 
@@ -40,7 +41,7 @@ export default function MoviePage() {
 
   const handleChangeInputSearch = (value) => {
     setValueSearch(value);
-    handleSearch(value);
+    debouncedHandleSearch(value)
   };
 
   const toggleMovieModal = ({ movieID }) => {
@@ -79,6 +80,9 @@ export default function MoviePage() {
       console.log(error);
     }
   };
+
+  const debouncedHandleSearch = debounce(handleSearch, 300);
+
 
   useEffect(() => {
     getMovie().then(() => setDataLoaded(true));

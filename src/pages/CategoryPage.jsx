@@ -15,6 +15,7 @@ import GenreModal from "../components/GenreModal";
 import { getAllGenres, deleteGenreApi, searchGenreApi } from "../services/genreService";
 import PaginationFooter from "../components/Pagination";
 import Search from "../components/Search";
+import { debounce } from "lodash";
 
 const TABLE_HEAD = ["Ordinal", "Name", "Edit"];
 
@@ -35,7 +36,7 @@ export default function CategoryPage() {
 
   const handleChangeInputSearch = (value)=>{
     setValueSearch(value)
-    handleSearch(value)
+    debouncedHandleSearch(value)
   }
 
   const toggleGenreModal = ({ genreID }) => {
@@ -75,6 +76,8 @@ export default function CategoryPage() {
       console.log(error)
     }
   }
+
+  const debouncedHandleSearch = debounce(handleSearch, 300);
 
   useEffect(() => {
     getGenres().then(() => setDataLoaded(true));
