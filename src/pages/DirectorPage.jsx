@@ -230,7 +230,7 @@ export default function DirectorPage() {
                             </Typography>
                           </td>
                           <td className={classes}>
-                            <Tooltip content="Edit Actor">
+                            <Tooltip content="Edit Director">
                               <IconButton
                                 variant="text"
                                 onClick={() => {
@@ -241,7 +241,7 @@ export default function DirectorPage() {
                                 <PencilIcon className="h-4 w-4 text-yellow-800" />
                               </IconButton>
                             </Tooltip>
-                            <Tooltip content="Delete Actor">
+                            <Tooltip content="Delete Director">
                               <IconButton
                                 variant="text"
                                 onClick={() => delteDirector({ directorID })}

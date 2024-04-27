@@ -233,7 +233,7 @@ export default function MoviePage() {
                                 <PencilIcon className="h-4 w-4 text-yellow-800" />
                               </IconButton>
                             </Tooltip>
-                            <Tooltip content="Delete Actor">
+                            <Tooltip content="Delete Movie">
                               <IconButton
                                 variant="text"
                                 onClick={() => delteMovie({ movieID })}

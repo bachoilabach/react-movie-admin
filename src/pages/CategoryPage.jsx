@@ -184,7 +184,7 @@ export default function CategoryPage() {
                           </div>
                         </td>
                         <td className={classes}>
-                          <Tooltip content="Edit Actor">
+                          <Tooltip content="Edit Genre">
                             <IconButton
                               variant="text"
                               onClick={() => {
@@ -195,7 +195,7 @@ export default function CategoryPage() {
                               <PencilIcon className="h-4 w-4 text-yellow-800" />
                             </IconButton>
                           </Tooltip>
-                          <Tooltip content="Delete Actor">
+                          <Tooltip content="Delete Genre">
                             <IconButton
                               variant="text"
                               onClick={() => deleteGenre({ genreID })}
