@@ -72,6 +72,7 @@ export default function CategoryPage() {
     try {
       let response = await searchGenreApi(keyword)
       setTableRows(response.genres.genresSearch)
+      setCurrentPage(1);
     } catch (error) {
       console.log(error)
     }
