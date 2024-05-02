@@ -108,6 +108,7 @@ export default function AccountPage() {
     try {
       let response = await searchUserApi(keyword);
       setTableRows(response.user.userSearch);
+      setCurrentPage(1);
     } catch (error) {
       console.log(error);
     }

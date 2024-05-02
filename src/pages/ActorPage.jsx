@@ -77,6 +77,7 @@ export default function ActorPage() {
     try {
       let response = await searchActorApi(keyword);
       setTableRows(response.actor.actorSearch);
+      setCurrentPage(1);
     } catch (error) {
       console.log(error);
     }

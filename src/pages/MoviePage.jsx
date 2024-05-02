@@ -76,6 +76,7 @@ export default function MoviePage() {
     try {
       let response = await searchMovieApi(keyword);
       setTableRows(response.movie.movieSearch);
+      setCurrentPage(1);
     } catch (error) {
       console.log(error);
     }
