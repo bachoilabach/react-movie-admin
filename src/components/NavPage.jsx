@@ -10,6 +10,8 @@ import CommentPage from "../pages/CommentPage";
 
 import AccountPage from "../pages/AccountPage";
 import StatisticPage from "../pages/StatisticPage";
+import Modal from "./Modal";
+
 
 const NavPage = () => {
   return (
@@ -22,6 +24,7 @@ const NavPage = () => {
       <Route path="/Comments" element={<CommentPage />} />
       <Route path="/Accounts" element={<AccountPage />} />
       <Route path="/Statistics" element={<StatisticPage />} />
+      <Route path="/Accounts/api/edit-user/:id" element={<Modal />} />
     </Routes>
   );
 };
