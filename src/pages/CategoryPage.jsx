@@ -57,14 +57,15 @@ export default function CategoryPage() {
 		}
 	};
 
-	const handleSearch = async (keyword) => {
-		try {
-			let response = await searchGenreApi(keyword);
-			setTableRows(response.genres.genresSearch);
-		} catch (error) {
-			console.log(error);
-		}
-	};
+  const handleSearch = async (keyword) => {
+    try {
+      let response = await searchGenreApi(keyword)
+      setTableRows(response.genres.genresSearch)
+      setCurrentPage(1);
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
 	const debouncedHandleSearch = debounce(handleSearch, 300);
 

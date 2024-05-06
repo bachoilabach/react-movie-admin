@@ -61,14 +61,15 @@ export default function ActorPage() {
 		}
 	};
 
-	const handleSearch = async (keyword) => {
-		try {
-			let response = await searchActorApi(keyword);
-			setTableRows(response.actor.actorSearch);
-		} catch (error) {
-			console.log(error);
-		}
-	};
+  const handleSearch = async (keyword) => {
+    try {
+      let response = await searchActorApi(keyword);
+      setTableRows(response.actor.actorSearch);
+      setCurrentPage(1);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
 	const debouncedHandleSearch = debounce(handleSearch, 300);
 

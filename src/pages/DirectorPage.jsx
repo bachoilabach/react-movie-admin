@@ -80,6 +80,7 @@ export default function DirectorPage() {
     try {
       let response = await searchDirectorApi(keyword);
       setTableRows(response.director.directorSearch);
+      setCurrentPage(1);
     } catch (error) {
       console.log(error);
     }

@@ -73,14 +73,15 @@ export default function AccountPage() {
 		}
 	};
 
-	const handleSearch = async (keyword) => {
-		try {
-			let response = await searchUserApi(keyword);
-			setTableRows(response.user.userSearch);
-		} catch (error) {
-			console.log(error);
-		}
-	};
+  const handleSearch = async (keyword) => {
+    try {
+      let response = await searchUserApi(keyword);
+      setTableRows(response.user.userSearch);
+      setCurrentPage(1);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
 	useEffect(() => {
 		getAccount().then(() => setDataLoaded(true));

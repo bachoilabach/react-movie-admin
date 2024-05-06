@@ -59,14 +59,15 @@ export default function MoviePage() {
 		}
 	};
 
-	const handleSearch = async (keyword) => {
-		try {
-			let response = await searchMovieApi(keyword);
-			setTableRows(response.movie.movieSearch);
-		} catch (error) {
-			console.log(error);
-		}
-	};
+  const handleSearch = async (keyword) => {
+    try {
+      let response = await searchMovieApi(keyword);
+      setTableRows(response.movie.movieSearch);
+      setCurrentPage(1);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
 	const debouncedHandleSearch = debounce(handleSearch, 300);
 
