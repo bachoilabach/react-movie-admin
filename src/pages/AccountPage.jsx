@@ -12,8 +12,7 @@ import {
 	IconButton,
 	Tooltip,
 } from '@material-tailwind/react';
-import { Link, useNavigate, unstable_HistoryRouter } from 'react-router-dom';
-import Modal from '../components/Modal';
+import { Link, } from 'react-router-dom';
 import PaginationFooter from '../components/Pagination';
 import Search from '../components/Search';
 import {
@@ -225,7 +224,7 @@ export default function AccountPage() {
 													</td>
 													<td className={classes}>
 														<Link
-															to={`/dashboard/Accounts/api/edit-user/:${userID}`}>
+															to={`edit-user/:${userID}`}>
 															<Tooltip content="Edit User">
 																<IconButton variant="text">
 																	<PencilIcon className="h-4 w-4 text-yellow-800" />
