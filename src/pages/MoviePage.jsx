@@ -15,11 +15,9 @@ import PaginationFooter from '../components/Pagination';
 import Search from '../components/Search';
 import {
 	deleteMovie,
-	getAllCountries,
 	getAllMovies,
 	searchMovieApi,
 } from '../services/movieService';
-import MovieModal from '../components/MovieModal';
 import { debounce } from 'lodash';
 import { useNavigate } from 'react-router-dom';
 
