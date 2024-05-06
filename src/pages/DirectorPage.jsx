@@ -21,6 +21,7 @@ import DirectorModal from "../components/DirectorModal";
 import PaginationFooter from "../components/Pagination";
 import Search from "../components/Search";
 import { debounce } from "lodash";
+import { useNavigate } from "react-router-dom";
 
 const TABLE_HEAD = ["Name", "National", "Birth Date", "Bio", "Edit"];
 
@@ -37,6 +38,8 @@ export default function DirectorPage() {
   // * State for searching
   const [valueSearch, setValueSearch] = useState();
   const [dataLoaded, setDataLoaded] = useState(false);
+
+  const navigate = useNavigate()
 
   const handleChangeInputSearch = (value) => {
     setValueSearch(value);
@@ -128,12 +131,9 @@ export default function DirectorPage() {
                 <Button
                   color="blue"
                   className="py-2.5"
-                  onClick={() => {
-                    toggleDirectorModal({ director });
-                    setClickAdd(true);
-                  }}
+                  onClick={() => navigate('create-director')}
                 >
-                  Add actor
+                  Add director
                 </Button>
               </div>
             </CardHeader>
@@ -233,10 +233,7 @@ export default function DirectorPage() {
                             <Tooltip content="Edit Director">
                               <IconButton
                                 variant="text"
-                                onClick={() => {
-                                  setClickAdd(false);
-                                  toggleDirectorModal({ directorID });
-                                }}
+                                onClick={() => navigate(`edit-director/:${directorID}`)}
                               >
                                 <PencilIcon className="h-4 w-4 text-yellow-800" />
                               </IconButton>
