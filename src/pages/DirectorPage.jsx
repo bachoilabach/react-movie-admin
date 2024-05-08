@@ -17,10 +17,9 @@ import {
 	getAllDirectors,
 	searchDirectorApi,
 } from '../services/directorService';
-import DirectorModal from '../components/DirectorModal';
 import PaginationFooter from '../components/Pagination';
 import Search from '../components/Search';
-import { debounce, intersection } from 'lodash';
+import { debounce } from 'lodash';
 import { useNavigate } from 'react-router-dom';
 
 const TABLE_HEAD = ['Name', 'National', 'Birth Date', 'Bio', 'Edit'];
@@ -29,8 +28,6 @@ const ITEMS_PER_PAGE = 6;
 
 export default function DirectorPage() {
 	const [check, setCheck] = useState(false);
-	const [director, setDirector] = useState(null);
-	const [clickAdd, setClickAdd] = useState(false);
 	const [tableRows, setTableRows] = useState([]);
 	const [currentPage, setCurrentPage] = useState(1);
 

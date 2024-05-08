@@ -12,7 +12,6 @@ import {
 	Tooltip,
 } from '@material-tailwind/react';
 
-import ActorModal from '../components/ActorModal';
 import {
 	deleteActor,
 	getAllActors,
