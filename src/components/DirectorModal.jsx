@@ -55,7 +55,7 @@ export default function DirectorModal() {
 				}, 3000);
 			}else{
 				setTimeout(() => {
-					toast(`❌ ${message.ereMessage}`)
+					toast.error(`❌ ${message.ereMessage}`)
 					navigate('/dashboard/Directors');
 				}, 3000);
 			}
