@@ -21,6 +21,7 @@ import PaginationFooter from '../components/Pagination';
 import Search from '../components/Search';
 import { debounce } from 'lodash';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const TABLE_HEAD = ['Name', 'National', 'Birth Date', 'Bio', 'Edit'];
 
@@ -52,8 +53,10 @@ export default function DirectorPage() {
 	};
 
 	const delteDirector = async ({ directorID }) => {
-		console.log(directorID);
+		
 		try {
+			toast('✅ Delete director successful')
+
 			await deleteDirectorApi(directorID);
 			setCheck(!check);
 		} catch (error) {

@@ -20,6 +20,9 @@ import PaginationFooter from '../components/Pagination';
 import Search from '../components/Search';
 import { debounce } from 'lodash';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import ToastMessage from '../components/ToastMessage';
+
 
 const TABLE_HEAD = ['Ordinal', 'Name', 'Edit'];
 
@@ -43,6 +46,9 @@ export default function CategoryPage() {
 		try {
 			let response = await getAllGenres('ALL');
 			setTableRows(response.genres);
+			setTimeout(() => {
+				setDataLoaded(true);
+			}, 1000);
 		} catch (error) {
 			console.error(`Lỗi khi gọi API:`, error);
 		}
@@ -50,8 +56,9 @@ export default function CategoryPage() {
 
 	const deleteGenre = async ({ genreID }) => {
 		try {
-			await deleteGenreApi(genreID);
 			setCheck(!check);
+			console.log(check);
+			await deleteGenreApi(genreID);
 		} catch (error) {
 			console.log(error);
 		}
@@ -69,12 +76,12 @@ export default function CategoryPage() {
 	const debouncedHandleSearch = debounce(handleSearch, 300);
 
 	useEffect(() => {
-		getGenres().then(
-			setTimeout(() => {
-				setDataLoaded(true);
-			}, 2000)
-		);
+		getGenres();
 	}, [check]);
+
+	const notify = () => {
+		toast('✅ Delete genre successful!');
+	};
 
 	const ITEMS_PER_PAGE = 6;
 
@@ -112,28 +119,35 @@ export default function CategoryPage() {
 								value={valueSearch}
 								handleChange={handleChangeInputSearch}
 							/>
-							<div>
+							<div className="flex">
 								<Button
 									color="blue"
 									className="py-2.5"
 									onClick={() => navigate('create-genre')}>
 									Add genre
 								</Button>
+								{/* <ToastMessage/> */}
 							</div>
 						</CardHeader>
 						<CardBody className="p-1 px-0">
 							{!dataLoaded ? (
-								Array.from({ length: tableRows.length > 6 ? ITEMS_PER_PAGE : tableRows.length }, (_, index) => (
-									<div className="p-5">
-										<Typography
-											as="div"
-											variant="paragraph"
-											className=" h-6 w-full rounded-full bg-gray-300 my-2"
-											key={index}>
-											&nbsp;
-										</Typography>
-									</div>
-								))
+								Array.from(
+									{
+										length:
+											tableRows.length > 6 ? ITEMS_PER_PAGE : tableRows.length,
+									},
+									(_, index) => (
+										<div className="p-5">
+											<Typography
+												as="div"
+												variant="paragraph"
+												className=" h-6 w-full rounded-full bg-gray-300 my-2"
+												key={index}>
+												&nbsp;
+											</Typography>
+										</div>
+									)
+								)
 							) : (
 								<table className=" w-full min-w-max table-auto text-left">
 									<thead>
@@ -196,7 +210,10 @@ export default function CategoryPage() {
 														<Tooltip content="Delete Genre">
 															<IconButton
 																variant="text"
-																onClick={() => deleteGenre({ genreID })}>
+																onClick={() => {
+																	deleteGenre({ genreID });
+																	notify();
+																}}>
 																<TrashIcon className="h-4 w-4 text-red-500" />
 															</IconButton>
 														</Tooltip>

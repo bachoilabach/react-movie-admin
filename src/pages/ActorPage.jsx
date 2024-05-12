@@ -21,6 +21,7 @@ import PaginationFooter from '../components/Pagination';
 import Search from '../components/Search';
 import { debounce } from 'lodash';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const TABLE_HEAD = ['Name', 'National', 'Birth Date', 'Bio', 'Edit'];
 
@@ -53,6 +54,8 @@ export default function ActorPage() {
 
 	const delteActor = async ({ actorID }) => {
 		try {
+			toast('✅ Delete actor successful')
+		
 			await deleteActor(actorID);
 			setCheck(!check);
 		} catch (error) {

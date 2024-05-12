@@ -20,6 +20,7 @@ import {
 } from '../services/movieService';
 import { debounce } from 'lodash';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const TABLE_HEAD = ['Title', 'Country', 'Release', 'Description', 'Edit'];
 
@@ -49,9 +50,10 @@ export default function MoviePage() {
 			console.error('Lỗi khi gọi API:', error);
 		}
 	};
-
 	const delteMovie = async ({ movieID }) => {
 		try {
+			toast('✅ Delete movie successful')
+
 			await deleteMovie(movieID);
 			setCheck(!check);
 		} catch (error) {

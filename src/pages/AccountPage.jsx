@@ -20,6 +20,7 @@ import {
 	handleDeleteUserApi,
 	searchUserApi,
 } from '../services/userService';
+import { toast } from 'react-toastify';
 
 const TABS = [
 	{
@@ -65,6 +66,7 @@ export default function AccountPage() {
 		const user = { userID };
 		console.log(user);
 		try {
+			toast('✅ Delete account successful')
 			await handleDeleteUserApi(user.userID);
 			setCheck(true);
 		} catch (error) {
