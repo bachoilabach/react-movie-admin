@@ -23,7 +23,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import ToastMessage from '../components/ToastMessage';
 
-
 const TABLE_HEAD = ['Ordinal', 'Name', 'Edit'];
 
 export default function CategoryPage() {
@@ -77,6 +76,7 @@ export default function CategoryPage() {
 
 	useEffect(() => {
 		getGenres();
+		console.log(localStorage.getItem('jwt'));
 	}, [check]);
 
 	const notify = () => {
@@ -85,9 +85,12 @@ export default function CategoryPage() {
 
 	const ITEMS_PER_PAGE = 6;
 
-	const totalPages = dataLoaded
-		? Math.ceil(tableRows.length / ITEMS_PER_PAGE)
-		: 1;
+	let totalPages;
+	if (tableRows) {
+		totalPages = Math.ceil(tableRows.length / ITEMS_PER_PAGE);
+	} else {
+		totalPages = 1;
+	}
 
 	const handleNextPage = () => {
 		if (currentPage < totalPages) {
@@ -101,10 +104,12 @@ export default function CategoryPage() {
 		}
 	};
 
-	const visibleItems = tableRows.slice(
-		(currentPage - 1) * ITEMS_PER_PAGE,
-		currentPage * ITEMS_PER_PAGE
-	);
+	const visibleItems = tableRows
+		? tableRows.slice(
+				(currentPage - 1) * ITEMS_PER_PAGE,
+				currentPage * ITEMS_PER_PAGE
+		  )
+		: [];
 
 	return (
 		<div className="w-full h-full flex flex-col gap-y-4">
@@ -130,11 +135,22 @@ export default function CategoryPage() {
 							</div>
 						</CardHeader>
 						<CardBody className="p-1 px-0">
-							{!dataLoaded ? (
+							{dataLoaded ? (
+								<Typography
+									variant="body"
+									color="blue-gray"
+									className="p-4 text-center">
+									No genres found.
+								</Typography>
+							) : !dataLoaded ? (
 								Array.from(
 									{
 										length:
-											tableRows.length > 6 ? ITEMS_PER_PAGE : tableRows.length,
+											tableRows && tableRows.length > 6
+												? ITEMS_PER_PAGE
+												: tableRows
+												? tableRows.length
+												: 0,
 									},
 									(_, index) => (
 										<div className="p-5">

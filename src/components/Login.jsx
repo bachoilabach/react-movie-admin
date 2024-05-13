@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { loginFields } from '../constants/FormFieldsAuth';
 import FormAction from './FormAction';
 import FormExtra from './FormExtra';
 import Input from './InputAuth';
 import { handleLoginApi } from '../services/userService';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../context/UserContext';
 
 const fields = loginFields;
 let fieldsState = {};
@@ -12,6 +13,9 @@ fields.forEach((field) => (fieldsState[field.id] = ''));
 
 export default function Login() {
 	const navigate = useNavigate();
+
+	const {loginContext} = useContext(UserContext)
+
 	const [loginState, setLoginState] = useState(fieldsState);
 	const [errMessage, setErrMessage] = useState('');
 
@@ -28,17 +32,27 @@ export default function Login() {
 	const authenticateUser = async (e) => {
 		try {
 			setErrMessage('');
-			let data = await handleLoginApi(
+			let response = await handleLoginApi(
 				e.target.email.value,
 				e.target.password.value
 			);
-			if (data && data.errCode !== 0) {
-				setErrMessage(data.message);
+			if (response && response.errCode !== 0) {
+				setErrMessage(response.message);
 			} else {
 				// Lưu thông tin người dùng vào localStorage hoặc trong global state
-				localStorage.setItem('userData', JSON.stringify(data.user));
+				const email = response.user.email
+				const roleID = response.user.roleID
+				const fullName = response.user.fullName
+				let data = {
+					isAuthenticated: true,
+					token: response.access_token,
+					account: {email,roleID,fullName}
+				}
+				localStorage.setItem('jwt',response.access_token)
+				// sessionStorage.setItem('userData', JSON.stringify(data));
+				loginContext(data)
 				// Chuyển hướng dựa trên phản hồi từ backend
-				navigate(data.redirectURL); 
+				navigate(response.redirectURL); 
 			}
 		} catch (error) {
 			console.log('Error in authenticateUser:', error);

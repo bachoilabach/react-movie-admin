@@ -54,8 +54,8 @@ export default function ActorPage() {
 
 	const delteActor = async ({ actorID }) => {
 		try {
-			toast('✅ Delete actor successful')
-		
+			toast('✅ Delete actor successful');
+
 			await deleteActor(actorID);
 			setCheck(!check);
 		} catch (error) {
@@ -82,9 +82,12 @@ export default function ActorPage() {
 		);
 	}, [check]);
 
-	const totalPages = dataLoaded
-		? Math.ceil(tableRows.length / ITEMS_PER_PAGE)
-		: 1;
+	let totalPages;
+	if (tableRows) {
+		totalPages = Math.ceil(tableRows.length / ITEMS_PER_PAGE);
+	} else {
+		totalPages = 1;
+	}
 
 	const handleNextPage = () => {
 		if (currentPage < totalPages) {
@@ -98,10 +101,12 @@ export default function ActorPage() {
 		}
 	};
 
-	const visibleItems = tableRows.slice(
-		(currentPage - 1) * ITEMS_PER_PAGE,
-		currentPage * ITEMS_PER_PAGE
-	);
+	const visibleItems = tableRows
+		? tableRows.slice(
+				(currentPage - 1) * ITEMS_PER_PAGE,
+				currentPage * ITEMS_PER_PAGE
+		  )
+		: [];
 
 	return (
 		<div className="w-full h-full flex flex-col gap-y-4">
@@ -126,18 +131,35 @@ export default function ActorPage() {
 							</div>
 						</CardHeader>
 						<CardBody className="p-1 px-0">
-							{!dataLoaded ? (
-								Array.from({ length: tableRows.length > 6 ? ITEMS_PER_PAGE : tableRows.length }, (_, index) => (
-									<div className="p-5">
-										<Typography
-											as="div"
-											variant="paragraph"
-											className=" h-6 w-full rounded-full bg-gray-300 my-2"
-											key={index}>
-											&nbsp;
-										</Typography>
-									</div>
-								))
+							{dataLoaded ? (
+								<Typography
+									variant="body"
+									color="blue-gray"
+									className="p-4 text-center">
+									No actors found.
+								</Typography>
+							) : !dataLoaded ? (
+								Array.from(
+									{
+										length:
+											tableRows && tableRows.length > 6
+												? ITEMS_PER_PAGE
+												: tableRows
+												? tableRows.length
+												: 0,
+									},
+									(_, index) => (
+										<div className="p-5">
+											<Typography
+												as="div"
+												variant="paragraph"
+												className=" h-6 w-full rounded-full bg-gray-300 my-2"
+												key={index}>
+												&nbsp;
+											</Typography>
+										</div>
+									)
+								)
 							) : (
 								<table className=" w-full min-w-max table-auto text-left">
 									<thead>
