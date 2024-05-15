@@ -80,7 +80,7 @@ export default function CategoryPage() {
 	}, [check]);
 
 	const notify = () => {
-		toast('✅ Delete genre successful!');
+		toast.success('✅ Delete genre successful!');
 	};
 
 	const ITEMS_PER_PAGE = 6;
@@ -135,7 +135,7 @@ export default function CategoryPage() {
 							</div>
 						</CardHeader>
 						<CardBody className="p-1 px-0">
-							{dataLoaded ? (
+							{dataLoaded ? tableRows.length === 0 (
 								<Typography
 									variant="body"
 									color="blue-gray"

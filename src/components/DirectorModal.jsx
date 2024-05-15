@@ -50,7 +50,7 @@ export default function DirectorModal() {
 			let message = await createNewDirectorApi(directorState);
 			if (message.errCode === 0) {
 				setTimeout(() => {
-					toast('✅ Add actor successful')
+					toast.success('✅ Add actor successful')
 					navigate('/dashboard/Directors');
 				}, 3000);
 			}else{
@@ -69,7 +69,7 @@ export default function DirectorModal() {
 			let message = await editDirectorApi(directorState);
 			if (message.errCode === 0) {
 				setTimeout(() => {
-					toast('✅ Edit actor successful')
+					toast.success('✅ Edit actor successful')
 					navigate('/dashboard/Directors');
 				}, 3000);
 			}

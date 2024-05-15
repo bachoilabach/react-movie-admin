@@ -66,7 +66,7 @@ export default function AccountPage() {
 		const user = { userID };
 		console.log(user);
 		try {
-			toast('✅ Delete account successful');
+			toast.success('✅ Delete account successful');
 			await handleDeleteUserApi(user.userID);
 			setCheck(true);
 		} catch (error) {
@@ -143,7 +143,7 @@ export default function AccountPage() {
 							/>
 						</CardHeader>
 						<CardBody className="p-1 px-0">
-							{dataLoaded ? (
+							{dataLoaded ? tableRows.length === 0(
 								<Typography
 									variant="body"
 									color="blue-gray"

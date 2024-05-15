@@ -52,7 +52,7 @@ export default function MoviePage() {
 	};
 	const delteMovie = async ({ movieID }) => {
 		try {
-			toast('✅ Delete movie successful');
+			toast.success('✅ Delete movie successful');
 
 			await deleteMovie(movieID);
 			setCheck(!check);
@@ -103,7 +103,7 @@ export default function MoviePage() {
 		? tableRows.slice(
 				(currentPage - 1) * ITEMS_PER_PAGE,
 				currentPage * ITEMS_PER_PAGE
-		  )
+		)
 		: [];
 
 	return (
@@ -129,7 +129,7 @@ export default function MoviePage() {
 							</div>
 						</CardHeader>
 						<CardBody className="p-1 px-0">
-							{dataLoaded ? (
+							{dataLoaded ? tableRows.length === 0 (
 								<Typography
 									variant="body"
 									color="blue-gray"

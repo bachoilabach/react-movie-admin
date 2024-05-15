@@ -54,7 +54,7 @@ export default function DirectorPage() {
 
 	const delteDirector = async ({ directorID }) => {
 		try {
-			toast('✅ Delete director successful');
+			toast.success('✅ Delete director successful');
 
 			await deleteDirectorApi(directorID);
 			setCheck(!check);
@@ -131,7 +131,7 @@ export default function DirectorPage() {
 							</div>
 						</CardHeader>
 						<CardBody className="p-1 px-0">
-							{dataLoaded ? (
+							{dataLoaded ? tableRows.length === 0 (
 								<Typography
 									variant="body"
 									color="blue-gray"

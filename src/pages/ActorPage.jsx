@@ -54,7 +54,7 @@ export default function ActorPage() {
 
 	const delteActor = async ({ actorID }) => {
 		try {
-			toast('✅ Delete actor successful');
+			toast.success('✅ Delete actor successful');
 
 			await deleteActor(actorID);
 			setCheck(!check);
@@ -131,7 +131,7 @@ export default function ActorPage() {
 							</div>
 						</CardHeader>
 						<CardBody className="p-1 px-0">
-							{dataLoaded ? (
+							{dataLoaded ? tableRows.length === 0 (
 								<Typography
 									variant="body"
 									color="blue-gray"

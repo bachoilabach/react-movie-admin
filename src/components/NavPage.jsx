@@ -15,7 +15,7 @@ import GenreModal from './GenreModal';
 import ActorModal from './ActorModal';
 import DirectorModal from './DirectorModal';
 import MovieModal from './MovieModal';
-import {ToastContainer} from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 
 const NavPage = () => {
 	return (
@@ -52,7 +52,12 @@ const NavPage = () => {
 				<Route path="/Movies/edit-movie/:id" element={<MovieModal />} />
 				<Route path="/Movies/create-movie" element={<MovieModal />} />
 			</Routes>
-      <ToastContainer position="bottom-left" pauseOnHover={true} stacked={true} pauseOnFocusLoss={false}/>
+			<ToastContainer
+				position="bottom-left"
+				pauseOnHover={true}
+				stacked={true}
+				pauseOnFocusLoss={false}
+			/>
 		</>
 	);
 };
