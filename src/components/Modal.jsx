@@ -77,7 +77,7 @@ export default function Modal() {
 
 			if (message.errCode === 0) {
 				setTimeout(() => {
-					toast.success('✅ Edit user successful')
+					toast.success(' Edit user successful')
 					navigate('/dashboard/Accounts');
 				}, 3000);
 			}
