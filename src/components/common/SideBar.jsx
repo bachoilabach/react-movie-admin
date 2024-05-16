@@ -3,10 +3,10 @@ import { useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as Icons from '@fortawesome/free-solid-svg-icons';
-import Routes from '../routes/routes';
+import Routes from '../../routes/routes';
 import { Link } from 'react-router-dom';
 import { Tooltip } from '@material-tailwind/react';
-import { UserContext } from '../context/UserContext';
+import { UserContext } from '../../context/UserContext';
 
 export default function SideBar() {
 	const [open, setOpen] = useState(true);

@@ -1,10 +1,10 @@
 import { Button, Spinner, Typography } from '@material-tailwind/react';
 import React, { useEffect, useState } from 'react';
-import Input from './Input';
+import Input from '../common/Input';
 import { DatePicker, Image, Select } from 'antd';
 import dayjs from 'dayjs';
 
-import commonUtils from '../utils/commonUtils';
+import commonUtils from '../../utils/commonUtils';
 import {
 	createNewMovieApi,
 	editMovieApi,
@@ -12,17 +12,17 @@ import {
 	getAllDirectorsMovie,
 	getAllGenresMovie,
 	getAllMovies,
-} from '../services/movieService';
+} from '../../services/movieService';
 
-import { getAllGenres } from '../services/genreService';
+import { getAllGenres } from '../../services/genreService';
 
-import { getAllActors } from '../services/actorService';
+import { getAllActors } from '../../services/actorService';
 
-import { movieFields } from '../constants/FormFields';
+import { movieFields } from '../../constants/FormFields';
 
-import { getAllCountries } from '../services/movieService';
+import { getAllCountries } from '../../services/movieService';
 
-import { getAllDirectors } from '../services/directorService';
+import { getAllDirectors } from '../../services/directorService';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 

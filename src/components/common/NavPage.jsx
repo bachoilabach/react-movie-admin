@@ -1,21 +1,21 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
-import HomePage from '../pages/HomePage';
-import MoviePage from '../pages/MoviePage';
-import CategoryPage from '../pages/CategoryPage';
-import ActorsPage from '../pages/ActorPage';
-import DirectorPage from '../pages/DirectorPage';
-import CommentPage from '../pages/CommentPage';
+import HomePage from '../../pages/HomePage';
+import MoviePage from '../../pages/MoviePage';
+import CategoryPage from '../../pages/CategoryPage';
+import ActorsPage from '../../pages/ActorPage';
+import DirectorPage from '../../pages/DirectorPage';
+import CommentPage from '../../pages/CommentPage';
 
-import AccountPage from '../pages/AccountPage';
-import StatisticPage from '../pages/StatisticPage';
-import Modal from './Modal';
-import GenreModal from './GenreModal';
-import ActorModal from './ActorModal';
-import DirectorModal from './DirectorModal';
-import MovieModal from './MovieModal';
+import AccountPage from '../../pages/AccountPage';
+import StatisticPage from '../../pages/StatisticPage';
+import GenreModal from '../modals/GenreModal';
+import ActorModal from '../modals/ActorModal';
+import DirectorModal from '../modals/DirectorModal';
+import MovieModal from '../modals/MovieModal';
 import { ToastContainer } from 'react-toastify';
+import Modal from '../modals/AccountModal';
 
 const NavPage = () => {
 	return (

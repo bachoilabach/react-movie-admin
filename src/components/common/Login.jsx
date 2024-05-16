@@ -1,11 +1,11 @@
 import { useContext, useState } from 'react';
-import { loginFields } from '../constants/FormFieldsAuth';
+import { loginFields } from '../../constants/FormFieldsAuth';
 import FormAction from './FormAction';
 import FormExtra from './FormExtra';
 import Input from './InputAuth';
-import { handleLoginApi } from '../services/userService';
+import { handleLoginApi } from '../../services/userService';
 import { useNavigate } from 'react-router-dom';
-import { UserContext } from '../context/UserContext';
+import { UserContext } from '../../context/UserContext';
 
 const fields = loginFields;
 let fieldsState = {};

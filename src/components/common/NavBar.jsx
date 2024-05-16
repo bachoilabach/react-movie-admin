@@ -17,7 +17,7 @@ import {
 } from '@material-tailwind/react';
 
 import { ClockIcon, CreditCardIcon } from '@heroicons/react/24/solid';
-import { UserContext } from '../context/UserContext';
+import { UserContext } from '../../context/UserContext';
 
 export default function NavBar() {
 	const { pathname } = useLocation();
