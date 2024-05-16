@@ -22,7 +22,7 @@ import { debounce } from 'lodash';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-const TABLE_HEAD = ['Title', 'Country', 'Release', 'Description', 'Edit'];
+const TABLE_HEAD = ['Title', 'IMDBScore', 'Release', 'Description', 'Edit'];
 
 const ITEMS_PER_PAGE = 6;
 
@@ -31,7 +31,6 @@ export default function MoviePage() {
 	const [check, setCheck] = useState(false);
 	const [tableRows, setTableRows] = useState([]);
 	const [currentPage, setCurrentPage] = useState(1);
-	const [country, setCountry] = useState();
 
 	// * State for searching
 	const [valueSearch, setValueSearch] = useState();
@@ -52,7 +51,7 @@ export default function MoviePage() {
 	};
 	const delteMovie = async ({ movieID }) => {
 		try {
-			toast.success('✅ Delete movie successful');
+			toast.success(' Delete movie successful');
 
 			await deleteMovie(movieID);
 			setCheck(!check);
@@ -129,7 +128,7 @@ export default function MoviePage() {
 							</div>
 						</CardHeader>
 						<CardBody className="p-1 px-0">
-							{dataLoaded ? tableRows.length === 0 (
+							{dataLoaded && tableRows.length === 0 ? (
 								<Typography
 									variant="body"
 									color="blue-gray"
@@ -181,7 +180,7 @@ export default function MoviePage() {
 									<tbody>
 										{visibleItems.map(
 											(
-												{ movieID, title, release, description, thumbnail },
+												{ movieID, title, release, description, thumbnail,imdb },
 												index
 											) => {
 												const isLast = index === tableRows.length - 1;
@@ -211,7 +210,7 @@ export default function MoviePage() {
 																	variant="small"
 																	color="blue-gray"
 																	className="font-normal">
-																	{country}
+																	{imdb}
 																</Typography>
 															</div>
 														</td>
