@@ -20,7 +20,7 @@ const Routes = [
     icon: Icons.faChartLine,
     link: "/dashboard/Statistics",
   },
-  { title: "Log out", icon: Icons.faRightFromBracket, link: "/" },
+  { title: "Log out", icon: Icons.faRightFromBracket, link: "/login" },
 ];
 
 export default Routes;

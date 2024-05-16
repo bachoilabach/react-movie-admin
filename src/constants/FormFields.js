@@ -74,7 +74,17 @@ const movieFields = [
 		type: 'text',
 		autoComplete: 'title',
 		isRequired: false,
-		classExpand: 'w-[420px]',
+		classExpand: 'w-full',
+	},
+	{
+		label: 'IMDB',
+		id: 'imdb',
+		name: 'imdb',
+		placeholder: 'Enter score imdb',
+		type: 'text',
+		autoComplete: 'imdb',
+		isRequired: false,
+		classExpand: 'w-[140px]',
 	},
 	{
 		label: 'Video Url',
@@ -84,7 +94,7 @@ const movieFields = [
 		type: 'text',
 		autoComplete: 'videoURL',
 		isRequired: false,
-		classExpand: 'w-[270px]',
+		classExpand: 'w-[240px] mr-4',
 	},
 	{
 		label: 'HTML',
@@ -94,8 +104,9 @@ const movieFields = [
 		type: 'text',
 		autoComplete: 'html',
 		isRequired: false,
-		classExpand: 'w-[270px] ml-[-65px]',
+		classExpand: 'w-[240px]',
 	},
+	
 ]
 
 export { UserFields, actorFields, movieFields };

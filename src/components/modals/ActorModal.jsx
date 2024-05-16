@@ -1,55 +1,60 @@
 import { Button, Spinner, Typography } from '@material-tailwind/react';
 import React, { useEffect, useState } from 'react';
-import Input from './Input';
-import { actorFields } from '../constants/FormFields';
+import Input from '../common/Input';
+import { actorFields } from '../../constants/FormFields';
 import { DatePicker, Image } from 'antd';
-import dayjs from 'dayjs';
-import commonUtils from '../utils/commonUtils';
 import {
-	createNewDirectorApi,
-	editDirectorApi,
-	getAllDirectors,
-} from '../services/directorService';
+	createNewActorApi,
+	editActorApi,
+	getAllActors,
+} from '../../services/actorService';
+import dayjs from 'dayjs';
+import commonUtils from '../../utils/commonUtils';
 import { useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
-export default function DirectorModal() {
+export default function ActorModal() {
 	const navigate = useNavigate();
 	const { id } = useParams();
-	let directorID = '';
+	let actorID = '';
 	if (id) {
-		directorID = id.split(':').filter((el) => el !== '');
+		actorID = id.split(':').filter((el) => el !== '');
 	}
 
-	// * Title
 	const [title, setTitle] = useState('Edit');
 
-	// * Field State
-	const [directorState, setDirectorState] = useState({});
+	const [actorState, setActorState] = useState({});
 	const [birthdate, setBirthDate] = useState(null);
 	const [previewImgURL, setPreviewImageURL] = useState(null);
 
 	// * Spinner
 	const [click, setClick] = useState(false);
 
-	const getDirector = async () => {
+	const getActor = async () => {
 		try {
-			if (directorID) {
-				let response = await getAllDirectors(directorID);
-				setDirectorState(response.directors);
-				setBirthDate(dayjs(response.directors.birthdate, 'YYYY-MM-DD'));
-				fetchImageAsBase64(response.directors.image);
+			if (actorID) {
+				let response = await getAllActors(actorID);
+				setActorState(response.actors);
+				setBirthDate(dayjs(response.actors.birthdate, 'YYYY-MM-DD'));
+				fetchImageAsBase64(response.actors.image);
 			}
 		} catch (error) {
 			console.error('Lỗi khi gọi API:', error);
 		}
 	};
 
-	const addDirector = async () => {
+	const addActor = async () => {
 		try {
-			let message = await createNewDirectorApi(directorState);
+			let message = await createNewActorApi(actorState);
 			if (message.errCode === 0) {
 				setTimeout(() => {
-					navigate('/dashboard/Directors');
+					toast.success(' Add actor successful')
+					navigate('/dashboard/Actors')
+				}, 3000);
+			}else{
+				setTimeout(() => {
+					toast.error(`❌ ${message.ereMessage}`)
+					navigate('/dashboard/Actors')
 				}, 3000);
 			}
 		} catch (error) {
@@ -57,12 +62,13 @@ export default function DirectorModal() {
 		}
 	};
 
-	const editDirector = async () => {
+	const editActor = async () => {
 		try {
-			let message = await editDirectorApi(directorState);
+			let message = await editActorApi(actorState);
 			if (message.errCode === 0) {
 				setTimeout(() => {
-					navigate('/dashboard/Directors');
+					toast.success(' Edit actor successful')
+					navigate('/dashboard/Actors')
 				}, 3000);
 			}
 		} catch (error) {
@@ -71,8 +77,8 @@ export default function DirectorModal() {
 	};
 
 	useEffect(() => {
-		if (directorID) {
-			getDirector();
+		if (actorID) {
+			getActor();
 		} else {
 			setTitle('Add');
 		}
@@ -80,7 +86,7 @@ export default function DirectorModal() {
 
 	const handleChange = (e) => {
 		const { id, value } = e.target;
-		setDirectorState((prevState) => ({
+		setActorState((prevState) => ({
 			...prevState,
 			[id]: value,
 		}));
@@ -90,7 +96,8 @@ export default function DirectorModal() {
 		const formattedBirthdate = value.format('YYYY-MM-DD');
 		console.log(formattedBirthdate);
 		setBirthDate(dayjs(value, 'YYYY-MM-DD'));
-		setDirectorState((prevState) => ({
+		console.log(dayjs(value, 'YYYY-MM-DD'));
+		setActorState((prevState) => ({
 			...prevState,
 			birthdate: formattedBirthdate,
 		}));
@@ -102,11 +109,13 @@ export default function DirectorModal() {
 		if (file) {
 			const base64 = await commonUtils.getBase64(file);
 			const objectURL = URL.createObjectURL(file);
+			console.log(objectURL);
 			setPreviewImageURL(base64);
-			setDirectorState((prevState) => ({
+			setActorState((prevState) => ({
 				...prevState,
 				image: base64,
 			}));
+			console.log(base64);
 		}
 	};
 
@@ -121,24 +130,24 @@ export default function DirectorModal() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		handleSubmitDirector();
+		handleSubmitActor();
 	};
 
-	const handleSubmitDirector = () => {
+	const handleSubmitActor = () => {
 		setClick(true);
-		title === 'Add' ? addDirector() : editDirector();
+		title === 'Add' ? addActor() : editActor();
 	};
 
 	return (
 		<div className="fixed inset-0 z-10">
 			<div
-				onClick={() => navigate('/dashboard/Directors')}
+				onClick={() => navigate('/dashboard/Actors')}
 				className="w-full h-full bg-black opacity-50"></div>
 			<div className="absolute w-7/12 h-5/6 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded">
 				<div className="p-4 flex justify-center flex-col items-center mt-[3%]">
 					<div className="w-2/3 mb-3">
 						<Typography variant="h4" color="blue-gray" className="text-xl">
-							{title} director
+							{title} actor
 						</Typography>
 					</div>
 					<form className="w-2/3" onSubmit={handleSubmit}>
@@ -155,7 +164,7 @@ export default function DirectorModal() {
 									autoComplete={ele.autoComplete}
 									required={ele.isRequired}
 									disable={ele.disable}
-									value={directorState[ele.id]}
+									value={actorState[ele.id]}
 									classExpand={ele.classExpand}
 								/>
 							))}
@@ -174,7 +183,7 @@ export default function DirectorModal() {
 										autoComplete={ele.autoComplete}
 										required={ele.isRequired}
 										disable={ele.disable}
-										value={directorState[ele.id]}
+										value={actorState[ele.id]}
 										classExpand={ele.classExpand}
 									/>
 								))}
@@ -193,7 +202,7 @@ export default function DirectorModal() {
 							<Typography className="text-[14px]">Bio</Typography>
 							<textarea
 								className="min-h-28 max-h-28 placeholder:text-slate-400 block bg-white w-full border border-gray-400 rounded-md py-2 pl-3 pr-3 mt-1 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
-								value={directorState.biography}
+								value={actorState.biography}
 								id="biography"
 								maxLength={5000}
 								onChange={handleChange}></textarea>
@@ -250,18 +259,17 @@ export default function DirectorModal() {
 										variant="solid"
 										color="blue"
 										className="w-24"
-										onClick={handleSubmitDirector}>
+										onClick={handleSubmitActor}>
 										Save
 									</Button>
 								)}
 							</div>
-
 							<Button
 								variant="outlined"
 								color="red"
 								className="ml-4"
-								onClick={() => navigate('/dashboard/Directors')}>
-								Cancel
+								onClick={() => navigate('/dashboard/Actors')}>
+								Cancle
 							</Button>
 						</div>
 					</form>

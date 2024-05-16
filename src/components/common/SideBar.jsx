@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as Icons from '@fortawesome/free-solid-svg-icons';
-import Routes from '../routes/routes';
+import Routes from '../../routes/routes';
 import { Link } from 'react-router-dom';
 import { Tooltip } from '@material-tailwind/react';
+import { UserContext } from '../../context/UserContext';
 
 export default function SideBar() {
 	const [open, setOpen] = useState(true);
-
+	const { logout } = useContext(UserContext);
 	return (
 		<div
 			className={` ${
@@ -56,7 +57,13 @@ export default function SideBar() {
 							mount: { scale: 1, y: 0 },
 							unmount: { scale: 0, y: 0, x: 1 },
 						}}>
-						<Link to={Menu.link}>
+						<Link
+							to={Menu.link}
+							onClick={() => {
+								if (Menu.title === 'Log out') {
+									logout()
+								}
+							}}>
 							<li
 								key={index}
 								className={`flex text-textMain rounded-md p-2 cursor-pointer font-medium text-sm items-center gap-x-4 hover:bg-hoverNavBar group

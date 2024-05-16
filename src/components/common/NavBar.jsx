@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as Icons from '@fortawesome/free-solid-svg-icons';
@@ -17,24 +17,17 @@ import {
 } from '@material-tailwind/react';
 
 import { ClockIcon, CreditCardIcon } from '@heroicons/react/24/solid';
+import { UserContext } from '../../context/UserContext';
 
 export default function NavBar() {
 	const { pathname } = useLocation();
+	const { user } = useContext(UserContext);
 	const pathParts = pathname.split('/dashboard/')[1].split('/'); // Phân tách đường dẫn sau "/dashboard/"
 	const namepage = pathParts[0]; // Lấy phần tử đầu tiên của mảng pathParts
 
-	const [user, setUser] = useState({ email: '', roleID: '', fullName: '' });
 
 	useEffect(() => {
-		const userDataString = localStorage.getItem('userData');
-		if (userDataString) {
-			const userData = JSON.parse(userDataString);
-			setUser({
-				email: userData.email,
-				roleID: userData.roleID,
-				fullName: userData.fullName,
-			});
-		}
+		
 	}, []);
 
 	return (
@@ -134,7 +127,7 @@ export default function NavBar() {
 							/>
 							<div>
 								<Typography variant="h6" color="blue-gray">
-									{user.fullName}
+									{user.account.fullName}
 								</Typography>
 							</div>
 						</div>
