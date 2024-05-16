@@ -6,7 +6,7 @@ import {
 	Typography,
 } from '@material-tailwind/react';
 import React, { useEffect, useState } from 'react';
-import Input from '../Input';
+import Input from '../common/Input';
 import { UserFields } from '../../constants/FormFields';
 import { getAllUsers } from '../../services/userService';
 import { handleUpdateUserDataApi } from '../../services/userService';

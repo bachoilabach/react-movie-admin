@@ -1,8 +1,8 @@
 import React from "react";
-import Navbar from "../components/NavBar";
-import Sidebar from "../components/SideBar";
-import NavPage from "../components/NavPage";
-import { ToastContainer } from "react-toastify";
+import Navbar from "../components/common/NavBar";
+import Sidebar from "../components/common/SideBar";
+import NavPage from "../components/common/NavPage";
+// import { ToastContainer } from "react-toastify";
 
 const Dashboard = () => {
   return (
