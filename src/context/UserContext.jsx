@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Cookies from 'js-cookie';
 
 const UserContext = React.createContext({ name: '', auth: false });
 
