@@ -129,7 +129,7 @@ export default function MoviePage() {
 							</div>
 						</CardHeader>
 						<CardBody className="p-1 px-0">
-							{dataLoaded && tableRows.length === 0 ? (
+							{dataLoaded && visibleItems.length === 0 ? (
 								<Typography
 									variant="body"
 									color="blue-gray"
