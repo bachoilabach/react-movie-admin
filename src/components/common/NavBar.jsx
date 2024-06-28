@@ -97,7 +97,7 @@ export default function NavBar() {
 									variant="small"
 									color="blue-gray"
 									className="mb-1 font-normal">
-									Payment successfully completed
+									Payment successly completed
 								</Typography>
 								<Typography
 									variant="small"

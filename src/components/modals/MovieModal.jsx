@@ -132,7 +132,7 @@ export default function MovieModal() {
 			let message = await createNewMovieApi(movieState);
 			if (message.errCode === 0) {
 				setTimeout(() => {
-					toast.success(' Add movie successful');
+					toast.success(' Add movie success');
 					navigate('/dashboard/Movies');
 				}, 3000);
 			} else {
@@ -153,7 +153,7 @@ export default function MovieModal() {
 			console.log(movieState);
 			if (message.errCode === 0) {
 				setTimeout(() => {
-					toast.success(' Edit movie successful');
+					toast.success(' Edit movie success');
 					navigate('/dashboard/Movies');
 				}, 3000);
 			}

@@ -81,7 +81,7 @@ export default function CategoryPage() {
 	}, [check]);
 
 	const notify = () => {
-		toast.success(' Delete genre successful!');
+		toast.success(' Delete genre success!');
 	};
 
 	const ITEMS_PER_PAGE = 6;

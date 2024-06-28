@@ -51,7 +51,7 @@ export default function MoviePage() {
 	};
 	const delteMovie = async ({ movieID }) => {
 		try {
-			toast.success(' Delete movie successful');
+			toast.success(' Delete movie success');
 
 			await deleteMovie(movieID);
 			setCheck(!check);
@@ -60,15 +60,15 @@ export default function MoviePage() {
 		}
 	};
 
-  const handleSearch = async (keyword) => {
-    try {
-      let response = await searchMovieApi(keyword);
-      setTableRows(response.movie.movieSearch);
-      setCurrentPage(1);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+	const handleSearch = async (keyword) => {
+		try {
+			let response = await searchMovieApi(keyword);
+			setTableRows(response.movie.movieSearch);
+			setCurrentPage(1);
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	const debouncedHandleSearch = debounce(handleSearch, 300);
 
@@ -103,7 +103,7 @@ export default function MoviePage() {
 		? tableRows.slice(
 				(currentPage - 1) * ITEMS_PER_PAGE,
 				currentPage * ITEMS_PER_PAGE
-		)
+		  )
 		: [];
 
 	return (
@@ -181,7 +181,14 @@ export default function MoviePage() {
 									<tbody>
 										{visibleItems.map(
 											(
-												{ movieID, title, release, description, thumbnail,imdb },
+												{
+													movieID,
+													title,
+													release,
+													description,
+													thumbnail,
+													imdb,
+												},
 												index
 											) => {
 												const isLast = index === tableRows.length - 1;

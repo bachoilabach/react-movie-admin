@@ -66,7 +66,7 @@ export default function AccountPage() {
 		const user = { userID };
 		console.log(user);
 		try {
-			toast.success(' Delete account successful');
+			toast.success(' Delete account success');
 			await handleDeleteUserApi(user.userID);
 			setCheck(true);
 		} catch (error) {
